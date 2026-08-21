@@ -271,8 +271,6 @@ gap:6px;
 align-items:center
 }
 
-/* FAVORITO */
-
 .favorite{
 width:36px;
 height:34px;
@@ -300,6 +298,68 @@ padding:8px 10px;
 border-radius:8px;
 font-size:11px;
 font-weight:900
+}
+
+/* HISTORIAL */
+
+.history{
+margin-top:12px;
+padding:11px;
+border:1px solid #252525;
+border-radius:10px;
+background:#0b0b0b
+}
+
+.history-title{
+font-size:10px;
+font-weight:900;
+color:#888;
+text-transform:uppercase;
+margin-bottom:7px
+}
+
+.history-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:11px;
+margin-top:5px
+}
+
+.history-low{
+color:#aaa
+}
+
+.history-change{
+font-weight:900
+}
+
+.history-down{
+color:#fff
+}
+
+.history-up{
+color:#888
+}
+
+.history-loading{
+font-size:10px;
+color:#666
+}
+
+.history-chart{
+height:34px;
+display:flex;
+align-items:flex-end;
+gap:3px;
+margin-top:8px
+}
+
+.history-bar{
+flex:1;
+background:#444;
+min-height:3px;
+border-radius:2px 2px 0 0
 }
 
 .empty{
@@ -414,8 +474,6 @@ Accesorios
 
 </div>
 
-<!-- BOTONES PRINCIPALES -->
-
 <div class="navigation">
 
 <button
@@ -430,8 +488,6 @@ id="favoritesButton">
 </button>
 
 </div>
-
-<!-- INICIO -->
 
 <section id="homeSection">
 
@@ -462,8 +518,6 @@ Buscando los mejores precios...
 
 </div>
 
-<!-- RESULTADOS -->
-
 <div
 id="resultsSection"
 style="display:none">
@@ -491,15 +545,13 @@ id="products">
 
 <div class="note">
 
-* El ahorro se calcula comparando los precios encontrados en la búsqueda. No representa necesariamente un descuento oficial.
+* El ahorro se calcula comparando los precios encontrados en la búsqueda.
 
 </div>
 
 </div>
 
 </section>
-
-<!-- FAVORITOS -->
 
 <section
 id="favoritesSection"
@@ -531,6 +583,9 @@ id="favoriteProducts">
 const API=
 "https://streetfind-rose.vercel.app/api/search";
 
+const HISTORY_API=
+"https://streetfind-rose.vercel.app/api/history";
+
 const q=
 document.getElementById("q");
 
@@ -548,6 +603,9 @@ document.getElementById("homeSection");
 
 const favoritesSection=
 document.getElementById("favoritesSection");
+
+const featuredSection=
+document.getElementById("featuredSection");
 
 const featuredProducts=
 document.getElementById("featuredProducts");
@@ -571,8 +629,6 @@ const favoriteCount=
 document.getElementById("favoriteCount");
 
 let category="all";
-
-/* FAVORITOS */
 
 let favorites=[];
 
@@ -617,7 +673,8 @@ function isFavorite(product){
 
 return favorites.some(
 item=>
-productKey(item)===productKey(product)
+productKey(item)===
+productKey(product)
 );
 
 }
@@ -651,8 +708,6 @@ updateFavoriteButtons();
 
 }
 
-/* ESCAPE */
-
 function esc(value){
 
 return String(value??"")
@@ -664,17 +719,13 @@ return String(value??"")
 
 }
 
-/* PRECIO */
-
 function getPrice(value){
 
 if(value===null||value===undefined)
 return null;
 
-let text=String(value);
-
-let match=
-text.match(
+const match=
+String(value).match(
 /(\d{1,5}(?:[.,]\d{1,2})?)/
 );
 
@@ -723,14 +774,234 @@ return Number.isFinite(price)
 
 function money(value){
 
-return value
+return Number(value)
 .toFixed(2)
 .replace(".",",")
 +" €";
 
 }
 
-/* PRODUCTO */
+/* HISTORIAL */
+
+async function loadHistory(product){
+
+const key=
+productKey(product);
+
+if(!key)
+return null;
+
+try{
+
+const response=
+await fetch(
+HISTORY_API+
+"?product_key="+
+encodeURIComponent(key)
+);
+
+if(!response.ok)
+return null;
+
+const data=
+await response.json();
+
+return Array.isArray(data.history)
+?data.history
+:null;
+
+}catch(error){
+
+return null;
+
+}
+
+}
+
+function historyHTML(history){
+
+if(!history){
+
+return `
+<div class="history">
+<div class="history-loading">
+Historial no disponible todavía.
+</div>
+</div>
+`;
+
+}
+
+if(!history.length){
+
+return `
+<div class="history">
+<div class="history-loading">
+Aún no hay historial suficiente.
+</div>
+</div>
+`;
+
+}
+
+const prices=
+history
+.map(item=>Number(item.price))
+.filter(price=>Number.isFinite(price));
+
+if(!prices.length)
+return "";
+
+const current=
+prices[prices.length-1];
+
+const lowest=
+Math.min(...prices);
+
+const highest=
+Math.max(...prices);
+
+const first=
+prices[0];
+
+let changeHTML="";
+
+if(first!==current){
+
+const difference=
+current-first;
+
+const percent=
+Math.abs(
+(difference/first)*100
+);
+
+if(difference<0){
+
+changeHTML=
+`
+<span class="history-change history-down">
+↓ ${money(Math.abs(difference))}
+(${percent.toFixed(0)}%)
+</span>
+`;
+
+}else{
+
+changeHTML=
+`
+<span class="history-change history-up">
+↑ ${money(difference)}
+(${percent.toFixed(0)}%)
+</span>
+`;
+
+}
+
+}
+
+const recent=
+prices.slice(-12);
+
+const minRecent=
+Math.min(...recent);
+
+const maxRecent=
+Math.max(...recent);
+
+const range=
+maxRecent-minRecent||1;
+
+const bars=
+recent
+.map(price=>{
+
+const height=
+20+
+(
+((price-minRecent)/range)
+*80
+);
+
+return `
+<div
+class="history-bar"
+style="height:${height}%">
+</div>
+`;
+
+})
+.join("");
+
+return `
+<div class="history">
+
+<div class="history-title">
+📊 Historial de precio
+</div>
+
+<div class="history-row">
+
+<span>
+Ahora
+</span>
+
+<strong>
+${money(current)}
+</strong>
+
+</div>
+
+<div class="history-row">
+
+<span class="history-low">
+Mínimo registrado
+</span>
+
+<strong>
+${money(lowest)}
+</strong>
+
+</div>
+
+<div class="history-row">
+
+<span>
+Desde primera consulta
+</span>
+
+${changeHTML}
+
+</div>
+
+<div class="history-chart">
+${bars}
+</div>
+
+</div>
+`;
+
+}
+
+async function addHistoryToCard(
+card,
+product
+){
+
+const history=
+await loadHistory(product);
+
+const container=
+card.querySelector(".history-container");
+
+if(container){
+
+container.innerHTML=
+historyHTML(history);
+
+}
+
+}
 
 function productHTML(
 product,
@@ -802,34 +1073,27 @@ loading="lazy">
 <div class="info">
 
 <div class="brand">
-
-${esc(
-product.source||
-"Tienda"
-)}
-
+${esc(product.source||"Tienda")}
 </div>
 
 <div class="name">
-
-${esc(
-product.title||
-"Producto"
-)}
-
+${esc(product.title||"Producto")}
 </div>
 
 ${savingHTML}
 
+<div class="history-container">
+<div class="history">
+<div class="history-loading">
+Cargando historial...
+</div>
+</div>
+</div>
+
 <div class="bottom">
 
 <div class="price">
-
-${esc(
-product.price||
-"Precio no disponible"
-)}
-
+${esc(product.price||"Precio no disponible")}
 </div>
 
 <div class="actions">
@@ -869,8 +1133,6 @@ VER
 
 }
 
-/* ORDENAR */
-
 function sortByPrice(list){
 
 return [...list].sort(
@@ -896,36 +1158,7 @@ return pa-pb;
 
 }
 
-/* EVENTOS DE CORAZONES */
-
 function updateFavoriteButtons(){
-
-document
-.querySelectorAll(".favorite")
-.forEach(button=>{
-
-try{
-
-const product=
-JSON.parse(
-decodeURIComponent(
-button.dataset.product
-)
-);
-
-button.textContent=
-isFavorite(product)
-?"❤️"
-:"♡";
-
-button.classList.toggle(
-"active",
-isFavorite(product)
-);
-
-}catch(e){}
-
-});
 
 document
 .querySelectorAll(".favorite")
@@ -952,7 +1185,29 @@ toggleFavorite(product);
 
 }
 
-/* DESTACADOS */
+async function loadHistories(
+container,
+list
+){
+
+const cards=
+Array.from(
+container.querySelectorAll(".card")
+);
+
+await Promise.all(
+
+cards.map(
+(card,index)=>
+addHistoryToCard(
+card,
+list[index]
+)
+)
+
+);
+
+}
 
 function renderFeatured(list){
 
@@ -972,11 +1227,10 @@ return;
 }
 
 const sorted=
-sortByPrice(list);
+sortByPrice(list).slice(0,8);
 
-sorted
-.slice(0,8)
-.forEach((product,index)=>{
+sorted.forEach(
+(product,index)=>{
 
 featuredProducts
 .insertAdjacentHTML(
@@ -992,9 +1246,12 @@ getPrice(product.price)!==null
 
 updateFavoriteButtons();
 
-}
+loadHistories(
+featuredProducts,
+sorted
+);
 
-/* RESULTADOS */
+}
 
 function renderResults(list){
 
@@ -1081,9 +1338,12 @@ saving
 
 updateFavoriteButtons();
 
-}
+loadHistories(
+products,
+sorted
+);
 
-/* FAVORITOS */
+}
 
 function renderFavorites(){
 
@@ -1135,9 +1395,12 @@ productHTML(product)
 
 updateFavoriteButtons();
 
-}
+loadHistories(
+favoriteProducts,
+favorites
+);
 
-/* NAVEGACIÓN */
+}
 
 homeButton.onclick=()=>{
 
@@ -1165,8 +1428,6 @@ renderFavorites();
 
 };
 
-/* BÚSQUEDA */
-
 async function search(){
 
 const query=
@@ -1174,12 +1435,9 @@ q.value.trim();
 
 if(!query){
 
-featuredProducts.innerHTML=
-`
-<div class="loading">
-Escribe algo para buscar.
-</div>
-`;
+featuredSection.style.display="";
+
+resultsSection.style.display="none";
 
 return;
 
@@ -1275,8 +1533,6 @@ Inténtalo de nuevo.
 
 }
 
-/* BUSCAR */
-
 go.onclick=search;
 
 q.addEventListener(
@@ -1287,8 +1543,6 @@ if(event.key==="Enter")
 search();
 
 });
-
-/* FILTROS */
 
 document
 .querySelectorAll(".filter")
@@ -1313,8 +1567,6 @@ search();
 };
 
 });
-
-/* DESTACADOS */
 
 async function loadFeatured(){
 
@@ -1399,8 +1651,6 @@ No se pudieron cargar los productos.
 }
 
 }
-
-/* INICIAR */
 
 renderFavorites();
 
