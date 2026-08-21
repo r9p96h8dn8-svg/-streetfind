@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>StreetFind V3</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+    }
+    header {
+      padding: 22px 18px;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .logo span {
+      color: #888;
+    }
+    .tagline {
+      color: #888;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px 16px 50px;
+    }
+    .hero {
+      padding: 28px 0;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 8vw, 64px);
+      line-height: .95;
+      font-weight: 900;
+      letter-spacing: -3px;
+      max-width: 700px;
+    }
+    .hero p {
+      color: #999;
+      margin-top: 16px;
+      font-size: 16px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin: 25px 0;
+    }
+    input {
+      flex: 1;
+      min-width: 0;
+      background: #151515;
+      border: 1px solid #333;
+      border-radius: 12px;
+      color: white;
+      padding: 15px;
+      font-size: 16px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #777;
+    }
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 0 20px;
+      background: #fff;
+      color: #000;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:active {
+      transform: scale(.98);
+    }
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .filter {
+      white-space: nowrap;
+      background: #151515;
+      border: 1px solid #2d2d2d;
+      color: #ccc;
+      border-radius: 999px;
+      padding: 9px 14px;
+      cursor: pointer;
+    }
+    .filter.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    .status {
+      color: #888;
+      font-size: 14px;
+      margin: 15px 0;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: #121212;
+      border: 1px solid #222;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #444;
+    }
+    .image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #1c1c1c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 13px;
+    }
+    .image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .info {
+      padding: 13px;
+    }
+    .brand {
+      color: #888;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+    .name {
+      margin-top: 5px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .price {
+      font-size: 17px;
+      font-weight: 900;
+    }
+    .buy {
+      padding: 8px 11px;
+      border-radius: 9px;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      color: #777;
+    }
+    footer {
+      border-top: 1px solid #222;
+      padding: 25px 16px;
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+    }
+    @media (min-width: 700px) {
+      .products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 520px) {
+      .search-box {
+        flex-direction: column;
+      }
+      button {
+        height: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">STREETFIND<span> V3</span></div>
+  <div class="tagline">Encuentra streetwear. Compara precios.</div>
+</header>
+<main>
+  <section class="hero">
+    <h1>ENCUENTRA<br>EL DRIP.</h1>
+    <p>
+      Busca zapatillas, ropa y accesorios streetwear
+      y descubre diferentes opciones y precios.
+    </p>
+  </section>
+  <div class="search-box">
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Buscar Jordan, Nike, hoodie..."
+      autocomplete="off"
+    >
+    <button id="searchButton">BUSCAR</button>
+  </div>
+  <div class="filters">
+    <button class="filter active" data-category="all">Todo</button>
+    <button class="filter" data-category="sneakers">Zapatillas</button>
+    <button class="filter" data-category="clothing">Ropa</button>
+    <button class="filter" data-category="accessories">Accesorios</button>
+  </div>
+  <div class="status" id="status">
+    Productos destacados
+  </div>
+  <section class="products" id="products"></section>
+</main>
+<footer>
+  StreetFind V3 · Comparador streetwear
+</footer>
+<script>
+  const products = [
+    {
+      name: "Air Jordan 1 Retro",
+      brand: "Jordan",
+      price: "Desde 129 €",
+      category: "sneakers",
+      image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name: "Air Force 1",
+      brand: "Nike",
+      price: "Desde 99 €",
+      category: "sneakers",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name: "Oversized Hoodie",
+      brand: "Streetwear",
+      price: "Desde 39 €",
+      category: "clothing",
+      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name: "Cargo Pants",
+      brand: "Streetwear",
+      price: "Desde 45 €",
+      category: "clothing",
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name: "Street Cap",
+      brand: "Streetwear",
+      price: "Desde 20 €",
+      category: "accessories",
+      image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name: "Retro Sneakers",
+      brand: "Streetwear",
+      price: "Desde 79 €",
+      category: "sneakers",
+      image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80"
+    }
+  ];
+  const productsContainer = document.getElementById("products");
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
+  const status = document.getElementById("status");
+  const filters = document.querySelectorAll(".filter");
+  let currentCategory = "all";
+  function renderProducts(list) {
+    productsContainer.innerHTML = "";
+    if (!list.length) {
+      productsContainer.innerHTML = `
+        <div class="empty">
+          No hemos encontrado productos.
+        </div>
+      `;
+      return;
+    }
+    list.forEach(product => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="image">
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.textContent='Sin imagen';"
+          >
+        </div>
+        <div class="info">
+          <div class="brand">${product.brand}</div>
+          <div class="name">${product.name}</div>
+          <div class="bottom">
+            <div class="price">${product.price}</div>
+            <a class="buy" href="#" onclick="return false;">
+              VER
+            </a>
+          </div>
+        </div>
+      `;
+      productsContainer.appendChild(card);
+    });
+  }
+  function searchProducts() {
+    const query = searchInput.value.trim().toLowerCase();
+    const filtered = products.filter(product => {
+      const matchesCategory =
+        currentCategory === "all" ||
+        product.category === currentCategory;
+      const matchesSearch =
+        !query ||
+        product.name.toLowerCase().includes(query) ||
+        product.brand.toLowerCase().includes(query);
+      return matchesCategory && matchesSearch;
+    });
+    status.textContent =
+      query
+        ? `${filtered.length} resultado${filtered.length === 1 ? "" : "s"} para "${query}"`
+        : "Productos destacados";
+    renderProducts(filtered);
+  }
+  searchButton.addEventListener("click", searchProducts);
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      searchProducts();
+    }
+  });
+  filters.forEach(filter => {
+    filter.addEventListener("click", () => {
+      filters.forEach(item => item.classList.remove("active"));
+      filter.classList.add("active");
+      currentCategory = filter.dataset.category;
+      searchProducts();
+    });
+  });
+  renderProducts(products);
+</script>
+</body>
+</html>
