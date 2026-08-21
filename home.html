@@ -12,7 +12,13 @@
 <title>StreetFind</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#050505;color:#fff;font-family:Arial,sans-serif}
+html,body{
+margin:0;
+padding:0;
+background:#050505;
+color:#fff;
+font-family:Arial,sans-serif
+}
 body{min-height:100vh}
 header{
 padding:20px 16px;
@@ -72,7 +78,8 @@ font-weight:900
 .filters{
 display:flex;
 gap:8px;
-overflow:auto
+overflow:auto;
+margin-bottom:25px
 }
 .filter{
 padding:9px 14px;
@@ -85,6 +92,21 @@ white-space:nowrap
 .filter.active{
 background:#fff;
 color:#000
+}
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:25px 0 14px
+}
+.section-title h2{
+font-size:20px;
+margin:0;
+letter-spacing:-.5px
+}
+.section-title span{
+font-size:12px;
+color:#777
 }
 .status{
 color:#888;
@@ -107,7 +129,8 @@ background:#191919;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#666
+color:#666;
+overflow:hidden
 }
 .image img{
 width:100%;
@@ -138,19 +161,26 @@ gap:8px
 font-weight:900
 }
 .buy{
-background:#222;
-color:#fff;
+background:#fff;
+color:#000;
 text-decoration:none;
 padding:8px 10px;
 border-radius:8px;
 font-size:11px;
-font-weight:800
+font-weight:900;
+white-space:nowrap
 }
 .empty{
 grid-column:1/-1;
 text-align:center;
 color:#777;
 padding:50px 15px
+}
+.loading{
+grid-column:1/-1;
+text-align:center;
+color:#777;
+padding:35px 15px
 }
 @media(min-width:700px){
 .products{
@@ -184,17 +214,34 @@ flex-direction:column
 <button class="filter" data-c="clothing">Ropa</button>
 <button class="filter" data-c="accessories">Accesorios</button>
 </div>
-<div class="status" id="status">
-Escribe algo para buscar productos reales.
+<section id="featuredSection">
+<div class="section-title">
+<h2>⭐ Productos destacados</h2>
+<span>Ahora mismo</span>
 </div>
+<section class="products" id="featuredProducts">
+<div class="loading">Cargando productos destacados...</div>
+</section>
+</section>
+<section id="resultsSection" style="display:none">
+<div class="section-title">
+<h2>Resultados</h2>
+<span id="resultCount"></span>
+</div>
+<div class="status" id="status"></div>
 <section class="products" id="products"></section>
+</section>
 </main>
 <script>
 const API="https://streetfind-rose.vercel.app/api/search";
 const q=document.getElementById("q");
 const go=document.getElementById("go");
+const featuredSection=document.getElementById("featuredSection");
+const featuredProducts=document.getElementById("featuredProducts");
+const resultsSection=document.getElementById("resultsSection");
 const box=document.getElementById("products");
 const status=document.getElementById("status");
+const resultCount=document.getElementById("resultCount");
 let cat="all";
 const esc=x=>String(x??"")
 .replaceAll("&","&amp;")
@@ -202,45 +249,125 @@ const esc=x=>String(x??"")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
-function render(a){
+function cardHTML(p){
+return `
+<article class="card">
+<div class="image">
+${p.thumbnail
+? `<img src="${esc(p.thumbnail)}"
+alt="${esc(p.title)}"
+loading="lazy">`
+: "Sin imagen"}
+</div>
+<div class="info">
+<div class="brand">
+${esc(p.source||"Tienda")}
+</div>
+<div class="name">
+${esc(p.title||"Producto")}
+</div>
+<div class="bottom">
+<div class="price">
+${esc(p.price||"Precio no disponible")}
+</div>
+<a
+class="buy"
+href="${esc(p.product_link||"#")}"
+target="_blank"
+rel="noopener">
+VER
+</a>
+</div>
+</div>
+</article>
+`;
+}
+function renderFeatured(a){
+featuredProducts.innerHTML="";
+if(!a.length){
+featuredProducts.innerHTML=
+'<div class="empty">No hay productos destacados disponibles.</div>';
+return;
+}
+a.slice(0,8).forEach(p=>{
+featuredProducts.insertAdjacentHTML(
+"beforeend",
+cardHTML(p)
+);
+});
+}
+function renderResults(a){
 box.innerHTML="";
 if(!a.length){
-box.innerHTML='<div class="empty">No encontramos productos.</div>';
+box.innerHTML=
+'<div class="empty">No encontramos productos.</div>';
 return;
 }
 a.forEach(p=>{
-let c=document.createElement("article");
-c.className="card";
-c.innerHTML=
-'<div class="image">'+
-(p.thumbnail
-?'<img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'" loading="lazy">'
-:"Sin imagen")+
-'</div>'+
-'<div class="info">'+
-'<div class="brand">'+esc(p.source||"Tienda")+'</div>'+
-'<div class="name">'+esc(p.title||"Producto")+'</div>'+
-'<div class="bottom">'+
-'<div class="price">'+esc(p.price||"Precio no disponible")+'</div>'+
-'<a class="buy" href="'+esc(p.product_link||"#")+'" target="_blank" rel="noopener">VER</a>'+
-'</div>'+
-'</div>';
-box.appendChild(c);
+box.insertAdjacentHTML(
+"beforeend",
+cardHTML(p)
+);
 });
+}
+async function loadFeatured(){
+try{
+const searches=[
+"Jordan Nike sneakers",
+"Adidas streetwear",
+"hoodie streetwear"
+];
+let all=[];
+for(const term of searches){
+try{
+const r=await fetch(
+API+"?q="+encodeURIComponent(term)
+);
+if(!r.ok) continue;
+const d=await r.json();
+if(Array.isArray(d.shopping_results)){
+all.push(...d.shopping_results);
+}
+}catch(e){}
+}
+const unique=[];
+const seen=new Set();
+for(const p of all){
+const key=
+p.product_link||
+p.title||
+Math.random();
+if(seen.has(key)) continue;
+seen.add(key);
+unique.push(p);
+if(unique.length>=8) break;
+}
+renderFeatured(unique);
+}catch(e){
+featuredProducts.innerHTML=
+'<div class="empty">No se pudieron cargar los destacados.</div>';
+}
 }
 async function search(){
 let s=q.value.trim();
 if(!s){
-status.textContent="Escribe algo para buscar.";
-box.innerHTML="";
+featuredSection.style.display="";
+resultsSection.style.display="none";
 return;
 }
+featuredSection.style.display="none";
+resultsSection.style.display="";
 status.textContent="Buscando productos reales...";
-box.innerHTML='<div class="empty">🔎 Buscando...</div>';
+resultCount.textContent="";
+box.innerHTML=
+'<div class="loading">🔎 Buscando...</div>';
 try{
-let r=await fetch(API+"?q="+encodeURIComponent(s));
+let r=await fetch(
+API+"?q="+encodeURIComponent(s)
+);
 let d=await r.json();
-if(!r.ok) throw Error(d.error||"Error");
+if(!r.ok)
+throw Error(d.error||"Error");
 let a=d.shopping_results||[];
 if(cat!=="all"){
 a=a.filter(p=>{
@@ -252,10 +379,13 @@ return /hoodie|shirt|jacket|pants|t-shirt/.test(t);
 return /cap|bag|wallet|belt/.test(t);
 });
 }
-status.textContent=a.length+" productos encontrados";
-render(a);
+status.textContent="";
+resultCount.textContent=
+a.length+" productos";
+renderResults(a);
 }catch(e){
-status.textContent="Error conectando con StreetFind API.";
+status.textContent=
+"Error conectando con StreetFind API.";
 box.innerHTML=
 '<div class="empty">'+
 'No se pudieron cargar los productos.<br><br>'+
@@ -265,17 +395,23 @@ box.innerHTML=
 }
 go.onclick=search;
 q.addEventListener("keydown",e=>{
-if(e.key==="Enter") search();
+if(e.key==="Enter")
+search();
 });
 document.querySelectorAll(".filter").forEach(b=>{
 b.onclick=()=>{
-document.querySelectorAll(".filter")
-.forEach(x=>x.classList.remove("active"));
+document
+.querySelectorAll(".filter")
+.forEach(x=>
+x.classList.remove("active")
+);
 b.classList.add("active");
 cat=b.dataset.c;
-if(q.value.trim()) search();
+if(q.value.trim())
+search();
 };
 });
+loadFeatured();
 </script>
 </body>
 </html>
