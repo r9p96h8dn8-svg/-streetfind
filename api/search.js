@@ -30,6 +30,9 @@ export default async function handler(req, res) {
       "https://serpapi.com/search.json" +
       "?engine=google_shopping" +
       "&q=" + encodeURIComponent(query) +
+      "&gl=es" +
+      "&hl=es" +
+      "&currency=EUR" +
       "&api_key=" + encodeURIComponent(apiKey);
 
     const response = await fetch(url);
