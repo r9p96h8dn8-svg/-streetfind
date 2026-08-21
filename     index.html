@@ -7,61 +7,55 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="StreetFind">
-
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./Img_7587.jpeg">
-
-<title>StreetFind</title>
-
+<link rel="apple-touch-icon" href="./A517A001-A63D-443E-A927-C33D2EB0CC4F.png">
+<title>StreetFind V3</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#050505;color:#fff;font-family:Arial,sans-serif}
+html,body{
+margin:0;
+padding:0;
+background:#050505;
+color:#fff;
+font-family:Arial,sans-serif
+}
 body{min-height:100vh}
-
 header{
 padding:20px 16px;
-border-bottom:1px solid #222;
-padding-top:calc(20px + env(safe-area-inset-top))
+padding-top:calc(20px + env(safe-area-inset-top));
+border-bottom:1px solid #222
 }
-
 .logo{
 font-size:28px;
 font-weight:900;
 letter-spacing:-1px
 }
-
 .logo span{color:#777}
-
 .tag{
 color:#888;
 font-size:12px;
 margin-top:4px
 }
-
 main{
 max-width:1100px;
 margin:auto;
-padding:25px 15px 50px
+padding:25px 15px 60px
 }
-
 .hero h1{
 font-size:clamp(40px,10vw,70px);
 line-height:.9;
 letter-spacing:-3px;
 margin:20px 0
 }
-
 .hero p{
 color:#999;
 line-height:1.5
 }
-
 .search{
 display:flex;
 gap:9px;
 margin:20px 0
 }
-
 .search input{
 flex:1;
 height:50px;
@@ -70,9 +64,12 @@ border:1px solid #333;
 border-radius:12px;
 background:#151515;
 color:#fff;
-font-size:16px
+font-size:16px;
+outline:none
 }
-
+.search input:focus{
+border-color:#777
+}
 .search button{
 height:50px;
 padding:0 18px;
@@ -80,113 +77,205 @@ border:0;
 border-radius:12px;
 background:#fff;
 color:#000;
-font-weight:900
+font-weight:900;
+cursor:pointer
 }
-
 .filters{
 display:flex;
 gap:8px;
-overflow:auto
+overflow:auto;
+margin-bottom:15px;
+padding-bottom:3px
 }
-
 .filter{
 padding:9px 14px;
 border:1px solid #333;
 border-radius:999px;
 background:#151515;
 color:#bbb;
-white-space:nowrap
+white-space:nowrap;
+cursor:pointer
 }
-
 .filter.active{
 background:#fff;
 color:#000
 }
-
+.navigation{
+display:flex;
+gap:10px;
+margin:15px 0 25px
+}
+.navigation button{
+flex:1;
+height:45px;
+border:1px solid #333;
+border-radius:12px;
+background:#151515;
+color:#bbb;
+font-size:14px;
+font-weight:900;
+cursor:pointer
+}
+.navigation button.active{
+background:#fff;
+color:#000
+}
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:25px 0 14px
+}
+.section-title h2{
+font-size:20px;
+margin:0
+}
+.section-title span{
+font-size:12px;
+color:#777
+}
 .status{
 color:#888;
 margin:18px 0
 }
-
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:12px
 }
-
 .card{
 background:#111;
 border:1px solid #222;
 border-radius:15px;
-overflow:hidden
+overflow:hidden;
+position:relative
 }
-
+.best{
+padding:7px;
+background:#fff;
+color:#000;
+font-size:10px;
+font-weight:900;
+text-align:center
+}
 .image{
 aspect-ratio:1;
 background:#191919;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#666
+color:#666;
+overflow:hidden
 }
-
 .image img{
 width:100%;
 height:100%;
 object-fit:cover
 }
-
 .info{
 padding:12px
 }
-
 .brand{
 font-size:11px;
 color:#888;
 text-transform:uppercase
 }
-
 .name{
 margin-top:5px;
 font-weight:700;
 line-height:1.3
 }
-
+.saving{
+margin-top:8px;
+font-size:11px;
+color:#aaa;
+font-weight:800
+}
+.saving strong{
+color:#fff
+}
 .bottom{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-top:12px;
-gap:8px
+gap:8px;
+margin-top:12px
 }
-
 .price{
+font-size:17px;
 font-weight:900
 }
-
-.buy{
-background:#222;
+.actions{
+display:flex;
+gap:6px;
+align-items:center
+}
+.favorite{
+width:36px;
+height:34px;
+border:1px solid #333;
+border-radius:9px;
+background:#191919;
+color:#aaa;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0;
+cursor:pointer
+}
+.favorite.active{
 color:#fff;
+background:#292929
+}
+.buy{
+background:#fff;
+color:#000;
 text-decoration:none;
 padding:8px 10px;
 border-radius:8px;
 font-size:11px;
-font-weight:800
+font-weight:900
 }
-
 .empty{
 grid-column:1/-1;
 text-align:center;
 color:#777;
 padding:50px 15px
 }
-
+.loading{
+grid-column:1/-1;
+text-align:center;
+color:#777;
+padding:40px
+}
+.note{
+font-size:10px;
+color:#666;
+margin-top:15px;
+line-height:1.5
+}
+.history-item{
+background:#111;
+border:1px solid #222;
+border-radius:12px;
+padding:14px;
+margin-bottom:10px
+}
+.history-title{
+font-weight:800;
+line-height:1.3
+}
+.history-meta{
+color:#777;
+font-size:11px;
+margin-top:6px
+}
 @media(min-width:700px){
 .products{
 grid-template-columns:repeat(4,1fr)
 }
 }
-
 @media(max-width:520px){
 .search{
 flex-direction:column
@@ -194,171 +283,822 @@ flex-direction:column
 }
 </style>
 </head>
-
 <body>
-
 <header>
 <div class="logo">STREETFIND<span> V3</span></div>
 <div class="tag">Streetwear · Sneakers · Precios</div>
 </header>
-
 <main>
-
 <section class="hero">
-<h1>ENCUENTRA<br>EL DRIP.</h1>
-<p>Busca sneakers, ropa y accesorios streetwear y encuentra productos reales.</p>
+<h1>
+ENCUENTRA<br>
+EL DRIP.
+</h1>
+<p>
+Busca sneakers, ropa y accesorios streetwear y encuentra productos reales.
+</p>
 </section>
-
 <div class="search">
-<input id="q" type="search" placeholder="Busca Jordan, Nike, hoodie...">
+<input
+id="q"
+type="search"
+placeholder="Busca Jordan, Nike, hoodie..."
+autocomplete="off">
 <button id="go">BUSCAR</button>
 </div>
-
 <div class="filters">
-<button class="filter active" data-c="all">Todo</button>
-<button class="filter" data-c="sneakers">Zapatillas</button>
-<button class="filter" data-c="clothing">Ropa</button>
-<button class="filter" data-c="accessories">Accesorios</button>
+<button class="filter active" data-c="all">
+Todo
+</button>
+<button class="filter" data-c="sneakers">
+Zapatillas
+</button>
+<button class="filter" data-c="clothing">
+Ropa
+</button>
+<button class="filter" data-c="accessories">
+Accesorios
+</button>
 </div>
-
-<div class="status" id="status">
-Escribe algo para buscar productos reales.
+<div class="navigation">
+<button id="homeButton" class="active">
+🏠 Inicio
+</button>
+<button id="favoritesButton">
+❤️ Favoritos
+</button>
+<button id="historyButton">
+📈 Historial
+</button>
 </div>
-
-<section class="products" id="products"></section>
-
+<section id="homeSection">
+<div id="featuredSection">
+<div class="section-title">
+<h2>🔥 Mejores precios</h2>
+<span>Más baratos</span>
+</div>
+<section
+class="products"
+id="featuredProducts">
+<div class="loading">
+Buscando los mejores precios...
+</div>
+</section>
+</div>
+<div id="resultsSection" style="display:none">
+<div class="section-title">
+<h2>Resultados</h2>
+<span id="resultCount"></span>
+</div>
+<div class="status" id="status"></div>
+<section
+class="products"
+id="products">
+</section>
+<div class="note">
+* El ahorro se calcula comparando los precios encontrados en la búsqueda. No representa necesariamente un descuento oficial.
+</div>
+</div>
+</section>
+<section
+id="favoritesSection"
+style="display:none">
+<div class="section-title">
+<h2>❤️ Mis favoritos</h2>
+<span id="favoriteCount">
+0 productos
+</span>
+</div>
+<section
+class="products"
+id="favoriteProducts">
+</section>
+</section>
+<section
+id="historySection"
+style="display:none">
+<div class="section-title">
+<h2>📈 Historial</h2>
+<span>
+Búsquedas recientes
+</span>
+</div>
+<div id="historyList">
+<div class="loading">
+Cargando historial...
+</div>
+</div>
+</section>
 </main>
-
 <script>
-const API="https://streetfind-rose.vercel.app/api/search";
-
-const q=document.getElementById("q");
-const go=document.getElementById("go");
-const box=document.getElementById("products");
-const status=document.getElementById("status");
-
-let cat="all";
-
-const esc=x=>String(x??"")
+const API =
+"https://streetfind-rose.vercel.app/api/search";
+const HISTORY_API =
+"https://streetfind-rose.vercel.app/api/history";
+const q =
+document.getElementById("q");
+const go =
+document.getElementById("go");
+const homeButton =
+document.getElementById("homeButton");
+const favoritesButton =
+document.getElementById("favoritesButton");
+const historyButton =
+document.getElementById("historyButton");
+const homeSection =
+document.getElementById("homeSection");
+const favoritesSection =
+document.getElementById("favoritesSection");
+const historySection =
+document.getElementById("historySection");
+const featuredSection =
+document.getElementById("featuredSection");
+const featuredProducts =
+document.getElementById("featuredProducts");
+const resultsSection =
+document.getElementById("resultsSection");
+const products =
+document.getElementById("products");
+const status =
+document.getElementById("status");
+const resultCount =
+document.getElementById("resultCount");
+const favoriteProducts =
+document.getElementById("favoriteProducts");
+const favoriteCount =
+document.getElementById("favoriteCount");
+const historyList =
+document.getElementById("historyList");
+let category = "all";
+let favorites = [];
+try{
+favorites =
+JSON.parse(
+localStorage.getItem(
+"streetfind_favorites"
+) || "[]"
+);
+if(!Array.isArray(favorites)){
+favorites = [];
+}
+}catch(e){
+favorites = [];
+}
+function saveFavorites(){
+localStorage.setItem(
+"streetfind_favorites",
+JSON.stringify(favorites)
+);
+}
+function productKey(product){
+return String(
+product.product_link ||
+product.title ||
+""
+);
+}
+function isFavorite(product){
+return favorites.some(
+item =>
+productKey(item) === productKey(product)
+);
+}
+function toggleFavorite(product){
+const key =
+productKey(product);
+const index =
+favorites.findIndex(
+item =>
+productKey(item) === key
+);
+if(index >= 0){
+favorites.splice(index,1);
+}else{
+favorites.push(product);
+}
+saveFavorites();
+renderFavorites();
+updateFavoriteButtons();
+}
+function esc(value){
+return String(value ?? "")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
-
-function render(a){
-box.innerHTML="";
-
-if(!a.length){
-box.innerHTML='<div class="empty">No encontramos productos.</div>';
-return;
 }
-
-a.forEach(p=>{
-let c=document.createElement("article");
-
-c.className="card";
-
-c.innerHTML=
-'<div class="image">'+
-(p.thumbnail
-?'<img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'" loading="lazy">'
-:"Sin imagen")+
-'</div>'+
-'<div class="info">'+
-'<div class="brand">'+esc(p.source||"Tienda")+'</div>'+
-'<div class="name">'+esc(p.title||"Producto")+'</div>'+
-'<div class="bottom">'+
-'<div class="price">'+esc(p.price||"Precio no disponible")+'</div>'+
-'<a class="buy" href="'+esc(p.product_link||"#")+'" target="_blank" rel="noopener">VER</a>'+
-'</div>'+
-'</div>';
-
-box.appendChild(c);
-});
+function getPrice(value){
+if(
+value === null ||
+value === undefined
+){
+return null;
 }
-
-async function search(){
-
-let s=q.value.trim();
-
-if(!s){
-status.textContent="Escribe algo para buscar.";
-box.innerHTML="";
-return;
+const text =
+String(value);
+const match =
+text.match(
+/(\d{1,5}(?:[.,]\d{1,2})?)/
+);
+if(!match){
+return null;
 }
-
-status.textContent="Buscando productos reales...";
-box.innerHTML='<div class="empty">🔎 Buscando...</div>';
-
+let number =
+match[1];
+if(
+number.includes(",") &&
+number.includes(".")
+){
+if(
+number.lastIndexOf(",") >
+number.lastIndexOf(".")
+){
+number =
+number
+.replace(/\./g,"")
+.replace(",",".");
+}else{
+number =
+number.replace(/,/g,"");
+}
+}else{
+number =
+number.replace(",",".");
+}
+const price =
+parseFloat(number);
+return Number.isFinite(price)
+? price
+: null;
+}
+function money(value){
+return value
+.toFixed(2)
+.replace(".",",") +
+" €";
+}
+function productHTML(
+product,
+best = false,
+saving = null
+){
+const favorite =
+isFavorite(product);
+let savingHTML = "";
+if(
+saving &&
+saving.amount > 0
+){
+savingHTML = `
+<div class="saving">
+Ahorras
+<strong>${money(saving.amount)}</strong>
+· ${saving.percent.toFixed(0)}%
+</div>
+`;
+}
+return `
+<article class="card">
+${
+best
+?
+`
+<div class="best">
+🟢 MEJOR PRECIO
+</div>
+`
+:
+""
+}
+<div class="image">
+${
+product.thumbnail
+?
+`
+<img
+src="${esc(product.thumbnail)}"
+alt="${esc(product.title || "Producto")}"
+loading="lazy">
+`
+:
+"Sin imagen"
+}
+</div>
+<div class="info">
+<div class="brand">
+${esc(product.source || "Tienda")}
+</div>
+<div class="name">
+${esc(product.title || "Producto")}
+</div>
+${savingHTML}
+<div class="bottom">
+<div class="price">
+${esc(product.price || "Precio no disponible")}
+</div>
+<div class="actions">
+<button
+class="favorite ${favorite ? "active" : ""}"
+data-product="${encodeURIComponent(
+JSON.stringify(product)
+)}">
+${favorite ? "❤️" : "♡"}
+</button>
+<a
+class="buy"
+href="${esc(product.product_link || "#")}"
+target="_blank"
+rel="noopener">
+VER
+</a>
+</div>
+</div>
+</div>
+</article>
+`;
+}
+function sortByPrice(list){
+return [...list].sort(
+(a,b)=>{
+const pa =
+getPrice(a.price);
+const pb =
+getPrice(b.price);
+if(
+pa === null &&
+pb === null
+){
+return 0;
+}
+if(pa === null){
+return 1;
+}
+if(pb === null){
+return -1;
+}
+return pa - pb;
+}
+);
+}
+function updateFavoriteButtons(){
+document
+.querySelectorAll(".favorite")
+.forEach(button => {
+button.onclick = () => {
 try{
-
-let r=await fetch(API+"?q="+encodeURIComponent(s));
-
-let d=await r.json();
-
-if(!r.ok) throw Error(d.error||"Error");
-
-let a=d.shopping_results||[];
-
-if(cat!=="all"){
-
-a=a.filter(p=>{
-
-let t=(p.title||"").toLowerCase();
-
-if(cat==="sneakers")
-return /shoe|sneaker|jordan|nike|adidas|air max/.test(t);
-
-if(cat==="clothing")
-return /hoodie|shirt|jacket|pants|t-shirt/.test(t);
-
-return /cap|bag|wallet|belt/.test(t);
-
-});
-
-}
-
-status.textContent=a.length+" productos encontrados";
-
-render(a);
-
-}catch(e){
-
-status.textContent="Error conectando con StreetFind API.";
-
-box.innerHTML=
-'<div class="empty">'+
-'No se pudieron cargar los productos.<br><br>'+
-'Inténtalo de nuevo.'+
-'</div>';
-
-}
-}
-
-go.onclick=search;
-
-q.addEventListener("keydown",e=>{
-if(e.key==="Enter") search();
-});
-
-document.querySelectorAll(".filter").forEach(b=>{
-
-b.onclick=()=>{
-
-document.querySelectorAll(".filter")
-.forEach(x=>x.classList.remove("active"));
-
-b.classList.add("active");
-
-cat=b.dataset.c;
-
-if(q.value.trim()) search();
-
+const product =
+JSON.parse(
+decodeURIComponent(
+button.dataset.product
+)
+);
+toggleFavorite(product);
+}catch(e){}
 };
-
 });
+}
+function renderFeatured(list){
+featuredProducts.innerHTML = "";
+if(!list.length){
+featuredProducts.innerHTML = `
+<div class="empty">
+No hay productos disponibles.
+</div>
+`;
+return;
+}
+const sorted =
+sortByPrice(list);
+sorted
+.slice(0,8)
+.forEach(
+(product,index)=>{
+featuredProducts
+.insertAdjacentHTML(
+"beforeend",
+productHTML(
+product,
+index === 0 &&
+getPrice(product.price) !== null
+)
+);
+});
+updateFavoriteButtons();
+}
+function renderResults(list){
+products.innerHTML = "";
+if(!list.length){
+products.innerHTML = `
+<div class="empty">
+No encontramos productos.
+</div>
+`;
+return;
+}
+const sorted =
+sortByPrice(list);
+const prices =
+sorted
+.map(
+p => getPrice(p.price)
+)
+.filter(
+p => p !== null
+);
+const lowest =
+prices.length
+?
+Math.min(...prices)
+:
+null;
+const highest =
+prices.length
+?
+Math.max(...prices)
+:
+null;
+sorted.forEach(product => {
+const price =
+getPrice(product.price);
+let saving = null;
+if(
+price !== null &&
+lowest !== null &&
+highest !== null &&
+highest > lowest
+){
+const amount =
+price - lowest;
+const percent =
+(amount / highest) * 100;
+if(amount > 0){
+saving = {
+amount,
+percent
+};
+}
+}
+const best =
+price !== null &&
+lowest !== null &&
+price === lowest;
+products.insertAdjacentHTML(
+"beforeend",
+productHTML(
+product,
+best,
+saving
+)
+);
+});
+updateFavoriteButtons();
+}
+function renderFavorites(){
+favoriteProducts.innerHTML = "";
+favoriteCount.textContent =
+favorites.length +
+(
+favorites.length === 1
+?
+" producto"
+:
+" productos"
+);
+if(!favorites.length){
+favoriteProducts.innerHTML = `
+<div class="empty">
+❤️
+<br><br>
+Todavía no tienes favoritos.
+<br><br>
+Pulsa ♡ en cualquier producto
+para guardarlo aquí.
+</div>
+`;
+return;
+}
+favorites.forEach(product => {
+favoriteProducts.insertAdjacentHTML(
+"beforeend",
+productHTML(product)
+);
+});
+updateFavoriteButtons();
+}
+async function loadHistory(){
+historyList.innerHTML = `
+<div class="loading">
+Cargando historial...
+</div>
+`;
+try{
+const response =
+await fetch(
+HISTORY_API,
+{
+method:"GET"
+}
+);
+if(!response.ok){
+throw new Error();
+}
+const data =
+await response.json();
+const list =
+Array.isArray(data)
+?
+data
+:
+(
+Array.isArray(data.history)
+?
+data.history
+:
+[]
+);
+if(!list.length){
+historyList.innerHTML = `
+<div class="empty">
+📈
+<br><br>
+Todavía no hay búsquedas guardadas.
+</div>
+`;
+return;
+}
+historyList.innerHTML = "";
+list.forEach(item => {
+const title =
+item.query ||
+item.title ||
+item.search ||
+"Búsqueda";
+const date =
+item.created_at ||
+item.createdAt ||
+"";
+historyList.insertAdjacentHTML(
+"beforeend",
+`
+<div class="history-item">
+<div class="history-title">
+${esc(title)}
+</div>
+${
+date
+?
+`
+<div class="history-meta">
+${esc(date)}
+</div>
+`
+:
+""
+}
+</div>
+`
+);
+});
+}catch(error){
+historyList.innerHTML = `
+<div class="empty">
+No se pudo cargar el historial todavía.
+</div>
+`;
+}
+}
+async function saveHistory(query){
+if(!query){
+return;
+}
+try{
+await fetch(
+HISTORY_API,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+query:query
+})
+}
+);
+}catch(e){}
+}
+function showSection(section){
+homeSection.style.display =
+section === "home"
+?
+""
+:
+"none";
+favoritesSection.style.display =
+section === "favorites"
+?
+""
+:
+"none";
+historySection.style.display =
+section === "history"
+?
+""
+:
+"none";
+homeButton.classList.toggle(
+"active",
+section === "home"
+);
+favoritesButton.classList.toggle(
+"active",
+section === "favorites"
+);
+historyButton.classList.toggle(
+"active",
+section === "history"
+);
+if(section === "favorites"){
+renderFavorites();
+}
+if(section === "history"){
+loadHistory();
+}
+}
+homeButton.onclick = () => {
+showSection("home");
+};
+favoritesButton.onclick = () => {
+showSection("favorites");
+};
+historyButton.onclick = () => {
+showSection("history");
+};
+async function search(){
+const query =
+q.value.trim();
+if(!query){
+showSection("home");
+featuredSection.style.display = "";
+resultsSection.style.display = "none";
+status.textContent =
+"Escribe algo para buscar.";
+return;
+}
+showSection("home");
+featuredSection.style.display = "none";
+resultsSection.style.display = "";
+status.textContent =
+"Buscando productos reales...";
+products.innerHTML = `
+<div class="loading">
+🔎 Buscando...
+</div>
+`;
+try{
+const response =
+await fetch(
+API +
+"?q=" +
+encodeURIComponent(query)
+);
+const data =
+await response.json();
+if(!response.ok){
+throw new Error(
+data.error ||
+"Error"
+);
+}
+let list =
+data.shopping_results ||
+[];
+if(category !== "all"){
+list =
+list.filter(product => {
+const title =
+(product.title || "")
+.toLowerCase();
+if(category === "sneakers"){
+return /shoe|sneaker|jordan|nike|adidas|air max/.test(
+title
+);
+}
+if(category === "clothing"){
+return /hoodie|shirt|jacket|pants|t-shirt|clothing/.test(
+title
+);
+}
+return /cap|bag|wallet|belt|accessory/.test(
+title
+);
+});
+}
+resultCount.textContent =
+list.length +
+" productos";
+status.textContent = "";
+renderResults(list);
+saveHistory(query);
+}catch(error){
+status.textContent =
+"Error conectando con StreetFind API.";
+products.innerHTML = `
+<div class="empty">
+No se pudieron cargar los productos.
+<br><br>
+Inténtalo de nuevo.
+</div>
+`;
+}
+}
+go.onclick = search;
+q.addEventListener(
+"keydown",
+event => {
+if(event.key === "Enter"){
+search();
+}
+});
+document
+.querySelectorAll(".filter")
+.forEach(button => {
+button.onclick = () => {
+document
+.querySelectorAll(".filter")
+.forEach(
+x =>
+x.classList.remove("active")
+);
+button.classList.add("active");
+category =
+button.dataset.c;
+if(q.value.trim()){
+search();
+}
+};
+});
+async function loadFeatured(){
+try{
+const searches = [
+"Jordan Nike sneakers",
+"Adidas sneakers",
+"streetwear hoodie"
+];
+let all = [];
+for(
+const term of searches
+){
+try{
+const response =
+await fetch(
+API +
+"?q=" +
+encodeURIComponent(term)
+);
+if(!response.ok){
+continue;
+}
+const data =
+await response.json();
+if(
+Array.isArray(
+data.shopping_results
+)
+){
+all.push(
+...data.shopping_results
+);
+}
+}catch(e){}
+}
+const unique = [];
+const seen =
+new Set();
+all.forEach(product => {
+const key =
+product.product_link ||
+product.title;
+if(!key){
+return;
+}
+if(seen.has(key)){
+return;
+}
+seen.add(key);
+unique.push(product);
+});
+renderFeatured(unique);
+}catch(e){
+featuredProducts.innerHTML = `
+<div class="empty">
+No se pudieron cargar los productos.
+</div>
+`;
+}
+}
+renderFavorites();
+loadFeatured();
 </script>
-
 </body>
 </html>
