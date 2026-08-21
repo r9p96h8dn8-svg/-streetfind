@@ -1,4 +1,14 @@
 export default async function handler(req, res) {
+  // Permitir peticiones desde StreetFind en GitHub Pages
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Responder a las peticiones OPTIONS del navegador
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   const query = req.query.q;
 
   if (!query) {
