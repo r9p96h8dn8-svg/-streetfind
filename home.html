@@ -191,6 +191,17 @@ font-weight:700;
 line-height:1.3
 }
 
+.saving{
+margin-top:8px;
+font-size:11px;
+font-weight:800;
+color:#aaa
+}
+
+.saving strong{
+color:#fff
+}
+
 .bottom{
 display:flex;
 justify-content:space-between;
@@ -200,7 +211,8 @@ gap:8px
 }
 
 .price{
-font-weight:900
+font-weight:900;
+font-size:17px
 }
 
 .buy{
@@ -226,6 +238,13 @@ grid-column:1/-1;
 text-align:center;
 color:#777;
 padding:35px 15px
+}
+
+.note{
+margin-top:15px;
+font-size:10px;
+color:#666;
+line-height:1.4
 }
 
 @media(min-width:700px){
@@ -291,6 +310,10 @@ flex-direction:column
 <div class="status" id="status"></div>
 
 <section class="products" id="products"></section>
+
+<div class="note">
+* El ahorro se calcula comparando el precio más bajo con el precio más alto encontrado en esta búsqueda. No representa necesariamente un descuento oficial.
+</div>
 
 </section>
 
@@ -371,7 +394,31 @@ return Number.isFinite(price)
 
 }
 
-function cardHTML(p,isBest=false){
+function money(value){
+
+return value.toFixed(2)
+.replace(".",",")+" €";
+
+}
+
+function cardHTML(p,isBest=false,saving=null){
+
+let savingHTML="";
+
+if(
+saving &&
+saving.amount>0 &&
+saving.percent>0
+){
+
+savingHTML=`
+<div class="saving">
+Ahorras <strong>${money(saving.amount)}</strong>
+· ${saving.percent.toFixed(0)}%
+</div>
+`;
+
+}
 
 return `
 <article class="card">
@@ -399,6 +446,8 @@ ${esc(p.source||"Tienda")}
 <div class="name">
 ${esc(p.title||"Producto")}
 </div>
+
+${savingHTML}
 
 <div class="bottom">
 
@@ -463,7 +512,10 @@ sorted.slice(0,8).forEach((p,i)=>{
 
 featuredProducts.insertAdjacentHTML(
 "beforeend",
-cardHTML(p,i===0 && getPrice(p.price)!==null)
+cardHTML(
+p,
+i===0 && getPrice(p.price)!==null
+)
 );
 
 });
@@ -484,26 +536,65 @@ return;
 
 const sorted=sortByPrice(a);
 
-const firstPriced=sorted.find(
-p=>getPrice(p.price)!==null
-);
+const priced=sorted
+.map(p=>({
+product:p,
+price:getPrice(p.price)
+}))
+.filter(x=>x.price!==null);
 
-const bestPrice=firstPriced
-?getPrice(firstPriced.price)
+const lowest=
+priced.length
+?priced[0].price
+:null;
+
+const highest=
+priced.length
+?priced[priced.length-1].price
 :null;
 
 sorted.forEach(p=>{
 
 const price=getPrice(p.price);
 
-const isBest=
-bestPrice!==null &&
+let saving=null;
+
+if(
 price!==null &&
-price===bestPrice;
+lowest!==null &&
+highest!==null &&
+highest>lowest
+){
+
+const amount=
+price-lowest;
+
+const percent=
+(amount/highest)*100;
+
+if(amount>0){
+
+saving={
+amount:amount,
+percent:percent
+};
+
+}
+
+}
+
+const isBest=
+lowest!==null &&
+price!==null &&
+price===lowest;
 
 box.insertAdjacentHTML(
 "beforeend",
-cardHTML(p,isBest)
+cardHTML(
+p,
+isBest,
+saving
+)
 );
 
 });
