@@ -1,0 +1,15 @@
+{
+  "name": "StreetFind",
+  "short_name": "StreetFind",
+  "start_url": "./home.html",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "./Img_7587.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
