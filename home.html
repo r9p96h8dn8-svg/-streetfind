@@ -145,7 +145,18 @@ gap:12px
 background:#111;
 border:1px solid #222;
 border-radius:15px;
-overflow:hidden
+overflow:hidden;
+position:relative
+}
+
+.best{
+padding:7px 10px;
+font-size:10px;
+font-weight:900;
+letter-spacing:.3px;
+background:#fff;
+color:#000;
+text-align:center
 }
 
 .image{
@@ -360,10 +371,14 @@ return Number.isFinite(price)
 
 }
 
-function cardHTML(p){
+function cardHTML(p,isBest=false){
 
 return `
 <article class="card">
+
+${isBest
+? `<div class="best">🟢 MEJOR PRECIO</div>`
+: ""}
 
 <div class="image">
 
@@ -408,6 +423,28 @@ VER
 
 }
 
+function sortByPrice(a){
+
+return [...a].sort((x,y)=>{
+
+const px=getPrice(x.price);
+const py=getPrice(y.price);
+
+if(px===null && py===null)
+return 0;
+
+if(px===null)
+return 1;
+
+if(py===null)
+return -1;
+
+return px-py;
+
+});
+
+}
+
 function renderFeatured(a){
 
 featuredProducts.innerHTML="";
@@ -420,11 +457,13 @@ featuredProducts.innerHTML=
 return;
 }
 
-a.slice(0,8).forEach(p=>{
+const sorted=sortByPrice(a);
+
+sorted.slice(0,8).forEach((p,i)=>{
 
 featuredProducts.insertAdjacentHTML(
 "beforeend",
-cardHTML(p)
+cardHTML(p,i===0 && getPrice(p.price)!==null)
 );
 
 });
@@ -443,11 +482,28 @@ box.innerHTML=
 return;
 }
 
-a.forEach(p=>{
+const sorted=sortByPrice(a);
+
+const firstPriced=sorted.find(
+p=>getPrice(p.price)!==null
+);
+
+const bestPrice=firstPriced
+?getPrice(firstPriced.price)
+:null;
+
+sorted.forEach(p=>{
+
+const price=getPrice(p.price);
+
+const isBest=
+bestPrice!==null &&
+price!==null &&
+price===bestPrice;
 
 box.insertAdjacentHTML(
 "beforeend",
-cardHTML(p)
+cardHTML(p,isBest)
 );
 
 });
@@ -474,7 +530,8 @@ const r=await fetch(
 API+"?q="+encodeURIComponent(term)
 );
 
-if(!r.ok) continue;
+if(!r.ok)
+continue;
 
 const d=await r.json();
 
@@ -505,24 +562,6 @@ seen.add(key);
 unique.push(p);
 
 }
-
-unique.sort((a,b)=>{
-
-const pa=getPrice(a.price);
-const pb=getPrice(b.price);
-
-if(pa===null && pb===null)
-return 0;
-
-if(pa===null)
-return 1;
-
-if(pb===null)
-return -1;
-
-return pa-pb;
-
-});
 
 renderFeatured(unique);
 
