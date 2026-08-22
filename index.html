@@ -407,7 +407,6 @@ main{
   color:#fff
 }
 
-/* PRECIO CORREGIDO */
 .price-row{
   display:flex;
   flex-direction:column;
@@ -1130,7 +1129,23 @@ function save(key,value){
 }
 
 function productKey(p){
-  return String(p?.product_link||p?.title||"")
+  return String(p?.product_link||p?.affiliate_url||p?.affiliateUrl||p?.title||"")
+}
+
+/* NUEVO: obtiene el enlace de afiliación si existe.
+   Si no existe, utiliza el enlace normal del producto. */
+function getProductUrl(p){
+
+  if(!p)return "#";
+
+  return String(
+    p.affiliate_url||
+    p.affiliateUrl||
+    p.product_link||
+    p.link||
+    "#"
+  ).trim()||"#";
+
 }
 
 function isFavorite(p){
@@ -1179,7 +1194,7 @@ function esc(v){
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;")
+    .replaceAll("'","&#039;");
 }
 
 function getPrice(v){
@@ -1476,6 +1491,9 @@ function productHTML(p,best=false,saving=null){
     a=>productKey(a.product)===productKey(p)
   );
 
+  /* NUEVO: el botón utiliza afiliación si existe */
+  const productUrl=getProductUrl(p);
+
   return `
     <article class="card">
 
@@ -1595,10 +1613,10 @@ function productHTML(p,best=false,saving=null){
 
             <a
               class="buy"
-              href="${esc(p.product_link||"#")}"
+              href="${esc(productUrl)}"
               target="_blank"
               rel="noopener noreferrer">
-              VER
+              VER OFERTA
             </a>
 
           </div>
@@ -1706,7 +1724,7 @@ function bindButtons(){
           )
         );
 
-        const url=p.product_link||location.href;
+        const url=getProductUrl(p);
 
         const text=
           (p.title||"Producto")+
@@ -2447,7 +2465,7 @@ async function loadFeatured(){
 
     const unique=all.filter(p=>{
 
-      const k=p.product_link||p.title;
+      const k=p.product_link||p.affiliate_url||p.affiliateUrl||p.title;
 
       if(!k||seen.has(k))
         return false;
