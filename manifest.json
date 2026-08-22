@@ -1,13 +1,23 @@
 {
-  "name":"StreetFind",
-  "short_name":"StreetFind",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#050505",
-  "theme_color":"#050505",
-  "description":"Compara precios de sneakers, ropa y streetwear.",
-  "icons":[
-    {"src":"./A517A001-A63D-443E-A927-C33D2EB0CC4F.png","sizes":"192x192","type":"image/png"},
-    {"src":"./A517A001-A63D-443E-A927-C33D2EB0CC4F.png","sizes":"512x512","type":"image/png"}
+  "name": "StreetFind",
+  "short_name": "StreetFind",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "description": "Compara precios de sneakers, ropa y streetwear.",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
