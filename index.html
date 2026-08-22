@@ -17,11 +17,6 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,vie
 <title>StreetFind</title>
 
 <style>
-
-/* =========================
-   BASE
-========================= */
-
 *{
 box-sizing:border-box;
 -webkit-tap-highlight-color:transparent
@@ -44,19 +39,8 @@ min-height:100vh;
 -webkit-text-size-adjust:100%
 }
 
-button,
-input,
-a{
-font-family:inherit
-}
-
-button{
-cursor:pointer
-}
-
-/* =========================
-   HEADER
-========================= */
+button,input,a{font-family:inherit}
+button{cursor:pointer}
 
 header{
 padding:20px 16px;
@@ -70,19 +54,13 @@ font-weight:900;
 letter-spacing:-1px
 }
 
-.logo span{
-color:#777
-}
+.logo span{color:#777}
 
 .tag{
 color:#888;
 font-size:12px;
 margin-top:4px
 }
-
-/* =========================
-   MAIN
-========================= */
 
 main{
 max-width:1100px;
@@ -101,10 +79,6 @@ margin:20px 0
 color:#999;
 line-height:1.5
 }
-
-/* =========================
-   SEARCH
-========================= */
 
 .search{
 display:flex;
@@ -130,9 +104,7 @@ outline:none;
 -webkit-appearance:none
 }
 
-.search input:focus{
-border-color:#777
-}
+.search input:focus{border-color:#777}
 
 .clear-search{
 position:absolute;
@@ -150,9 +122,7 @@ align-items:center;
 justify-content:center
 }
 
-.clear-search.show{
-display:flex
-}
+.clear-search.show{display:flex}
 
 .main-search{
 height:50px;
@@ -164,10 +134,6 @@ color:#000;
 font-weight:900
 }
 
-/* =========================
-   FILTERS
-========================= */
-
 .filters,
 .store-filters{
 display:flex;
@@ -178,9 +144,7 @@ scrollbar-width:none
 }
 
 .filters::-webkit-scrollbar,
-.store-filters::-webkit-scrollbar{
-display:none
-}
+.store-filters::-webkit-scrollbar{display:none}
 
 .filter,
 .store-filter{
@@ -198,10 +162,6 @@ background:#fff;
 color:#000;
 border-color:#fff
 }
-
-/* =========================
-   SECTIONS
-========================= */
 
 .section-title{
 display:flex;
@@ -221,10 +181,6 @@ font-size:12px;
 color:#777
 }
 
-/* =========================
-   RESULTS TOOLS
-========================= */
-
 .results-tools{
 display:flex;
 gap:8px;
@@ -233,9 +189,7 @@ margin:-3px 0 15px;
 scrollbar-width:none
 }
 
-.results-tools::-webkit-scrollbar{
-display:none
-}
+.results-tools::-webkit-scrollbar{display:none}
 
 .sort-btn{
 height:36px;
@@ -254,22 +208,12 @@ background:#fff;
 color:#000
 }
 
-.sort-btn[data-sort="saving"]{
-color:#9cffaa
-}
-
-/* =========================
-   STATUS
-========================= */
+.sort-btn[data-sort="saving"]{color:#9cffaa}
 
 .status{
 color:#888;
 margin:18px 0
 }
-
-/* =========================
-   PRODUCTS
-========================= */
 
 .products{
 display:grid;
@@ -286,10 +230,6 @@ min-width:0;
 width:100%
 }
 
-/* =========================
-   BEST PRICE
-========================= */
-
 .best{
 padding:9px 7px;
 background:linear-gradient(90deg,#d7ffdf,#fff);
@@ -299,10 +239,6 @@ font-weight:900;
 text-align:center;
 letter-spacing:.2px
 }
-
-/* =========================
-   IMAGE
-========================= */
 
 .image{
 aspect-ratio:1;
@@ -327,13 +263,7 @@ text-align:center;
 padding:15px
 }
 
-/* =========================
-   PRODUCT INFO
-========================= */
-
-.info{
-padding:12px
-}
+.info{padding:12px}
 
 .brand{
 font-size:11px;
@@ -361,13 +291,7 @@ color:#aaa;
 font-weight:800
 }
 
-.saving strong{
-color:#9cffaa
-}
-
-/* =========================
-   PRICE
-========================= */
+.saving strong{color:#9cffaa}
 
 .bottom{
 display:flex;
@@ -396,9 +320,7 @@ flex:0 0 auto;
 min-width:max-content
 }
 
-/* =========================
-   CORAZÓN LLAMATIVO
-========================= */
+/* CORAZÓN LLAMATIVO */
 
 .favorite,
 .share{
@@ -438,14 +360,10 @@ background:#ff1748!important;
 border-color:#ff1748!important
 }
 
-.favorite:active{
-transform:scale(.88)
-}
+.favorite:active{transform:scale(.88)}
 
 .share:active,
-.buy:active{
-transform:scale(.94)
-}
+.buy:active{transform:scale(.94)}
 
 .buy{
 display:flex;
@@ -464,10 +382,6 @@ font-weight:900;
 white-space:nowrap
 }
 
-/* =========================
-   STREETFIND SCORE
-========================= */
-
 .street-score{
 display:flex;
 align-items:center;
@@ -485,9 +399,7 @@ font-size:15px;
 font-weight:900
 }
 
-.street-score-main span{
-color:#fff
-}
+.street-score-main span{color:#fff}
 
 .street-score-label{
 font-size:9px;
@@ -495,10 +407,6 @@ color:#888;
 margin-top:2px;
 text-align:right
 }
-
-/* =========================
-   TOP OFERTAS
-========================= */
 
 .top-offers{
 display:grid;
@@ -546,10 +454,6 @@ font-weight:900;
 white-space:nowrap
 }
 
-/* =========================
-   AUTOCOMPLETADO
-========================= */
-
 .autocomplete{
 position:absolute;
 left:0;
@@ -564,9 +468,7 @@ background:#111;
 box-shadow:0 15px 35px rgba(0,0,0,.5)
 }
 
-.autocomplete.show{
-display:block
-}
+.autocomplete.show{display:block}
 
 .autocomplete-item{
 width:100%;
@@ -583,13 +485,7 @@ font-size:12px
 }
 
 .autocomplete-item:hover,
-.autocomplete-item:active{
-background:#202020
-}
-
-/* =========================
-   FAVORITOS
-========================= */
+.autocomplete-item:active{background:#202020}
 
 .favorite-summary{
 display:flex;
@@ -617,13 +513,7 @@ color:#777;
 font-size:9px
 }
 
-/* =========================
-   ALERTAS
-========================= */
-
-.alerts-section{
-margin-top:25px
-}
+.alerts-section{margin-top:25px}
 
 .alert-item{
 padding:12px;
@@ -678,10 +568,6 @@ padding:6px 9px;
 font-size:9px
 }
 
-/* =========================
-   MODAL
-========================= */
-
 .product-modal{
 position:fixed;
 inset:0;
@@ -692,9 +578,7 @@ padding:10px;
 background:rgba(0,0,0,.78)
 }
 
-.product-modal.show{
-display:flex
-}
+.product-modal.show{display:flex}
 
 .product-modal-card{
 position:relative;
@@ -721,9 +605,7 @@ height:100%;
 object-fit:cover
 }
 
-.product-modal-info{
-padding:14px 3px 5px
-}
+.product-modal-info{padding:14px 3px 5px}
 
 .product-modal-brand{
 color:#888;
@@ -787,10 +669,6 @@ font-size:20px;
 z-index:2
 }
 
-/* =========================
-   ESTADOS
-========================= */
-
 .empty,
 .loading,
 .error-box{
@@ -817,10 +695,6 @@ color:#666;
 margin-top:15px;
 line-height:1.5
 }
-
-/* =========================
-   NAVEGACIÓN
-========================= */
 
 .bottom-nav{
 position:fixed;
@@ -900,16 +774,10 @@ opacity:1;
 transform:translate(-50%,0)
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(min-width:700px){
-
 .products{
 grid-template-columns:repeat(4,minmax(0,1fr))
 }
-
 }
 
 @media(max-width:520px){
@@ -929,21 +797,12 @@ align-items:center;
 gap:8px
 }
 
-.top-rank{
-margin:0
-}
+.top-rank{margin:0}
+.top-offer-price{margin:0}
 
-.top-offer-price{
-margin:0
-}
+.price{font-size:15px}
 
-.price{
-font-size:15px
-}
-
-.actions{
-gap:3px
-}
+.actions{gap:3px}
 
 .favorite,
 .share{
@@ -962,9 +821,7 @@ flex-basis:40px
 
 @media(max-width:370px){
 
-.price{
-font-size:14px
-}
+.price{font-size:14px}
 
 .favorite,
 .share{
@@ -981,37 +838,24 @@ font-size:9px
 }
 
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-STREETFIND<span> V4</span>
-</div>
-
-<div class="tag">
-Streetwear · Sneakers · Precios
-</div>
-
+<div class="logo">STREETFIND<span> V4</span></div>
+<div class="tag">Streetwear · Sneakers · Precios</div>
 </header>
 
 <main>
 
 <section class="hero">
-
-<h1>
-ENCUENTRA<br>
-EL MEJOR PRECIO.
-</h1>
+<h1>ENCUENTRA<br>EL MEJOR PRECIO.</h1>
 
 <p>
 Compara precios de sneakers, ropa y streetwear y encuentra la mejor oferta.
 </p>
-
 </section>
 
 <div class="search">
@@ -1030,18 +874,14 @@ aria-label="Buscar productos">
 id="clearSearch"
 class="clear-search"
 type="button"
-aria-label="Borrar búsqueda">
-×
-</button>
+aria-label="Borrar búsqueda">×</button>
 
 </div>
 
 <button
 id="go"
 class="main-search"
-type="button">
-BUSCAR
-</button>
+type="button">BUSCAR</button>
 
 </div>
 
@@ -1059,11 +899,8 @@ BUSCAR
 <div id="featuredSection">
 
 <div class="section-title">
-
 <h2>🔥 Mejores precios</h2>
-
 <span>Más baratos</span>
-
 </div>
 
 <section class="products" id="featuredProducts">
@@ -1079,11 +916,8 @@ Buscando los mejores precios...
 <div id="resultsSection" style="display:none">
 
 <div class="section-title">
-
 <h2>Resultados</h2>
-
 <span id="resultCount"></span>
-
 </div>
 
 <div class="results-tools">
@@ -1104,29 +938,12 @@ Mayor ahorro
 
 <div id="streetStoreFilters" class="store-filters">
 
-<button class="store-filter active" data-store="all" type="button">
-Todas
-</button>
-
-<button class="store-filter" data-store="Nike" type="button">
-Nike
-</button>
-
-<button class="store-filter" data-store="Adidas" type="button">
-Adidas
-</button>
-
-<button class="store-filter" data-store="JD" type="button">
-JD
-</button>
-
-<button class="store-filter" data-store="Foot Locker" type="button">
-Foot Locker
-</button>
-
-<button class="store-filter" data-store="StockX" type="button">
-StockX
-</button>
+<button class="store-filter active" data-store="all" type="button">Todas</button>
+<button class="store-filter" data-store="Nike" type="button">Nike</button>
+<button class="store-filter" data-store="Adidas" type="button">Adidas</button>
+<button class="store-filter" data-store="JD" type="button">JD</button>
+<button class="store-filter" data-store="Foot Locker" type="button">Foot Locker</button>
+<button class="store-filter" data-store="StockX" type="button">StockX</button>
 
 </div>
 
@@ -1135,39 +952,29 @@ StockX
 <section class="products" id="products"></section>
 
 <div class="note">
-* StreetFind muestra el precio encontrado en cada tienda. El ahorro solo se muestra cuando existe un precio anterior proporcionado por la tienda.
+* StreetFind muestra el precio encontrado en cada tienda. El ahorro solo se muestra cuando existe un precio anterior válido proporcionado por la tienda.
 </div>
 
 </div>
-
 </section>
 
 <section id="favoritesSection" style="display:none">
 
 <div class="section-title">
-
 <h2>❤️ Mis favoritos</h2>
-
 <span id="favoriteCount">0 productos</span>
-
 </div>
 
 <div id="streetFavoriteSummary" class="favorite-summary">
 
 <div class="favorite-stat">
-
 <strong id="streetFavTotal">0</strong>
-
 <span>Guardados</span>
-
 </div>
 
 <div class="favorite-stat">
-
 <strong id="streetFavDrops">0</strong>
-
 <span>Han bajado</span>
-
 </div>
 
 </div>
@@ -1177,11 +984,8 @@ StockX
 <div class="alerts-section">
 
 <div class="section-title">
-
 <h2>🔔 Mis alertas</h2>
-
 <span>Precios objetivo</span>
-
 </div>
 
 <div id="alertList"></div>
@@ -1195,29 +999,19 @@ StockX
 <nav class="bottom-nav" aria-label="Navegación">
 
 <button id="bottomHome" class="active" type="button">
-
 <span class="nav-icon">⌂</span>
-
 Inicio
-
 </button>
 
 <button id="bottomSearch" type="button">
-
 <span class="nav-icon">⌕</span>
-
 Buscar
-
 </button>
 
 <button id="bottomFavorites" type="button">
-
 <span class="nav-icon">♡</span>
-
 Favoritos
-
 <span id="favoriteBadge" class="favorite-badge">0</span>
-
 </button>
 
 </nav>
@@ -1225,7 +1019,6 @@ Favoritos
 <div id="toast" class="toast"></div>
 
 <script>
-
 "use strict";
 
 /* =========================
@@ -1234,7 +1027,6 @@ Favoritos
 
 const API =
 "https://streetfind-rose.vercel.app/api/search";
-
 
 /* =========================
    ELEMENTOS
@@ -1266,7 +1058,6 @@ const bottomFavorites=document.getElementById("bottomFavorites");
 const toast=document.getElementById("toast");
 const storeFilters=document.getElementById("streetStoreFilters");
 
-
 /* =========================
    ESTADO
 ========================= */
@@ -1282,46 +1073,31 @@ let currentFilteredResults=[];
 
 let searchInProgress=false;
 let searchController=null;
-
 let toastTimer=null;
-
 
 /* =========================
    LOCAL STORAGE
 ========================= */
 
 try{
-
-favorites=
-JSON.parse(
+favorites=JSON.parse(
 localStorage.getItem("streetfind_favorites")||"[]"
 );
 
-if(!Array.isArray(favorites))
-favorites=[];
-
+if(!Array.isArray(favorites)) favorites=[];
 }catch(e){
-
 favorites=[];
-
 }
 
 try{
-
-alerts=
-JSON.parse(
+alerts=JSON.parse(
 localStorage.getItem("streetfind_alerts")||"[]"
 );
 
-if(!Array.isArray(alerts))
-alerts=[];
-
+if(!Array.isArray(alerts)) alerts=[];
 }catch(e){
-
 alerts=[];
-
 }
-
 
 /* =========================
    HELPERS
@@ -1338,66 +1114,140 @@ return String(value??"")
 
 }
 
+/*
+   PARSER DE PRECIOS CORREGIDO
 
-/* Convierte correctamente un precio
-   de texto a número */
+   Ejemplos:
+
+   1299,99      -> 1299.99
+   1.299,99     -> 1299.99
+   1,299.99     -> 1299.99
+   1299.99      -> 1299.99
+   1299         -> 1299
+
+   Evita interpretar:
+   "1.299,99 €"
+   como 1.29999
+*/
 
 function getPrice(value){
 
-if(value==null)
+if(value===null||value===undefined)
 return null;
 
-const text=String(value).trim();
+if(typeof value==="number"){
 
-const matches=
-text.match(
-/\d+(?:[.,]\d{1,2})?/g
-);
-
-if(!matches||!matches.length)
-return null;
-
-let number=matches[matches.length-1];
-
-if(
-number.includes(",")&&
-number.includes(".")
-){
-
-if(
-number.lastIndexOf(",")>
-number.lastIndexOf(".")
-){
-
-number=
-number
-.replace(/\./g,"")
-.replace(",",".")
-;
-
-}else{
-
-number=
-number.replace(/,/g,"");
-
-}
-
-}else{
-
-number=
-number.replace(",",".");
-}
-
-const price=parseFloat(number);
-
-return Number.isFinite(price)
-?price
+return Number.isFinite(value)
+?value
 :null;
 
 }
 
+let text=String(value)
+.trim()
+.replace(/\s/g,"")
+.replace(/[€$£]/g,"");
 
-/* Precio siempre con 2 decimales */
+if(!text)
+return null;
+
+/* Elimina texto que no sea número,
+   separadores o signo */
+
+text=text.replace(/[^\d.,-]/g,"");
+
+if(!text)
+return null;
+
+const comma=text.lastIndexOf(",");
+const dot=text.lastIndexOf(".");
+
+if(
+comma!==-1 &&
+dot!==-1
+){
+
+/* El último separador suele ser
+   el decimal */
+
+if(comma>dot){
+
+text=text
+.replace(/\./g,"")
+.replace(",",".");
+}else{
+
+text=text
+.replace(/,/g,"");
+}
+
+}else if(comma!==-1){
+
+const parts=text.split(",");
+
+/*
+   Si hay exactamente 1-2 cifras después
+   de la coma, es decimal.
+   Si hay 3, normalmente es separador
+   de miles.
+*/
+
+if(
+parts.length===2 &&
+parts[1].length<=2
+){
+
+text=parts[0]+"."+parts[1];
+
+}else{
+
+text=text.replace(/,/g,"");
+
+}
+
+}else if(dot!==-1){
+
+const parts=text.split(".");
+
+if(
+parts.length===2 &&
+parts[1].length<=2
+){
+
+/* decimal */
+
+}else{
+
+/* puntos de miles */
+
+text=text.replace(/\./g,"");
+
+}
+
+}
+
+const price=parseFloat(text);
+
+if(!Number.isFinite(price))
+return null;
+
+/*
+   Seguridad adicional:
+   ningún precio absurdo entra en
+   cálculos de ahorro.
+*/
+
+if(price<=0||price>100000)
+return null;
+
+return price;
+
+}
+
+
+/* =========================
+   FORMATO DE DINERO
+========================= */
 
 function money(value){
 
@@ -1413,6 +1263,69 @@ return price
 }
 
 
+/* =========================
+   AHORRO SEGURO
+========================= */
+
+function savingFor(product){
+
+if(!product)
+return null;
+
+const price=getPrice(product.price);
+
+if(price===null)
+return null;
+
+/*
+   Solo aceptamos old_price.
+   Nunca calculamos ahorro comparando
+   productos diferentes.
+*/
+
+const oldPrice=getPrice(product.old_price);
+
+if(oldPrice===null)
+return null;
+
+if(oldPrice<=price)
+return null;
+
+/*
+   Seguridad contra valores corruptos
+   de la API.
+*/
+
+const amount=oldPrice-price;
+
+if(
+amount<=0 ||
+amount>oldPrice ||
+amount>10000
+)
+return null;
+
+const percent=(amount/oldPrice)*100;
+
+if(
+!Number.isFinite(percent) ||
+percent<=0 ||
+percent>99.9
+)
+return null;
+
+return {
+amount,
+percent
+};
+
+}
+
+
+/* =========================
+   PRODUCT KEY
+========================= */
+
 function productKey(product){
 
 return String(
@@ -1422,7 +1335,6 @@ product?.title||
 );
 
 }
-
 
 function getProductUrl(product){
 
@@ -1461,19 +1373,13 @@ let score=
 100-
 ((price-min)/(max-min))*60;
 
-const old=getPrice(product.old_price);
+const saving=savingFor(product);
 
-if(
-old!==null&&
-old>price
-){
-
-const discount=
-((old-price)/old)*100;
+if(saving){
 
 score+=Math.min(
 15,
-discount*.35
+saving.percent*.35
 );
 
 }
@@ -1485,25 +1391,17 @@ Math.min(100,score)
 )
 );
 
-
 }
-
 
 function scoreText(score){
 
-if(score>=90)
-return "Oferta excelente";
-
-if(score>=75)
-return "Muy buena oferta";
-
-if(score>=60)
-return "Buena oferta";
+if(score>=90) return "Oferta excelente";
+if(score>=75) return "Muy buena oferta";
+if(score>=60) return "Buena oferta";
 
 return "Precio normal";
 
 }
-
 
 function scoreHTML(product,list){
 
@@ -1535,58 +1433,6 @@ ${scoreText(score)}
 
 }
 
-
-/* =========================
-   AHORRO REAL
-   =========================
-
-   IMPORTANTE:
-   Ya NO calculamos ahorro comparando
-   contra el precio más alto de los
-   resultados.
-
-   Solo mostramos ahorro cuando la API
-   proporciona old_price y ese precio
-   anterior es superior al actual.
-*/
-
-function savingFor(product){
-
-const price=getPrice(product?.price);
-
-if(price===null)
-return null;
-
-const oldPrice=
-getPrice(product?.old_price);
-
-if(
-oldPrice===null||
-oldPrice<=price
-)
-return null;
-
-const amount=
-oldPrice-price;
-
-if(
-amount<=0||
-amount>oldPrice
-)
-return null;
-
-return {
-
-amount:amount,
-
-percent:
-(amount/oldPrice)*100
-
-};
-
-}
-
-
 /* =========================
    FAVORITOS
 ========================= */
@@ -1595,13 +1441,12 @@ function isFavorite(product){
 
 const key=productKey(product);
 
-return !!key&&
+return !!key &&
 favorites.some(
 item=>productKey(item)===key
 );
 
 }
-
 
 function saveFavorites(){
 
@@ -1618,28 +1463,19 @@ updateFavoriteCounter();
 
 }
 
-
 function updateFavoriteCounter(){
 
 const count=favorites.length;
 
 favoriteCount.textContent=
-count+
-(
-count===1
-?" producto"
-:" productos"
-);
+count+(count===1?" producto":" productos");
 
 favoriteBadge.textContent=count;
 
 favoriteBadge.style.display=
-count>0
-?"block"
-:"none";
+count>0?"block":"none";
 
-const total=
-document.getElementById("streetFavTotal");
+const total=document.getElementById("streetFavTotal");
 
 if(total)
 total.textContent=count;
@@ -1661,7 +1497,6 @@ dropsElement.textContent=drops;
 
 }
 
-
 function toggleFavorite(product,button){
 
 const key=productKey(product);
@@ -1677,21 +1512,17 @@ item=>productKey(item)===key
 if(index>=0){
 
 favorites.splice(index,1);
-
 showToast("Eliminado de favoritos");
 
 }else{
 
 favorites.push(product);
-
 showToast("Añadido a favoritos");
 
 }
 
 saveFavorites();
-
 updateFavoriteButtons();
-
 renderFavorites();
 
 if(button){
@@ -1704,14 +1535,11 @@ active
 );
 
 button.innerHTML=
-active
-?"♥"
-:"♡";
+active?"♥":"♡";
 
 }
 
 }
-
 
 /* =========================
    TOAST
@@ -1734,9 +1562,8 @@ toast.classList.remove("show");
 
 }
 
-
 /* =========================
-   TARJETA
+   TARJETAS
 ========================= */
 
 function productHTML(
@@ -1786,8 +1613,10 @@ Sin imagen
 let savingHTML="";
 
 if(
-saving&&
-saving.amount>0
+saving &&
+saving.amount>0 &&
+saving.percent>0 &&
+saving.percent<=99.9
 ){
 
 savingHTML=`
@@ -1843,11 +1672,11 @@ ${scoreHTML(product,scoreList)}
 <div class="bottom">
 
 <div class="price">
-
-${product.price
+${
+product.price
 ?money(product.price)
-:"Precio no disponible"}
-
+:"Precio no disponible"
+}
 </div>
 
 <div class="actions">
@@ -1902,7 +1731,6 @@ VER
 
 }
 
-
 /* =========================
    BOTONES
 ========================= */
@@ -1924,17 +1752,13 @@ button.dataset.product
 )
 );
 
-toggleFavorite(
-product,
-button
-);
+toggleFavorite(product,button);
 
 }catch(e){}
 
 };
 
 });
-
 
 document
 .querySelectorAll(".share")
@@ -1961,7 +1785,6 @@ shareProduct(product);
 
 }
 
-
 /* =========================
    COMPARTIR
 ========================= */
@@ -1969,8 +1792,7 @@ shareProduct(product);
 async function shareProduct(product){
 
 const title=
-product.title||
-"Producto en StreetFind";
+product.title||"Producto en StreetFind";
 
 const price=
 product.price
@@ -2008,7 +1830,6 @@ showToast("Enlace copiado");
 
 }
 
-
 /* =========================
    ORDEN
 ========================= */
@@ -2033,14 +1854,9 @@ return sb-sa;
 const pa=getPrice(a.price);
 const pb=getPrice(b.price);
 
-if(pa===null&&pb===null)
-return 0;
-
-if(pa===null)
-return 1;
-
-if(pb===null)
-return -1;
+if(pa===null&&pb===null) return 0;
+if(pa===null) return 1;
+if(pb===null) return -1;
 
 return sortMode==="low"
 ?pa-pb
@@ -2050,7 +1866,6 @@ return sortMode==="low"
 );
 
 }
-
 
 /* =========================
    TOP OFERTAS
@@ -2071,13 +1886,9 @@ section.innerHTML=`
 
 <div class="section-title">
 
-<h2>
-🔥 Top ofertas
-</h2>
+<h2>🔥 Top ofertas</h2>
 
-<span>
-Los precios más bajos
-</span>
+<span>Los precios más bajos</span>
 
 </div>
 
@@ -2106,13 +1917,10 @@ return;
 const usable=
 list
 .filter(
-product=>
-getPrice(product.price)!==null
+product=>getPrice(product.price)!==null
 )
 .sort(
-(a,b)=>
-getPrice(a.price)-
-getPrice(b.price)
+(a,b)=>getPrice(a.price)-getPrice(b.price)
 )
 .slice(0,3);
 
@@ -2133,23 +1941,16 @@ button.className=
 button.innerHTML=`
 
 <div class="top-rank">
-
 ${
-index===0
-?"🥇"
-:index===1
-?"🥈"
-:"🥉"
+index===0?"🥇":
+index===1?"🥈":"🥉"
 }
-
 </div>
 
 <div>
-
 <div class="top-offer-title">
 ${esc(product.title||"Producto")}
 </div>
-
 </div>
 
 <div class="top-offer-price">
@@ -2160,10 +1961,7 @@ ${money(product.price)}
 
 button.onclick=
 ()=>{
-openStreetProduct(
-product,
-list
-);
+openStreetProduct(product,list);
 };
 
 container.appendChild(button);
@@ -2171,7 +1969,6 @@ container.appendChild(button);
 });
 
 }
-
 
 /* =========================
    DESTACADOS
@@ -2222,7 +2019,6 @@ updateFavoriteButtons();
 
 }
 
-
 /* =========================
    RESULTADOS
 ========================= */
@@ -2236,13 +2032,9 @@ if(!list.length){
 products.innerHTML=`
 
 <div class="empty">
-
 No encontramos productos.
-
 <br><br>
-
 Prueba otra búsqueda.
-
 </div>
 
 `;
@@ -2289,7 +2081,6 @@ list
 updateFavoriteButtons();
 
 }
-
 
 /* =========================
    FAVORITOS
@@ -2345,11 +2136,9 @@ favorites
 });
 
 updateFavoriteButtons();
-
 renderAlerts();
 
 }
-
 
 /* =========================
    ALERTAS
@@ -2367,7 +2156,6 @@ JSON.stringify(alerts)
 }catch(e){}
 
 }
-
 
 function openAlert(product){
 
@@ -2410,10 +2198,7 @@ if(
 target<=0
 ){
 
-showToast(
-"Precio objetivo no válido"
-);
-
+showToast("Precio objetivo no válido");
 return;
 
 }
@@ -2422,35 +2207,25 @@ const key=productKey(product);
 
 alerts=
 alerts.filter(
-alert=>
-alert.productKey!==key
+alert=>alert.productKey!==key
 );
 
 alerts.push({
 
 id:Date.now().toString(),
-
 productKey:key,
-
 product:product,
-
 target:target,
-
-createdAt:
-new Date().toISOString()
+createdAt:new Date().toISOString()
 
 });
 
 saveAlerts();
-
 renderAlerts();
 
-showToast(
-"Alerta creada"
-);
+showToast("Alerta creada");
 
 }
-
 
 function deleteAlert(id){
 
@@ -2460,15 +2235,11 @@ alert=>alert.id!==id
 );
 
 saveAlerts();
-
 renderAlerts();
 
-showToast(
-"Alerta eliminada"
-);
+showToast("Alerta eliminada");
 
 }
-
 
 function renderAlerts(){
 
@@ -2504,7 +2275,7 @@ const target=Number(alert.target);
 let content="";
 
 if(
-current!==null&&
+current!==null &&
 target>0
 ){
 
@@ -2525,19 +2296,14 @@ Math.max(
 0,
 Math.min(
 100,
-(
-1-
-current/(target*1.5)
-)*100
+(1-current/(target*1.5))*100
 )
 );
 
 content=`
 
 <div class="alert-progress">
-
 <div style="width:${progress}%"></div>
-
 </div>
 
 <div
@@ -2568,18 +2334,13 @@ item.className="alert-item";
 item.innerHTML=`
 
 <div class="alert-item-title">
-${esc(
-alert.product?.title||
-"Producto"
-)}
+${esc(alert.product?.title||"Producto")}
 </div>
 
 <div class="alert-item-price">
 
 Objetivo:
-<strong>
-${money(target)}
-</strong>
+<strong>${money(target)}</strong>
 
 · Actual:
 
@@ -2606,16 +2367,13 @@ ELIMINAR ALERTA
 item
 .querySelector(".alert-delete")
 .onclick=
-()=>{
-deleteAlert(alert.id);
-};
+()=>deleteAlert(alert.id);
 
 list.appendChild(item);
 
 });
 
 }
-
 
 /* =========================
    MODAL
@@ -2624,14 +2382,9 @@ list.appendChild(item);
 let modalProduct=null;
 let modalList=[];
 
-
 function ensureModal(){
 
-if(
-document.getElementById(
-"streetProductModal"
-)
-)
+if(document.getElementById("streetProductModal"))
 return;
 
 const modal=document.createElement("div");
@@ -2646,11 +2399,7 @@ modal.innerHTML=`
 <button
 class="product-modal-close"
 id="streetProductClose"
-type="button">
-
-×
-
-</button>
+type="button">×</button>
 
 <div
 id="streetProductImage"
@@ -2725,8 +2474,7 @@ document.body.appendChild(modal);
 
 document.getElementById(
 "streetProductClose"
-).onclick=
-closeStreetProduct;
+).onclick=closeStreetProduct;
 
 modal.addEventListener(
 "click",
@@ -2738,7 +2486,6 @@ closeStreetProduct();
 });
 
 }
-
 
 function openStreetProduct(product,list=[]){
 
@@ -2782,14 +2529,12 @@ Sin imagen
 document.getElementById(
 "streetProductBrand"
 ).textContent=
-product.source||
-"Tienda";
+product.source||"Tienda";
 
 document.getElementById(
 "streetProductTitle"
 ).textContent=
-product.title||
-"Producto";
+product.title||"Producto";
 
 document.getElementById(
 "streetProductPrice"
@@ -2841,14 +2586,11 @@ isFavorite(product)
 document.getElementById(
 "streetProductAlert"
 ).onclick=
-()=>{
-openAlert(product);
-};
+()=>openAlert(product);
 
 modal.classList.add("show");
 
 }
-
 
 function closeStreetProduct(){
 
@@ -2864,7 +2606,6 @@ modalProduct=null;
 
 }
 
-
 /* =========================
    CLICK TARJETA
 ========================= */
@@ -2879,21 +2620,15 @@ event.target.closest(".card");
 if(!card)
 return;
 
-if(
-event.target.closest("button,a")
-)
+if(event.target.closest("button,a"))
 return;
 
-const key=
-card.dataset.productKey;
+const key=card.dataset.productKey;
 
 const product=
-[
-...lastResults,
-...favorites
-].find(
-item=>
-productKey(item)===key
+[...lastResults,...favorites]
+.find(
+item=>productKey(item)===key
 );
 
 if(product){
@@ -2909,7 +2644,6 @@ currentFilteredResults.length
 
 });
 
-
 /* =========================
    TIENDAS
 ========================= */
@@ -2923,8 +2657,7 @@ button.onclick=()=>{
 storeFilters
 .querySelectorAll(".store-filter")
 .forEach(
-item=>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -2933,8 +2666,7 @@ const store=button.dataset.store;
 
 if(store==="all"){
 
-currentFilteredResults=
-[...lastResults];
+currentFilteredResults=[...lastResults];
 
 }else{
 
@@ -2948,14 +2680,11 @@ String(product.source||"")
 
 }
 
-renderResults(
-currentFilteredResults
-);
+renderResults(currentFilteredResults);
 
 };
 
 });
-
 
 /* =========================
    AUTOCOMPLETADO
@@ -2982,17 +2711,12 @@ const suggestions=[
 const autocomplete=
 document.createElement("div");
 
-autocomplete.id=
-"streetAutocomplete";
-
-autocomplete.className=
-"autocomplete";
+autocomplete.id="streetAutocomplete";
+autocomplete.className="autocomplete";
 
 document
 .querySelector(".search-box")
-.appendChild(
-autocomplete
-);
+.appendChild(autocomplete);
 
 q.addEventListener(
 "input",
@@ -3008,10 +2732,7 @@ q.value.trim().toLowerCase();
 
 if(!term){
 
-autocomplete.classList.remove(
-"show"
-);
-
+autocomplete.classList.remove("show");
 return;
 
 }
@@ -3019,8 +2740,7 @@ return;
 const matches=
 suggestions
 .filter(
-item=>
-item.toLowerCase().includes(term)
+item=>item.toLowerCase().includes(term)
 )
 .slice(0,5);
 
@@ -3034,8 +2754,7 @@ document.createElement("button");
 button.type="button";
 button.className="autocomplete-item";
 
-button.innerHTML=
-`🔎 ${esc(text)}`;
+button.innerHTML=`🔎 ${esc(text)}`;
 
 button.onclick=()=>{
 
@@ -3060,7 +2779,6 @@ matches.length>0
 
 });
 
-
 document.addEventListener(
 "click",
 event=>{
@@ -3071,14 +2789,11 @@ if(
 .contains(event.target)
 ){
 
-autocomplete.classList.remove(
-"show"
-);
+autocomplete.classList.remove("show");
 
 }
 
 });
-
 
 /* =========================
    PESTAÑAS
@@ -3087,14 +2802,10 @@ autocomplete.classList.remove(
 function setTab(tab){
 
 homeSection.style.display=
-tab==="favorites"
-?"none"
-:"";
+tab==="favorites"?"none":"";
 
 favoritesSection.style.display=
-tab==="favorites"
-?""
-:"none";
+tab==="favorites"?"":"none";
 
 bottomHome.classList.toggle(
 "active",
@@ -3139,16 +2850,9 @@ behavior:"smooth"
 
 }
 
-
-bottomHome.onclick=
-()=>setTab("home");
-
-bottomSearch.onclick=
-()=>setTab("search");
-
-bottomFavorites.onclick=
-()=>setTab("favorites");
-
+bottomHome.onclick=()=>setTab("home");
+bottomSearch.onclick=()=>setTab("search");
+bottomFavorites.onclick=()=>setTab("favorites");
 
 /* =========================
    BÚSQUEDA
@@ -3173,8 +2877,7 @@ return;
 if(searchController)
 searchController.abort();
 
-searchController=
-new AbortController();
+searchController=new AbortController();
 
 searchInProgress=true;
 
@@ -3199,8 +2902,7 @@ try{
 const response=
 await fetch(
 API+
-"?q="+
-encodeURIComponent(query),
+"?q="+encodeURIComponent(query),
 {
 signal:searchController.signal,
 cache:"no-store"
@@ -3217,8 +2919,7 @@ Array.isArray(data.shopping_results)
 ?data.shopping_results
 :[];
 
-
-/* FILTRO CATEGORÍA */
+/* CATEGORÍA */
 
 if(category!=="all"){
 
@@ -3253,11 +2954,7 @@ currentFilteredResults=[...list];
 
 resultCount.textContent=
 list.length+
-(
-list.length===1
-?" producto"
-:" productos"
-);
+(list.length===1?" producto":" productos");
 
 status.textContent="";
 
@@ -3305,16 +3002,13 @@ retry.onclick=search;
 }finally{
 
 searchInProgress=false;
-
 go.textContent="BUSCAR";
 
 }
 
 }
 
-
 go.onclick=search;
-
 
 q.addEventListener(
 "keydown",
@@ -3323,13 +3017,11 @@ event=>{
 if(event.key==="Enter"){
 
 event.preventDefault();
-
 search();
 
 }
 
 });
-
 
 clearSearch.onclick=()=>{
 
@@ -3347,9 +3039,8 @@ setTab("search");
 
 };
 
-
 /* =========================
-   FILTROS CATEGORÍA
+   FILTROS
 ========================= */
 
 document
@@ -3361,8 +3052,7 @@ button.onclick=()=>{
 document
 .querySelectorAll(".filter")
 .forEach(
-item=>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -3375,7 +3065,6 @@ search();
 };
 
 });
-
 
 /* =========================
    ORDEN
@@ -3390,8 +3079,7 @@ button.onclick=()=>{
 document
 .querySelectorAll(".sort-btn")
 .forEach(
-item=>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -3412,9 +3100,8 @@ currentFilteredResults.length
 
 });
 
-
 /* =========================
-   PRODUCTOS DESTACADOS
+   DESTACADOS
 ========================= */
 
 async function loadFeatured(){
@@ -3431,17 +3118,14 @@ const searches=[
 
 let all=[];
 
-for(
-const term of searches
-){
+for(const term of searches){
 
 try{
 
 const response=
 await fetch(
 API+
-"?q="+
-encodeURIComponent(term),
+"?q="+encodeURIComponent(term),
 {
 cache:"no-store"
 }
@@ -3454,9 +3138,7 @@ const data=
 await response.json();
 
 if(
-Array.isArray(
-data.shopping_results
-)
+Array.isArray(data.shopping_results)
 ){
 
 all.push(
@@ -3482,7 +3164,6 @@ if(!key||seen.has(key))
 return;
 
 seen.add(key);
-
 unique.push(product);
 
 });
@@ -3509,17 +3190,13 @@ Prueba a actualizar la página.
 
 }
 
-
 /* =========================
    INICIO
 ========================= */
 
 ensureModal();
-
 updateFavoriteCounter();
-
 renderFavorites();
-
 loadFeatured();
 
 </script>
