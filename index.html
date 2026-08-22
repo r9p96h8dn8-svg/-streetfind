@@ -18,6 +18,10 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,vie
 
 <style>
 
+/* =========================
+   BASE
+========================= */
+
 *{
 box-sizing:border-box;
 -webkit-tap-highlight-color:transparent
@@ -50,7 +54,9 @@ button{
 cursor:pointer
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
 padding:20px 16px;
@@ -74,7 +80,9 @@ font-size:12px;
 margin-top:4px
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 main{
 max-width:1100px;
@@ -94,7 +102,9 @@ color:#999;
 line-height:1.5
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 .search{
 display:flex;
@@ -154,7 +164,9 @@ color:#000;
 font-weight:900
 }
 
-/* FILTERS */
+/* =========================
+   FILTERS
+========================= */
 
 .filters,
 .store-filters{
@@ -187,7 +199,9 @@ color:#000;
 border-color:#fff
 }
 
-/* SECTIONS */
+/* =========================
+   SECTIONS
+========================= */
 
 .section-title{
 display:flex;
@@ -207,7 +221,9 @@ font-size:12px;
 color:#777
 }
 
-/* RESULTS TOOLS */
+/* =========================
+   RESULTS TOOLS
+========================= */
 
 .results-tools{
 display:flex;
@@ -242,14 +258,18 @@ color:#000
 color:#9cffaa
 }
 
-/* STATUS */
+/* =========================
+   STATUS
+========================= */
 
 .status{
 color:#888;
 margin:18px 0
 }
 
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
 display:grid;
@@ -266,7 +286,9 @@ min-width:0;
 width:100%
 }
 
-/* BEST */
+/* =========================
+   BEST PRICE
+========================= */
 
 .best{
 padding:9px 7px;
@@ -278,7 +300,9 @@ text-align:center;
 letter-spacing:.2px
 }
 
-/* IMAGE */
+/* =========================
+   IMAGE
+========================= */
 
 .image{
 aspect-ratio:1;
@@ -303,7 +327,9 @@ text-align:center;
 padding:15px
 }
 
-/* PRODUCT INFO */
+/* =========================
+   PRODUCT INFO
+========================= */
 
 .info{
 padding:12px
@@ -339,7 +365,9 @@ font-weight:800
 color:#fff
 }
 
-/* PRICE */
+/* =========================
+   PRICE
+========================= */
 
 .bottom{
 display:flex;
@@ -353,11 +381,14 @@ min-width:0
 font-size:16px;
 font-weight:900;
 white-space:nowrap;
-flex:1 1 auto;
+flex:0 0 auto;
 min-width:0;
-letter-spacing:-.2px;
-overflow:visible
+letter-spacing:-.2px
 }
+
+/* =========================
+   ACTIONS
+========================= */
 
 .actions{
 display:flex;
@@ -369,30 +400,52 @@ flex:0 0 auto;
 min-width:max-content
 }
 
+/* =========================
+   ❤️ FAVORITO LLAMATIVO
+========================= */
+
 .favorite,
 .share{
 width:30px;
 height:30px;
 flex:0 0 30px;
-border:1px solid #333;
+border:1px solid #444;
 border-radius:8px;
 background:#191919;
-color:#aaa;
-font-size:17px;
+color:#ff2d55;
+font-size:19px;
 display:flex;
 align-items:center;
 justify-content:center;
 padding:0;
 margin:0;
 line-height:1;
-transition:.15s
+transition:.18s ease
+}
+
+.favorite:not(.active){
+color:#ff2d55;
 }
 
 .favorite.active{
-background:#fff!important;
-border-color:#fff!important;
-color:#000!important;
-box-shadow:0 0 8px rgba(255,255,255,.18)
+background:#ff2d55!important;
+border-color:#ff2d55!important;
+color:#fff!important;
+box-shadow:0 0 12px rgba(255,45,85,.45);
+transform:scale(1.05)
+}
+
+.favorite:active{
+transform:scale(.90)
+}
+
+.share{
+color:#aaa;
+font-size:17px
+}
+
+.share:active{
+transform:scale(.94)
 }
 
 .buy{
@@ -412,13 +465,13 @@ font-weight:900;
 white-space:nowrap
 }
 
-.favorite:active,
-.share:active,
 .buy:active{
 transform:scale(.94)
 }
 
-/* SCORE */
+/* =========================
+   STREETFIND SCORE
+========================= */
 
 .street-score{
 display:flex;
@@ -448,7 +501,9 @@ margin-top:2px;
 text-align:right
 }
 
-/* TOP OFFERS */
+/* =========================
+   TOP OFERTAS
+========================= */
 
 .top-offers{
 display:grid;
@@ -502,7 +557,9 @@ font-size:9px;
 color:#8cff9d
 }
 
-/* AUTOCOMPLETE */
+/* =========================
+   AUTOCOMPLETADO
+========================= */
 
 .autocomplete{
 position:absolute;
@@ -541,7 +598,9 @@ font-size:12px
 background:#202020
 }
 
-/* FAVORITES */
+/* =========================
+   FAVORITOS
+========================= */
 
 .favorite-summary{
 display:flex;
@@ -569,7 +628,9 @@ color:#777;
 font-size:9px
 }
 
-/* ALERTS */
+/* =========================
+   ALERTAS
+========================= */
 
 .alerts-section{
 margin-top:25px
@@ -628,7 +689,10 @@ padding:6px 9px;
 font-size:9px
 }
 
-/* MODAL */
+/* =========================
+   MODAL
+   SIN HISTORIAL
+========================= */
 
 .product-modal{
 position:fixed;
@@ -735,7 +799,9 @@ font-size:20px;
 z-index:2
 }
 
-/* STATES */
+/* =========================
+   ESTADOS
+========================= */
 
 .empty,
 .loading,
@@ -764,7 +830,9 @@ margin-top:15px;
 line-height:1.5
 }
 
-/* NAV */
+/* =========================
+   NAVEGACIÓN
+========================= */
 
 .bottom-nav{
 position:fixed;
@@ -813,8 +881,8 @@ min-width:16px;
 height:16px;
 padding:0 4px;
 border-radius:99px;
-background:#fff;
-color:#000;
+background:#ff2d55;
+color:#fff;
 font-size:9px;
 line-height:16px;
 display:none
@@ -844,7 +912,9 @@ opacity:1;
 transform:translate(-50%,0)
 }
 
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(min-width:700px){
 
@@ -896,6 +966,10 @@ gap:3px
 width:28px;
 height:28px;
 flex-basis:28px
+}
+
+.favorite{
+font-size:18px
 }
 
 .buy{
@@ -1027,9 +1101,7 @@ Más baratos
 
 </div>
 
-<section
-class="products"
-id="featuredProducts">
+<section class="products" id="featuredProducts">
 
 <div class="loading">
 Buscando los mejores precios...
@@ -1039,9 +1111,7 @@ Buscando los mejores precios...
 
 </div>
 
-<div
-id="resultsSection"
-style="display:none">
+<div id="resultsSection" style="display:none">
 
 <div class="section-title">
 
@@ -1055,32 +1125,21 @@ Resultados
 
 <div class="results-tools">
 
-<button
-class="sort-btn active"
-data-sort="low"
-type="button">
+<button class="sort-btn active" data-sort="low" type="button">
 Precio ↑
 </button>
 
-<button
-class="sort-btn"
-data-sort="high"
-type="button">
+<button class="sort-btn" data-sort="high" type="button">
 Precio ↓
 </button>
 
-<button
-class="sort-btn"
-data-sort="saving"
-type="button">
+<button class="sort-btn" data-sort="saving" type="button">
 Mayor ahorro
 </button>
 
 </div>
 
-<div
-id="streetStoreFilters"
-class="store-filters">
+<div id="streetStoreFilters" class="store-filters">
 
 <button class="store-filter active" data-store="all" type="button">
 Todas
@@ -1113,16 +1172,14 @@ StockX
 <section class="products" id="products"></section>
 
 <div class="note">
-* El ahorro solo se muestra cuando la tienda proporciona un precio anterior real.
+* El ahorro se calcula comparando los precios encontrados en la búsqueda.
 </div>
 
 </div>
 
 </section>
 
-<section
-id="favoritesSection"
-style="display:none">
+<section id="favoritesSection" style="display:none">
 
 <div class="section-title">
 
@@ -1136,9 +1193,7 @@ style="display:none">
 
 </div>
 
-<div
-id="streetFavoriteSummary"
-class="favorite-summary">
+<div id="streetFavoriteSummary" class="favorite-summary">
 
 <div class="favorite-stat">
 
@@ -1166,10 +1221,7 @@ Han bajado
 
 </div>
 
-<section
-class="products"
-id="favoriteProducts">
-</section>
+<section class="products" id="favoriteProducts"></section>
 
 <div class="alerts-section">
 
@@ -1193,9 +1245,7 @@ Precios objetivo
 
 </main>
 
-<nav
-class="bottom-nav"
-aria-label="Navegación">
+<nav class="bottom-nav" aria-label="Navegación">
 
 <button id="bottomHome" class="active" type="button">
 
@@ -1220,7 +1270,7 @@ Buscar
 <button id="bottomFavorites" type="button">
 
 <span class="nav-icon">
-♡
+♥
 </span>
 
 Favoritos
@@ -1243,7 +1293,7 @@ Favoritos
    API
 ========================= */
 
-const API =
+const API=
 "https://streetfind-rose.vercel.app/api/search";
 
 
@@ -1251,50 +1301,49 @@ const API =
    ELEMENTOS
 ========================= */
 
-const q = document.getElementById("q");
-const go = document.getElementById("go");
-const clearSearch = document.getElementById("clearSearch");
+const q=document.getElementById("q");
+const go=document.getElementById("go");
+const clearSearch=document.getElementById("clearSearch");
 
-const homeSection = document.getElementById("homeSection");
-const favoritesSection = document.getElementById("favoritesSection");
+const homeSection=document.getElementById("homeSection");
+const favoritesSection=document.getElementById("favoritesSection");
 
-const featuredSection = document.getElementById("featuredSection");
-const featuredProducts = document.getElementById("featuredProducts");
+const featuredSection=document.getElementById("featuredSection");
+const featuredProducts=document.getElementById("featuredProducts");
 
-const resultsSection = document.getElementById("resultsSection");
-const products = document.getElementById("products");
+const resultsSection=document.getElementById("resultsSection");
+const products=document.getElementById("products");
+const status=document.getElementById("status");
+const resultCount=document.getElementById("resultCount");
 
-const status = document.getElementById("status");
-const resultCount = document.getElementById("resultCount");
+const favoriteProducts=document.getElementById("favoriteProducts");
+const favoriteCount=document.getElementById("favoriteCount");
+const favoriteBadge=document.getElementById("favoriteBadge");
 
-const favoriteProducts = document.getElementById("favoriteProducts");
-const favoriteCount = document.getElementById("favoriteCount");
-const favoriteBadge = document.getElementById("favoriteBadge");
+const bottomHome=document.getElementById("bottomHome");
+const bottomSearch=document.getElementById("bottomSearch");
+const bottomFavorites=document.getElementById("bottomFavorites");
 
-const bottomHome = document.getElementById("bottomHome");
-const bottomSearch = document.getElementById("bottomSearch");
-const bottomFavorites = document.getElementById("bottomFavorites");
-
-const toast = document.getElementById("toast");
-const storeFilters = document.getElementById("streetStoreFilters");
+const toast=document.getElementById("toast");
+const storeFilters=document.getElementById("streetStoreFilters");
 
 
 /* =========================
    ESTADO
 ========================= */
 
-let category = "all";
-let sortMode = "low";
+let category="all";
+let sortMode="low";
 
-let favorites = [];
-let alerts = [];
+let favorites=[];
+let alerts=[];
 
-let lastResults = [];
-let currentFilteredResults = [];
+let lastResults=[];
+let currentFilteredResults=[];
 
-let searchInProgress = false;
-let searchController = null;
-let toastTimer = null;
+let searchInProgress=false;
+let searchController=null;
+let toastTimer=null;
 
 
 /* =========================
@@ -1303,33 +1352,33 @@ let toastTimer = null;
 
 try{
 
-favorites =
+favorites=
 JSON.parse(
-localStorage.getItem("streetfind_favorites") || "[]"
+localStorage.getItem("streetfind_favorites")||"[]"
 );
 
 if(!Array.isArray(favorites))
-favorites = [];
+favorites=[];
 
 }catch(e){
 
-favorites = [];
+favorites=[];
 
 }
 
 try{
 
-alerts =
+alerts=
 JSON.parse(
-localStorage.getItem("streetfind_alerts") || "[]"
+localStorage.getItem("streetfind_alerts")||"[]"
 );
 
 if(!Array.isArray(alerts))
-alerts = [];
+alerts=[];
 
 }catch(e){
 
-alerts = [];
+alerts=[];
 
 }
 
@@ -1340,7 +1389,7 @@ alerts = [];
 
 function esc(value){
 
-return String(value ?? "")
+return String(value??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
@@ -1350,68 +1399,32 @@ return String(value ?? "")
 }
 
 
-/*
-   Convierte cualquier formato razonable
-   de precio a número.
-*/
-
 function getPrice(value){
 
-if(value == null)
+if(value==null)
 return null;
 
-if(typeof value === "number"){
-
-return Number.isFinite(value)
-?value
-:null;
-
-}
-
-const text = String(value).trim();
-
-if(!text)
-return null;
-
-
-/*
-   Primero buscamos un número.
-
-   Ejemplos:
-   89.99 €
-   89,99 €
-   EUR 89.99
-   1.299,99 €
-*/
-
-const match =
-text.match(
-/\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?/
+const match=
+String(value).match(
+/(\d{1,5}(?:[.,]\d{1,2})?)/
 );
 
 if(!match)
 return null;
 
-let number = match[0];
-
-
-/*
-   Si aparecen ambos separadores:
-   1.299,99 -> 1299.99
-   1,299.99 -> 1299.99
-*/
+let number=match[1];
 
 if(
-number.includes(",") &&
+number.includes(",")&&
 number.includes(".")
 ){
 
 if(
-number.lastIndexOf(",") >
+number.lastIndexOf(",")>
 number.lastIndexOf(".")
 ){
 
-number =
+number=
 number
 .replace(/\./g,"")
 .replace(",",".")
@@ -1419,53 +1432,18 @@ number
 
 }else{
 
-number =
+number=
 number.replace(/,/g,"");
 
 }
-
-}else if(number.includes(",")){
-
-const parts = number.split(",");
-
-if(parts.length===2 && parts[1].length<=2){
-
-number =
-parts[0].replace(/\./g,"")+
-"."+parts[1];
 
 }else{
 
-number =
-number.replace(/,/g,"");
-
+number=
+number.replace(",",".");
 }
 
-}else if(number.includes(".")){
-
-const parts = number.split(".");
-
-if(
-parts.length>2
-){
-
-number =
-number.replace(/\./g,"");
-
-}else if(
-parts.length===2 &&
-parts[1].length===3
-){
-
-number =
-number.replace(/\./g,"");
-
-}
-
-}
-
-const price =
-parseFloat(number);
+const price=parseFloat(number);
 
 return Number.isFinite(price)
 ?price
@@ -1474,25 +1452,11 @@ return Number.isFinite(price)
 }
 
 
-/*
-   Todos los precios visibles de StreetFind
-   pasan por aquí.
-*/
-
 function money(value){
 
-const price = getPrice(value);
-
-if(price === null)
-return "Precio no disponible";
-
-return new Intl.NumberFormat(
-"es-ES",
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-}
-).format(price)+" €";
+return Number(value)
+.toFixed(2)
+.replace(".",",")+" €";
 
 }
 
@@ -1500,9 +1464,8 @@ maximumFractionDigits:2
 function productKey(product){
 
 return String(
-product?.product_link ||
-product?.link ||
-product?.title ||
+product?.product_link||
+product?.title||
 ""
 );
 
@@ -1511,8 +1474,8 @@ product?.title ||
 
 function getProductUrl(product){
 
-return product?.product_link ||
-product?.link ||
+return product?.product_link||
+product?.link||
 "#";
 
 }
@@ -1524,13 +1487,12 @@ product?.link ||
 
 function streetScore(product,list){
 
-const price =
-getPrice(product.price);
+const price=getPrice(product.price);
 
-if(price === null)
+if(price===null)
 return 50;
 
-const prices =
+const prices=
 list
 .map(item=>getPrice(item.price))
 .filter(price=>price!==null);
@@ -1538,34 +1500,24 @@ list
 if(!prices.length)
 return 50;
 
-const min = Math.min(...prices);
-const max = Math.max(...prices);
+const min=Math.min(...prices);
+const max=Math.max(...prices);
 
 if(max===min)
 return 90;
 
-let score =
-100 -
+let score=
+100-
 ((price-min)/(max-min))*60;
 
+const old=getPrice(product.old_price);
 
-/*
-   Solo usamos old_price real
-   para el extra de descuento.
-*/
+if(old!==null&&old>price){
 
-const old =
-getPrice(product.old_price);
-
-if(
-old!==null &&
-old>price
-){
-
-const discount =
+const discount=
 ((old-price)/old)*100;
 
-score += Math.min(
+score+=Math.min(
 15,
 discount*.35
 );
@@ -1578,7 +1530,6 @@ Math.max(
 Math.min(100,score)
 )
 );
-
 
 }
 
@@ -1601,8 +1552,7 @@ return "Precio normal";
 
 function scoreHTML(product,list){
 
-const score =
-streetScore(product,list);
+const score=streetScore(product,list);
 
 return `
 
@@ -1632,57 +1582,31 @@ ${scoreText(score)}
 
 
 /* =========================
-   AHORRO CORREGIDO
+   AHORRO
 ========================= */
-
-/*
-   IMPORTANTE:
-
-   StreetFind NO calcula el ahorro comparando
-   el producto con otros productos.
-
-   Solo muestra ahorro si la API proporciona
-   un old_price real para ESE MISMO producto.
-
-   Esto evita cosas absurdas como:
-
-   "Ahorras 670 €"
-
-   cuando simplemente se estaba comparando
-   con otro producto más caro.
-*/
 
 function savingFor(product,list){
 
-const price =
-getPrice(product.price);
+const price=getPrice(product.price);
 
-const oldPrice =
-getPrice(product.old_price);
+const prices=
+list
+.map(item=>getPrice(item.price))
+.filter(price=>price!==null);
 
-if(
-price === null ||
-oldPrice === null ||
-oldPrice <= price
-){
-
+if(price===null||prices.length<2)
 return null;
 
-}
+const highest=Math.max(...prices);
 
-const amount =
-oldPrice-price;
-
-if(amount<=0)
+if(highest<=price)
 return null;
 
-return {
+const amount=highest-price;
 
-amount:amount,
-
-percent:
-(amount/oldPrice)*100
-
+return{
+amount,
+percent:(amount/highest)*100
 };
 
 }
@@ -1694,13 +1618,11 @@ percent:
 
 function isFavorite(product){
 
-const key =
-productKey(product);
+const key=productKey(product);
 
-return !!key &&
+return !!key&&
 favorites.some(
-item =>
-productKey(item)===key
+item=>productKey(item)===key
 );
 
 }
@@ -1724,118 +1646,89 @@ updateFavoriteCounter();
 
 function updateFavoriteCounter(){
 
-const count =
-favorites.length;
+const count=favorites.length;
 
-favoriteCount.textContent =
-count +
-(
-count===1
-?" producto"
-:" productos"
-);
+favoriteCount.textContent=
+count+
+(count===1?" producto":" productos");
 
-favoriteBadge.textContent =
-count;
+favoriteBadge.textContent=count;
 
-favoriteBadge.style.display =
-count>0
-?"block"
-:"none";
+favoriteBadge.style.display=
+count>0?"block":"none";
 
-const total =
-document.getElementById(
-"streetFavTotal"
-);
+const total=
+document.getElementById("streetFavTotal");
 
 if(total)
-total.textContent = count;
+total.textContent=count;
 
-let drops = 0;
+let drops=0;
 
 favorites.forEach(product=>{
 
-const current =
-getPrice(product.price);
-
-const old =
-getPrice(product.old_price);
+const current=getPrice(product.price);
+const old=getPrice(product.old_price);
 
 if(
-current!==null &&
-old!==null &&
+current!==null&&
+old!==null&&
 current<old
-){
-
+)
 drops++;
-
-}
 
 });
 
-const dropsElement =
-document.getElementById(
-"streetFavDrops"
-);
+const dropsElement=
+document.getElementById("streetFavDrops");
 
 if(dropsElement)
-dropsElement.textContent = drops;
+dropsElement.textContent=drops;
 
 }
 
 
 function toggleFavorite(product,button){
 
-const key =
-productKey(product);
+const key=productKey(product);
 
 if(!key)
 return;
 
-const index =
+const index=
 favorites.findIndex(
-item =>
-productKey(item)===key
+item=>productKey(item)===key
 );
 
 if(index>=0){
 
 favorites.splice(index,1);
 
-showToast(
-"Eliminado de favoritos"
-);
+showToast("Eliminado de favoritos");
 
 }else{
 
 favorites.push(product);
 
-showToast(
-"Añadido a favoritos"
-);
+showToast("Añadido a favoritos");
 
 }
 
 saveFavorites();
-
 updateFavoriteButtons();
-
 renderFavorites();
 
 if(button){
 
-const active =
-isFavorite(product);
+const active=isFavorite(product);
 
 button.classList.toggle(
 "active",
 active
 );
 
-button.innerHTML =
-active
-?"♥"
-:"♡";
+button.innerHTML=
+active?"♥":"♡";
 
 }
 
@@ -1848,15 +1741,13 @@ active
 
 function showToast(message){
 
-toast.textContent =
-message;
+toast.textContent=message;
 
 toast.classList.add("show");
 
 clearTimeout(toastTimer);
 
-toastTimer =
-setTimeout(
+toastTimer=setTimeout(
 ()=>{
 toast.classList.remove("show");
 },
@@ -1877,14 +1768,13 @@ saving=null,
 scoreList=[]
 ){
 
-const favorite =
-isFavorite(product);
+const favorite=isFavorite(product);
 
-let imageHTML = "";
+let imageHTML="";
 
 if(product.thumbnail){
 
-imageHTML = `
+imageHTML=`
 
 <img
 src="${esc(product.thumbnail)}"
@@ -1905,7 +1795,7 @@ Imagen no disponible
 
 }else{
 
-imageHTML = `
+imageHTML=`
 
 <div class="image-fallback">
 Sin imagen
@@ -1915,14 +1805,14 @@ Sin imagen
 
 }
 
-let savingHTML = "";
+let savingHTML="";
 
 if(
-saving &&
+saving&&
 saving.amount>0
 ){
 
-savingHTML = `
+savingHTML=`
 
 <div class="saving">
 Ahorras
@@ -1934,30 +1824,19 @@ Ahorras
 
 }
 
-
-/*
-   Precio siempre formateado por money()
-*/
-
-const displayPrice =
-getPrice(product.price)!==null
-?money(product.price)
-:"Precio no disponible";
-
-
 return `
 
 <article
 class="card"
 data-product-key="${esc(productKey(product))}">
 
-${best ? `
+${best?`
 
 <div class="best">
 🟢 MEJOR PRECIO
 </div>
 
-` : ""}
+`:""}
 
 <div class="image">
 ${imageHTML}
@@ -1980,7 +1859,7 @@ ${scoreHTML(product,scoreList)}
 <div class="bottom">
 
 <div class="price">
-${esc(displayPrice)}
+${esc(product.price||"Precio no disponible")}
 </div>
 
 <div class="actions">
@@ -2031,7 +1910,7 @@ VER
 
 
 /* =========================
-   BOTONES TARJETAS
+   BOTONES
 ========================= */
 
 function updateFavoriteButtons(){
@@ -2040,21 +1919,18 @@ document
 .querySelectorAll(".favorite")
 .forEach(button=>{
 
-button.onclick = ()=>{
+button.onclick=()=>{
 
 try{
 
-const product =
+const product=
 JSON.parse(
 decodeURIComponent(
 button.dataset.product
 )
 );
 
-toggleFavorite(
-product,
-button
-);
+toggleFavorite(product,button);
 
 }catch(e){}
 
@@ -2067,11 +1943,11 @@ document
 .querySelectorAll(".share")
 .forEach(button=>{
 
-button.onclick = ()=>{
+button.onclick=()=>{
 
 try{
 
-const product =
+const product=
 JSON.parse(
 decodeURIComponent(
 button.dataset.shareProduct
@@ -2095,19 +1971,17 @@ shareProduct(product);
 
 async function shareProduct(product){
 
-const title =
-product.title ||
+const title=
+product.title||
 "Producto en StreetFind";
 
-const price =
-getPrice(product.price)!==null
-?money(product.price)
-:"";
+const price=
+product.price||
+"";
 
-const url =
-getProductUrl(product);
+const url=getProductUrl(product);
 
-const text =
+const text=
 `${title}${price?" · "+price:""}
 Encontrado en StreetFind`;
 
@@ -2121,18 +1995,14 @@ text,
 url
 });
 
-}else if(
-navigator.clipboard
-){
+}else if(navigator.clipboard){
 
 await navigator.clipboard.writeText(
 `${text}
 ${url}`
 );
 
-showToast(
-"Enlace copiado"
-);
+showToast("Enlace copiado");
 
 }
 
@@ -2152,26 +2022,20 @@ return [...list].sort(
 
 if(sortMode==="saving"){
 
-const sa =
-savingFor(a,list)?.amount || 0;
+const sa=
+savingFor(a,list)?.amount||0;
 
-const sb =
-savingFor(b,list)?.amount || 0;
+const sb=
+savingFor(b,list)?.amount||0;
 
 return sb-sa;
 
 }
 
-const pa =
-getPrice(a.price);
+const pa=getPrice(a.price);
+const pb=getPrice(b.price);
 
-const pb =
-getPrice(b.price);
-
-if(
-pa===null &&
-pb===null
-)
+if(pa===null&&pb===null)
 return 0;
 
 if(pa===null)
@@ -2196,20 +2060,16 @@ return sortMode==="low"
 
 function renderTopOffers(list){
 
-let section =
-document.getElementById(
-"streetTopOffers"
-);
+let section=
+document.getElementById("streetTopOffers");
 
 if(!section){
 
-section =
-document.createElement("div");
+section=document.createElement("div");
 
-section.id =
-"streetTopOffers";
+section.id="streetTopOffers";
 
-section.innerHTML = `
+section.innerHTML=`
 
 <div class="section-title">
 
@@ -2237,7 +2097,7 @@ featuredSection.firstChild
 
 }
 
-const container =
+const container=
 document.getElementById(
 "streetTopOffersList"
 );
@@ -2245,10 +2105,10 @@ document.getElementById(
 if(!container)
 return;
 
-const usable =
+const usable=
 list
 .filter(
-product =>
+product=>
 getPrice(product.price)!==null
 )
 .sort(
@@ -2258,29 +2118,23 @@ getPrice(b.price)
 )
 .slice(0,3);
 
-container.innerHTML = "";
+container.innerHTML="";
 
 usable.forEach(
 (product,index)=>{
 
-/*
-   AHORA savingFor() solo usa
-   old_price real.
-*/
+const saving=savingFor(product,list);
 
-const saving =
-savingFor(product,list);
-
-const button =
+const button=
 document.createElement("button");
 
-button.type = "button";
+button.type="button";
 
-button.className =
+button.className=
 "top-offer"+
 (index===0?" first":"");
 
-button.innerHTML = `
+button.innerHTML=`
 
 <div class="top-rank">
 ${
@@ -2311,21 +2165,13 @@ Ahorras ${money(saving.amount)}
 </div>
 
 <div class="top-offer-price">
-${
-getPrice(product.price)!==null
-?money(product.price)
-:"—"
-}
+${esc(product.price||"—")}
 </div>
 
 `;
 
-button.onclick =
-()=>{
-openStreetProduct(
-product,
-list
-);
+button.onclick=()=>{
+openStreetProduct(product,list);
 };
 
 container.appendChild(button);
@@ -2341,13 +2187,13 @@ container.appendChild(button);
 
 function renderFeatured(list){
 
-featuredProducts.innerHTML = "";
+featuredProducts.innerHTML="";
 
 renderTopOffers(list);
 
 if(!list.length){
 
-featuredProducts.innerHTML = `
+featuredProducts.innerHTML=`
 
 <div class="empty">
 No hay productos disponibles.
@@ -2359,9 +2205,8 @@ return;
 
 }
 
-const sorted =
-sortProducts(list)
-.slice(0,8);
+const sorted=
+sortProducts(list).slice(0,8);
 
 sorted.forEach(
 (product,index)=>{
@@ -2371,7 +2216,7 @@ featuredProducts.insertAdjacentHTML(
 
 productHTML(
 product,
-index===0 &&
+index===0&&
 getPrice(product.price)!==null,
 savingFor(product,list),
 list
@@ -2392,11 +2237,11 @@ updateFavoriteButtons();
 
 function renderResults(list){
 
-products.innerHTML = "";
+products.innerHTML="";
 
 if(!list.length){
 
-products.innerHTML = `
+products.innerHTML=`
 
 <div class="empty">
 
@@ -2414,33 +2259,25 @@ return;
 
 }
 
-const sorted =
-sortProducts(list);
+const sorted=sortProducts(list);
 
-const prices =
+const prices=
 sorted
-.map(
-product =>
-getPrice(product.price)
-)
-.filter(
-price =>
-price!==null
-);
+.map(product=>getPrice(product.price))
+.filter(price=>price!==null);
 
-const lowest =
+const lowest=
 prices.length
 ?Math.min(...prices)
 :null;
 
 sorted.forEach(product=>{
 
-const price =
-getPrice(product.price);
+const price=getPrice(product.price);
 
-const best =
-price!==null &&
-lowest!==null &&
+const best=
+price!==null&&
+lowest!==null&&
 price===lowest;
 
 products.insertAdjacentHTML(
@@ -2468,13 +2305,13 @@ updateFavoriteButtons();
 
 function renderFavorites(){
 
-favoriteProducts.innerHTML = "";
+favoriteProducts.innerHTML="";
 
 updateFavoriteCounter();
 
 if(!favorites.length){
 
-favoriteProducts.innerHTML = `
+favoriteProducts.innerHTML=`
 
 <div class="empty">
 
@@ -2507,8 +2344,8 @@ favoriteProducts.insertAdjacentHTML(
 productHTML(
 product,
 false,
-savingFor(product,[product]),
-[product]
+null,
+favorites
 )
 
 );
@@ -2516,7 +2353,6 @@ savingFor(product,[product]),
 });
 
 updateFavoriteButtons();
-
 renderAlerts();
 
 }
@@ -2542,10 +2378,9 @@ JSON.stringify(alerts)
 
 function openAlert(product){
 
-const current =
-getPrice(product.price);
+const current=getPrice(product.price);
 
-const defaultTarget =
+const defaultTarget=
 current!==null
 ?Math.max(
 1,
@@ -2553,7 +2388,7 @@ Math.floor(current*0.9)
 )
 :0;
 
-const input =
+const input=
 prompt(
 `¿A qué precio quieres recibir la alerta para:
 
@@ -2572,96 +2407,76 @@ String(defaultTarget)
 if(input===null)
 return;
 
-const target =
+const target=
 parseFloat(
-String(input)
-.replace(",",".")
+String(input).replace(",",".")
 );
 
 if(
-!Number.isFinite(target) ||
+!Number.isFinite(target)||
 target<=0
 ){
 
-showToast(
-"Precio objetivo no válido"
-);
+showToast("Precio objetivo no válido");
 
 return;
 
 }
 
-const key =
-productKey(product);
+const key=productKey(product);
 
-alerts =
+alerts=
 alerts.filter(
-alert =>
-alert.productKey!==key
+alert=>alert.productKey!==key
 );
 
 alerts.push({
 
-id:
-Date.now().toString(),
+id:Date.now().toString(),
 
-productKey:
-key,
+productKey:key,
 
-product:
-product,
+product:product,
 
-target:
-target,
+target:target,
 
-createdAt:
-new Date().toISOString()
+createdAt:new Date().toISOString()
 
 });
 
 saveAlerts();
-
 renderAlerts();
 
-showToast(
-"Alerta creada"
-);
+showToast("Alerta creada");
 
 }
 
 
 function deleteAlert(id){
 
-alerts =
+alerts=
 alerts.filter(
-alert =>
-alert.id!==id
+alert=>alert.id!==id
 );
 
 saveAlerts();
-
 renderAlerts();
 
-showToast(
-"Alerta eliminada"
-);
+showToast("Alerta eliminada");
 
 }
 
 
 function renderAlerts(){
 
-const list =
-document.getElementById(
-"alertList"
-);
+const list=document.getElementById("alertList");
 
 if(!list)
 return;
 
 if(!alerts.length){
 
-list.innerHTML = `
+list.innerHTML=`
 
 <div class="empty">
 No tienes alertas creadas.
@@ -2673,28 +2488,25 @@ return;
 
 }
 
-list.innerHTML = "";
+list.innerHTML="";
 
 alerts.forEach(alert=>{
 
-const current =
-getPrice(
-alert.product?.price
-);
+const current=
+getPrice(alert.product?.price);
 
-const target =
-Number(alert.target);
+const target=Number(alert.target);
 
-let content = "";
+let content="";
 
 if(
-current!==null &&
+current!==null&&
 target>0
 ){
 
 if(current<=target){
 
-content = `
+content=`
 
 <div class="alert-reached">
 🟢 ¡PRECIO ALCANZADO!
@@ -2704,24 +2516,22 @@ content = `
 
 }else{
 
-const progress =
+const progress=
 Math.max(
 0,
 Math.min(
 100,
 (
-1 -
-current/(target*1.5)
+1-current/(target*1.5)
 )*100
 )
 );
 
-content = `
+content=`
 
 <div class="alert-progress">
 
-<div
-style="width:${progress}%">
+<div style="width:${progress}%">
 </div>
 
 </div>
@@ -2746,19 +2556,14 @@ ${money(current-target)}
 
 }
 
-const item =
-document.createElement("div");
+const item=document.createElement("div");
 
-item.className =
-"alert-item";
+item.className="alert-item";
 
-item.innerHTML = `
+item.innerHTML=`
 
 <div class="alert-item-title">
-${esc(
-alert.product?.title ||
-"Producto"
-)}
+${esc(alert.product?.title||"Producto")}
 </div>
 
 <div class="alert-item-price">
@@ -2790,7 +2595,7 @@ ELIMINAR ALERTA
 
 item
 .querySelector(".alert-delete")
-.onclick =
+.onclick=
 ()=>{
 deleteAlert(alert.id);
 };
@@ -2804,31 +2609,26 @@ list.appendChild(item);
 
 /* =========================
    MODAL
+   SIN HISTORIAL
 ========================= */
 
-let modalProduct = null;
-let modalList = [];
+let modalProduct=null;
+let modalList=[];
 
 
 function ensureModal(){
 
 if(
-document.getElementById(
-"streetProductModal"
-)
+document.getElementById("streetProductModal")
 )
 return;
 
-const modal =
-document.createElement("div");
+const modal=document.createElement("div");
 
-modal.id =
-"streetProductModal";
+modal.id="streetProductModal";
+modal.className="product-modal";
 
-modal.className =
-"product-modal";
-
-modal.innerHTML = `
+modal.innerHTML=`
 
 <div class="product-modal-card">
 
@@ -2866,8 +2666,7 @@ id="streetProductSaving"
 class="product-modal-saving">
 </div>
 
-<div id="streetProductScore">
-</div>
+<div id="streetProductScore"></div>
 
 <div class="product-modal-actions">
 
@@ -2911,8 +2710,7 @@ document.body.appendChild(modal);
 
 document.getElementById(
 "streetProductClose"
-).onclick =
-closeStreetProduct;
+).onclick=closeStreetProduct;
 
 modal.addEventListener(
 "click",
@@ -2930,34 +2728,32 @@ function openStreetProduct(product,list=[]){
 
 ensureModal();
 
-modalProduct = product;
-modalList = list;
+modalProduct=product;
+modalList=list;
 
-const modal =
+const modal=
 document.getElementById(
 "streetProductModal"
 );
 
-const image =
+const image=
 document.getElementById(
 "streetProductImage"
 );
 
 if(product.thumbnail){
 
-image.innerHTML = `
+image.innerHTML=`
 
 <img
 src="${esc(product.thumbnail)}"
-alt="${esc(
-product.title||"Producto"
-)}">
+alt="${esc(product.title||"Producto")}">
 
 `;
 
 }else{
 
-image.innerHTML = `
+image.innerHTML=`
 
 <div class="image-fallback">
 Sin imagen
@@ -2969,64 +2765,53 @@ Sin imagen
 
 document.getElementById(
 "streetProductBrand"
-).textContent =
-product.source ||
-"Tienda";
+).textContent=
+product.source||"Tienda";
 
 document.getElementById(
 "streetProductTitle"
-).textContent =
-product.title ||
-"Producto";
+).textContent=
+product.title||"Producto";
 
 document.getElementById(
 "streetProductPrice"
-).textContent =
-getPrice(product.price)!==null
-?money(product.price)
-:"Precio no disponible";
+).textContent=
+product.price||"Precio no disponible";
 
-
-const saving =
-savingFor(product,list);
+const saving=savingFor(product,list);
 
 document.getElementById(
 "streetProductSaving"
-).textContent =
+).textContent=
 saving
 ?`Ahorras ${money(saving.amount)} · ${saving.percent.toFixed(0)}%`
 :"";
 
-
 document.getElementById(
 "streetProductScore"
-).innerHTML =
-scoreHTML(
-product,
-list
-);
+).innerHTML=
+scoreHTML(product,list);
 
 document.getElementById(
 "streetProductBuy"
-).href =
+).href=
 getProductUrl(product);
 
-const favButton =
+const favButton=
 document.getElementById(
 "streetProductFav"
 );
 
-favButton.textContent =
+favButton.textContent=
 isFavorite(product)
 ?"♥ Favorito"
 :"♡ Favorito";
 
-favButton.onclick =
-()=>{
+favButton.onclick=()=>{
 
 toggleFavorite(product);
 
-favButton.textContent =
+favButton.textContent=
 isFavorite(product)
 ?"♥ Favorito"
 :"♡ Favorito";
@@ -3035,11 +2820,8 @@ isFavorite(product)
 
 document.getElementById(
 "streetProductAlert"
-).onclick =
-()=>{
-
+).onclick=()=>{
 openAlert(product);
-
 };
 
 modal.classList.add("show");
@@ -3049,7 +2831,7 @@ modal.classList.add("show");
 
 function closeStreetProduct(){
 
-const modal =
+const modal=
 document.getElementById(
 "streetProductModal"
 );
@@ -3057,7 +2839,7 @@ document.getElementById(
 if(modal)
 modal.classList.remove("show");
 
-modalProduct = null;
+modalProduct=null;
 
 }
 
@@ -3070,27 +2852,23 @@ document.addEventListener(
 "click",
 event=>{
 
-const card =
+const card=
 event.target.closest(".card");
 
 if(!card)
 return;
 
-if(
-event.target.closest("button,a")
-)
+if(event.target.closest("button,a"))
 return;
 
-const key =
-card.dataset.productKey;
+const key=card.dataset.productKey;
 
-const product =
+const product=
 [
 ...lastResults,
 ...favorites
 ].find(
-item =>
-productKey(item)===key
+item=>productKey(item)===key
 );
 
 if(product){
@@ -3115,45 +2893,35 @@ storeFilters
 .querySelectorAll(".store-filter")
 .forEach(button=>{
 
-button.onclick =
-()=>{
+button.onclick=()=>{
 
 storeFilters
 .querySelectorAll(".store-filter")
 .forEach(
-item =>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-const store =
-button.dataset.store;
+const store=button.dataset.store;
 
 if(store==="all"){
 
-currentFilteredResults =
-[...lastResults];
+currentFilteredResults=[...lastResults];
 
 }else{
 
-currentFilteredResults =
+currentFilteredResults=
 lastResults.filter(
-product =>
-String(
-product.source||""
-)
+product=>
+String(product.source||"")
 .toLowerCase()
-.includes(
-store.toLowerCase()
-)
+.includes(store.toLowerCase())
 );
 
 }
 
-renderResults(
-currentFilteredResults
-);
+renderResults(currentFilteredResults);
 
 };
 
@@ -3161,10 +2929,10 @@ currentFilteredResults
 
 
 /* =========================
-   AUTOCOMPLETE
+   AUTOCOMPLETADO
 ========================= */
 
-const suggestions = [
+const suggestions=[
 
 "Jordan 4 Retro",
 "Jordan 4 Military Black",
@@ -3182,20 +2950,15 @@ const suggestions = [
 
 ];
 
-const autocomplete =
-document.createElement("div");
+const autocomplete=document.createElement("div");
 
-autocomplete.id =
-"streetAutocomplete";
-
-autocomplete.className =
-"autocomplete";
+autocomplete.id="streetAutocomplete";
+autocomplete.className="autocomplete";
 
 document
 .querySelector(".search-box")
-.appendChild(
-autocomplete
-);
+.appendChild(autocomplete);
+
 
 q.addEventListener(
 "input",
@@ -3206,56 +2969,42 @@ clearSearch.classList.toggle(
 q.value.length>0
 );
 
-const term =
-q.value
-.trim()
-.toLowerCase();
+const term=
+q.value.trim().toLowerCase();
 
 if(!term){
 
-autocomplete.classList.remove(
-"show"
-);
+autocomplete.classList.remove("show");
 
 return;
 
 }
 
-const matches =
+const matches=
 suggestions
 .filter(
-item =>
-item
-.toLowerCase()
-.includes(term)
+item=>
+item.toLowerCase().includes(term)
 )
 .slice(0,5);
 
-autocomplete.innerHTML = "";
+autocomplete.innerHTML="";
 
 matches.forEach(text=>{
 
-const button =
-document.createElement("button");
+const button=document.createElement("button");
 
-button.type = "button";
-button.className = "autocomplete-item";
+button.type="button";
+button.className="autocomplete-item";
+button.innerHTML=`🔎 ${esc(text)}`;
 
-button.innerHTML =
-`🔎 ${esc(text)}`;
+button.onclick=()=>{
 
-button.onclick =
-()=>{
+q.value=text;
 
-q.value = text;
+clearSearch.classList.add("show");
 
-clearSearch.classList.add(
-"show"
-);
-
-autocomplete.classList.remove(
-"show"
-);
+autocomplete.classList.remove("show");
 
 search();
 
@@ -3283,9 +3032,7 @@ if(
 .contains(event.target)
 ){
 
-autocomplete.classList.remove(
-"show"
-);
+autocomplete.classList.remove("show");
 
 }
 
@@ -3298,12 +3045,12 @@ autocomplete.classList.remove(
 
 function setTab(tab){
 
-homeSection.style.display =
+homeSection.style.display=
 tab==="favorites"
 ?"none"
 :"";
 
-favoritesSection.style.display =
+favoritesSection.style.display=
 tab==="favorites"
 ?""
 :"none";
@@ -3352,18 +3099,15 @@ behavior:"smooth"
 }
 
 
-bottomHome.onclick =
-()=>{
+bottomHome.onclick=()=>{
 setTab("home");
 };
 
-bottomSearch.onclick =
-()=>{
+bottomSearch.onclick=()=>{
 setTab("search");
 };
 
-bottomFavorites.onclick =
-()=>{
+bottomFavorites.onclick=()=>{
 setTab("favorites");
 };
 
@@ -3374,13 +3118,12 @@ setTab("favorites");
 
 async function search(){
 
-const query =
-q.value.trim();
+const query=q.value.trim();
 
 if(!query){
 
-featuredSection.style.display = "";
-resultsSection.style.display = "none";
+featuredSection.style.display="";
+resultsSection.style.display="none";
 
 return;
 
@@ -3392,24 +3135,19 @@ return;
 if(searchController)
 searchController.abort();
 
-searchController =
-new AbortController();
+searchController=new AbortController();
 
-searchInProgress = true;
+searchInProgress=true;
 
-go.textContent =
-"BUSCANDO...";
+go.textContent="BUSCANDO...";
 
-featuredSection.style.display =
-"none";
+featuredSection.style.display="none";
+resultsSection.style.display="";
 
-resultsSection.style.display =
-"";
-
-status.textContent =
+status.textContent=
 "Buscando productos reales...";
 
-products.innerHTML = `
+products.innerHTML=`
 
 <div class="loading">
 🔎 Buscando...
@@ -3419,42 +3157,36 @@ products.innerHTML = `
 
 try{
 
-const response =
+const response=
 await fetch(
 API+
 "?q="+
 encodeURIComponent(query),
 {
-signal:
-searchController.signal,
+signal:searchController.signal,
 cache:"no-store"
 }
 );
 
-const data =
-await response.json();
+const data=await response.json();
 
 if(!response.ok)
 throw new Error();
 
-let list =
-Array.isArray(
-data.shopping_results
-)
+let list=
+Array.isArray(data.shopping_results)
 ?data.shopping_results
 :[];
 
 
-/* CATEGORÍA */
+/* FILTRO CATEGORÍA */
 
 if(category!=="all"){
 
-list =
-list.filter(product=>{
+list=list.filter(product=>{
 
-const title =
-(product.title||"")
-.toLowerCase();
+const title=
+(product.title||"").toLowerCase();
 
 if(category==="sneakers"){
 
@@ -3477,33 +3209,26 @@ return /cap|bag|wallet|belt|backpack|hat|beanie|sunglasses/
 
 }
 
-lastResults = list;
+lastResults=list;
+currentFilteredResults=[...list];
 
-currentFilteredResults = [...list];
-
-resultCount.textContent =
+resultCount.textContent=
 list.length+
-(
-list.length===1
-?" producto"
-:" productos"
-);
+(list.length===1?" producto":" productos");
 
-status.textContent = "";
+status.textContent="";
 
 renderResults(list);
 
 }catch(error){
 
-if(
-error.name==="AbortError"
-)
+if(error.name==="AbortError")
 return;
 
-status.textContent =
+status.textContent=
 "Error conectando con StreetFind API.";
 
-products.innerHTML = `
+products.innerHTML=`
 
 <div class="error-box">
 
@@ -3526,28 +3251,24 @@ REINTENTAR
 
 `;
 
-const retry =
-document.getElementById(
-"retrySearch"
-);
+const retry=
+document.getElementById("retrySearch");
 
 if(retry)
-retry.onclick = search;
+retry.onclick=search;
 
 }finally{
 
-searchInProgress = false;
+searchInProgress=false;
 
-go.textContent =
-"BUSCAR";
-
-}
+go.textContent="BUSCAR";
 
 }
 
+}
 
-go.onclick =
-search;
+
+go.onclick=search;
 
 
 q.addEventListener(
@@ -3565,20 +3286,17 @@ search();
 });
 
 
-clearSearch.onclick =
-()=>{
+clearSearch.onclick=()=>{
 
-q.value = "";
+q.value="";
 
-clearSearch.classList.remove(
-"show"
-);
+clearSearch.classList.remove("show");
 
-lastResults = [];
-currentFilteredResults = [];
+lastResults=[];
+currentFilteredResults=[];
 
-featuredSection.style.display = "";
-resultsSection.style.display = "none";
+featuredSection.style.display="";
+resultsSection.style.display="none";
 
 setTab("search");
 
@@ -3593,20 +3311,17 @@ document
 .querySelectorAll(".filter")
 .forEach(button=>{
 
-button.onclick =
-()=>{
+button.onclick=()=>{
 
 document
 .querySelectorAll(".filter")
 .forEach(
-item =>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-category =
-button.dataset.c;
+category=button.dataset.c;
 
 if(q.value.trim())
 search();
@@ -3624,20 +3339,17 @@ document
 .querySelectorAll(".sort-btn")
 .forEach(button=>{
 
-button.onclick =
-()=>{
+button.onclick=()=>{
 
 document
 .querySelectorAll(".sort-btn")
 .forEach(
-item =>
-item.classList.remove("active")
+item=>item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-sortMode =
-button.dataset.sort;
+sortMode=button.dataset.sort;
 
 if(lastResults.length){
 
@@ -3655,14 +3367,14 @@ currentFilteredResults.length
 
 
 /* =========================
-   DESTACADOS
+   PRODUCTOS DESTACADOS
 ========================= */
 
 async function loadFeatured(){
 
 try{
 
-const searches = [
+const searches=[
 
 "Jordan Nike sneakers",
 "Adidas sneakers",
@@ -3670,15 +3382,13 @@ const searches = [
 
 ];
 
-let all = [];
+let all=[];
 
-for(
-const term of searches
-){
+for(const term of searches){
 
 try{
 
-const response =
+const response=
 await fetch(
 API+
 "?q="+
@@ -3691,13 +3401,10 @@ cache:"no-store"
 if(!response.ok)
 continue;
 
-const data =
-await response.json();
+const data=await response.json();
 
 if(
-Array.isArray(
-data.shopping_results
-)
+Array.isArray(data.shopping_results)
 ){
 
 all.push(
@@ -3710,19 +3417,16 @@ all.push(
 
 }
 
-const unique = [];
-const seen = new Set();
+const unique=[];
+const seen=new Set();
 
 all.forEach(product=>{
 
-const key =
-product.product_link ||
+const key=
+product.product_link||
 product.title;
 
-if(
-!key ||
-seen.has(key)
-)
+if(!key||seen.has(key))
 return;
 
 seen.add(key);
@@ -3734,7 +3438,7 @@ renderFeatured(unique);
 
 }catch(e){
 
-featuredProducts.innerHTML = `
+featuredProducts.innerHTML=`
 
 <div class="empty">
 
