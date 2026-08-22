@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#050505">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -106,11 +106,9 @@ white-space:nowrap
 background:#fff;
 color:#000
 }
-/* NAVEGACIÓN ANTIGUA OCULTA */
 .navigation{
 display:none
 }
-/* SECCIONES */
 .section-title{
 display:flex;
 align-items:center;
@@ -129,7 +127,6 @@ color:#777
 color:#888;
 margin:18px 0
 }
-/* PRODUCTOS */
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -228,7 +225,6 @@ border-radius:8px;
 font-size:11px;
 font-weight:900
 }
-/* HISTORIAL */
 .history{
 margin-top:12px;
 padding:11px;
@@ -297,7 +293,6 @@ color:#666;
 margin-top:15px;
 line-height:1.5
 }
-/* MENÚ INFERIOR ESTILO APP */
 .bottom-nav{
 position:fixed;
 left:0;
@@ -375,187 +370,95 @@ BUSCAR
 </button>
 </div>
 <div class="filters">
-<button
-class="filter active"
-data-c="all">
-Todo
-</button>
-<button
-class="filter"
-data-c="sneakers">
-Zapatillas
-</button>
-<button
-class="filter"
-data-c="clothing">
-Ropa
-</button>
-<button
-class="filter"
-data-c="accessories">
-Accesorios
-</button>
+<button class="filter active" data-c="all">Todo</button>
+<button class="filter" data-c="sneakers">Zapatillas</button>
+<button class="filter" data-c="clothing">Ropa</button>
+<button class="filter" data-c="accessories">Accesorios</button>
 </div>
 <section id="homeSection">
 <div id="featuredSection">
 <div class="section-title">
-<h2>
-🔥 Mejores precios
-</h2>
-<span>
-Más baratos
-</span>
+<h2>🔥 Mejores precios</h2>
+<span>Más baratos</span>
 </div>
-<section
-class="products"
-id="featuredProducts">
+<section class="products" id="featuredProducts">
 <div class="loading">
 Buscando los mejores precios...
 </div>
 </section>
 </div>
-<div
-id="resultsSection"
-style="display:none">
+<div id="resultsSection" style="display:none">
 <div class="section-title">
-<h2>
-Resultados
-</h2>
-<span id="resultCount">
-</span>
+<h2>Resultados</h2>
+<span id="resultCount"></span>
 </div>
-<div
-class="status"
-id="status">
-</div>
-<section
-class="products"
-id="products">
-</section>
+<div class="status" id="status"></div>
+<section class="products" id="products"></section>
 <div class="note">
 * El ahorro se calcula comparando los precios encontrados en la búsqueda.
 </div>
 </div>
 </section>
-<section
-id="favoritesSection"
-style="display:none">
+<section id="favoritesSection" style="display:none">
 <div class="section-title">
-<h2>
-❤️ Mis favoritos
-</h2>
-<span id="favoriteCount">
-0 productos
-</span>
+<h2>❤️ Mis favoritos</h2>
+<span id="favoriteCount">0 productos</span>
 </div>
-<section
-class="products"
-id="favoriteProducts">
-</section>
+<section class="products" id="favoriteProducts"></section>
 </section>
 </main>
-<!-- MENÚ INFERIOR -->
 <nav class="bottom-nav">
-<button
-id="bottomHome"
-class="active">
-<span class="nav-icon">
-⌂
-</span>
+<button id="bottomHome" class="active">
+<span class="nav-icon">⌂</span>
 Inicio
 </button>
-<button
-id="bottomSearch">
-<span class="nav-icon">
-⌕
-</span>
+<button id="bottomSearch">
+<span class="nav-icon">⌕</span>
 Buscar
 </button>
-<button
-id="bottomFavorites">
-<span class="nav-icon">
-♡
-</span>
+<button id="bottomFavorites">
+<span class="nav-icon">♡</span>
 Favoritos
 </button>
 </nav>
 <script>
-const API=
-"https://streetfind-rose.vercel.app/api/search";
-const HISTORY_API=
-"https://streetfind-rose.vercel.app/api/history";
-const q=
-document.getElementById("q");
-const go=
-document.getElementById("go");
-const homeSection=
-document.getElementById("homeSection");
-const favoritesSection=
-document.getElementById("favoritesSection");
-const featuredSection=
-document.getElementById("featuredSection");
-const featuredProducts=
-document.getElementById("featuredProducts");
-const resultsSection=
-document.getElementById("resultsSection");
-const products=
-document.getElementById("products");
-const status=
-document.getElementById("status");
-const resultCount=
-document.getElementById("resultCount");
-const favoriteProducts=
-document.getElementById("favoriteProducts");
-const favoriteCount=
-document.getElementById("favoriteCount");
-const bottomHome=
-document.getElementById("bottomHome");
-const bottomSearch=
-document.getElementById("bottomSearch");
-const bottomFavorites=
-document.getElementById("bottomFavorites");
+const API="https://streetfind-rose.vercel.app/api/search";
+const HISTORY_API="https://streetfind-rose.vercel.app/api/history";
+const q=document.getElementById("q");
+const go=document.getElementById("go");
+const homeSection=document.getElementById("homeSection");
+const favoritesSection=document.getElementById("favoritesSection");
+const featuredSection=document.getElementById("featuredSection");
+const featuredProducts=document.getElementById("featuredProducts");
+const resultsSection=document.getElementById("resultsSection");
+const products=document.getElementById("products");
+const status=document.getElementById("status");
+const resultCount=document.getElementById("resultCount");
+const favoriteProducts=document.getElementById("favoriteProducts");
+const favoriteCount=document.getElementById("favoriteCount");
+const bottomHome=document.getElementById("bottomHome");
+const bottomSearch=document.getElementById("bottomSearch");
+const bottomFavorites=document.getElementById("bottomFavorites");
 let category="all";
 let favorites=[];
 try{
-favorites=
-JSON.parse(
-localStorage.getItem(
-"streetfind_favorites"
-)||"[]"
-);
-if(!Array.isArray(favorites))
-favorites=[];
+favorites=JSON.parse(localStorage.getItem("streetfind_favorites")||"[]");
+if(!Array.isArray(favorites)) favorites=[];
 }catch(e){
 favorites=[];
 }
 function saveFavorites(){
-localStorage.setItem(
-"streetfind_favorites",
-JSON.stringify(favorites)
-);
+localStorage.setItem("streetfind_favorites",JSON.stringify(favorites));
 }
 function productKey(product){
-return String(
-product.product_link||
-product.title||
-""
-);
+return String(product.product_link||product.title||"");
 }
 function isFavorite(product){
-return favorites.some(
-item=>
-productKey(item)===
-productKey(product)
-);
+return favorites.some(item=>productKey(item)===productKey(product));
 }
 function toggleFavorite(product){
-const key=
-productKey(product);
-const index=
-favorites.findIndex(
-item=>
-productKey(item)===key
-);
+const key=productKey(product);
+const index=favorites.findIndex(item=>productKey(item)===key);
 if(index>=0){
 favorites.splice(index,1);
 }else{
@@ -574,68 +477,35 @@ return String(value??"")
 .replaceAll("'","&#039;");
 }
 function getPrice(value){
-if(value===null||value===undefined)
-return null;
-const match=
-String(value).match(
-/(\d{1,5}(?:[.,]\d{1,2})?)/
-);
-if(!match)
-return null;
+if(value===null||value===undefined) return null;
+const match=String(value).match(/(\d{1,5}(?:[.,]\d{1,2})?)/);
+if(!match) return null;
 let number=match[1];
-if(
-number.includes(",")&&
-number.includes(".")
-){
-if(
-number.lastIndexOf(",")>
-number.lastIndexOf(".")
-){
-number=
-number
-.replace(/\./g,"")
-.replace(",",".")
-;
+if(number.includes(",")&&number.includes(".")){
+if(number.lastIndexOf(",")>number.lastIndexOf(".")){
+number=number.replace(/\./g,"").replace(",",".");
 }else{
-number=
-number.replace(/,/g,"");
+number=number.replace(/,/g,"");
 }
 }else{
-number=
-number.replace(",",".");
+number=number.replace(",",".");
 }
-const price=
-parseFloat(number);
-return Number.isFinite(price)
-?price
-:null;
+const price=parseFloat(number);
+return Number.isFinite(price)?price:null;
 }
 function money(value){
-return Number(value)
-.toFixed(2)
-.replace(".",",")
-+" €";
+return Number(value).toFixed(2).replace(".",",")+" €";
 }
-/* HISTORIAL */
 async function loadHistory(product){
-const key=
-productKey(product);
-if(!key)
-return null;
+const key=productKey(product);
+if(!key) return null;
 try{
-const response=
-await fetch(
-HISTORY_API+
-"?product_key="+
-encodeURIComponent(key)
+const response=await fetch(
+HISTORY_API+"?product_key="+encodeURIComponent(key)
 );
-if(!response.ok)
-return null;
-const data=
-await response.json();
-return Array.isArray(data.history)
-?data.history
-:null;
+if(!response.ok) return null;
+const data=await response.json();
+return Array.isArray(data.history)?data.history:null;
 }catch(error){
 return null;
 }
@@ -659,37 +529,26 @@ Aún no hay historial suficiente.
 </div>
 `;
 }
-const prices=
-history
+const prices=history
 .map(item=>Number(item.price))
 .filter(price=>Number.isFinite(price));
-if(!prices.length)
-return "";
-const current=
-prices[prices.length-1];
-const lowest=
-Math.min(...prices);
-const first=
-prices[0];
+if(!prices.length) return "";
+const current=prices[prices.length-1];
+const lowest=Math.min(...prices);
+const first=prices[0];
 let changeHTML="";
 if(first!==current){
-const difference=
-current-first;
-const percent=
-Math.abs(
-(difference/first)*100
-);
+const difference=current-first;
+const percent=Math.abs((difference/first)*100);
 if(difference<0){
-changeHTML=
-`
+changeHTML=`
 <span class="history-change history-down">
 ↓ ${money(Math.abs(difference))}
 (${percent.toFixed(0)}%)
 </span>
 `;
 }else{
-changeHTML=
-`
+changeHTML=`
 <span class="history-change history-up">
 ↑ ${money(difference)}
 (${percent.toFixed(0)}%)
@@ -697,31 +556,19 @@ changeHTML=
 `;
 }
 }
-const recent=
-prices.slice(-12);
-const minRecent=
-Math.min(...recent);
-const maxRecent=
-Math.max(...recent);
-const range=
-maxRecent-minRecent||1;
-const bars=
-recent
-.map(price=>{
-const height=
-20+
-(
-((price-minRecent)/range)
-*80
-);
+const recent=prices.slice(-12);
+const minRecent=Math.min(...recent);
+const maxRecent=Math.max(...recent);
+const range=maxRecent-minRecent||1;
+const bars=recent.map(price=>{
+const height=20+(((price-minRecent)/range)*80);
 return `
 <div
 class="history-bar"
 style="height:${height}%">
 </div>
 `;
-})
-.join("");
+}).join("");
 return `
 <div class="history">
 <div class="history-title">
@@ -755,31 +602,17 @@ ${bars}
 </div>
 `;
 }
-async function addHistoryToCard(
-card,
-product
-){
-const history=
-await loadHistory(product);
-const container=
-card.querySelector(".history-container");
+async function addHistoryToCard(card,product){
+const history=await loadHistory(product);
+const container=card.querySelector(".history-container");
 if(container){
-container.innerHTML=
-historyHTML(history);
+container.innerHTML=historyHTML(history);
 }
 }
-function productHTML(
-product,
-best=false,
-saving=null
-){
-const favorite=
-isFavorite(product);
+function productHTML(product,best=false,saving=null){
+const favorite=isFavorite(product);
 let savingHTML="";
-if(
-saving&&
-saving.amount>0
-){
+if(saving&&saving.amount>0){
 savingHTML=`
 <div class="saving">
 Ahorras
@@ -839,17 +672,12 @@ ${esc(product.price||"Precio no disponible")}
 <div class="actions">
 <button
 class="favorite ${favorite?"active":""}"
-data-product="${encodeURIComponent(
-JSON.stringify(product)
-)}">
+data-product="${encodeURIComponent(JSON.stringify(product))}">
 ${favorite?"❤️":"♡"}
 </button>
 <a
 class="buy"
-href="${esc(
-product.product_link||
-"#"
-)}"
+href="${esc(product.product_link||"#")}"
 target="_blank"
 rel="noopener">
 VER
@@ -861,114 +689,78 @@ VER
 `;
 }
 function sortByPrice(list){
-return [...list].sort(
-(a,b)=>{
+return [...list].sort((a,b)=>{
 const pa=getPrice(a.price);
 const pb=getPrice(b.price);
-if(pa===null&&pb===null)
-return 0;
-if(pa===null)
-return 1;
-if(pb===null)
-return -1;
+if(pa===null&&pb===null) return 0;
+if(pa===null) return 1;
+if(pb===null) return -1;
 return pa-pb;
-}
-);
+});
 }
 function updateFavoriteButtons(){
-document
-.querySelectorAll(".favorite")
-.forEach(button=>{
+document.querySelectorAll(".favorite").forEach(button=>{
 button.onclick=()=>{
 try{
-const product=
-JSON.parse(
-decodeURIComponent(
-button.dataset.product
-)
+const product=JSON.parse(
+decodeURIComponent(button.dataset.product)
 );
 toggleFavorite(product);
 }catch(e){}
 };
 });
 }
-async function loadHistories(
-container,
-list
-){
-const cards=
-Array.from(
+async function loadHistories(container,list){
+const cards=Array.from(
 container.querySelectorAll(".card")
 );
 await Promise.all(
-cards.map(
-(card,index)=>
-addHistoryToCard(
-card,
-list[index]
-)
+cards.map((card,index)=>
+addHistoryToCard(card,list[index])
 )
 );
 }
 function renderFeatured(list){
 featuredProducts.innerHTML="";
 if(!list.length){
-featuredProducts.innerHTML=
-`
+featuredProducts.innerHTML=`
 <div class="empty">
 No hay productos disponibles.
 </div>
 `;
 return;
 }
-const sorted=
-sortByPrice(list).slice(0,8);
-sorted.forEach(
-(product,index)=>{
-featuredProducts
-.insertAdjacentHTML(
+const sorted=sortByPrice(list).slice(0,8);
+sorted.forEach((product,index)=>{
+featuredProducts.insertAdjacentHTML(
 "beforeend",
 productHTML(
 product,
-index===0&&
-getPrice(product.price)!==null
+index===0&&getPrice(product.price)!==null
 )
 );
 });
 updateFavoriteButtons();
-loadHistories(
-featuredProducts,
-sorted
-);
+loadHistories(featuredProducts,sorted);
 }
 function renderResults(list){
 products.innerHTML="";
 if(!list.length){
-products.innerHTML=
-`
+products.innerHTML=`
 <div class="empty">
 No encontramos productos.
 </div>
 `;
 return;
 }
-const sorted=
-sortByPrice(list);
-const prices=
-sorted
+const sorted=sortByPrice(list);
+const prices=sorted
 .map(p=>getPrice(p.price))
 .filter(p=>p!==null);
-const lowest=
-prices.length
-?Math.min(...prices)
-:null;
-const highest=
-prices.length
-?Math.max(...prices)
-:null;
+const lowest=prices.length?Math.min(...prices):null;
+const highest=prices.length?Math.max(...prices):null;
 sorted.forEach(product=>{
-const price=
-getPrice(product.price);
+const price=getPrice(product.price);
 let saving=null;
 if(
 price!==null&&
@@ -976,51 +768,31 @@ lowest!==null&&
 highest!==null&&
 highest>lowest
 ){
-const amount=
-price-lowest;
-const percent=
-(amount/highest)*100;
+const amount=price-lowest;
+const percent=(amount/highest)*100;
 if(amount>0){
-saving={
-amount,
-percent
-};
+saving={amount,percent};
 }
 }
 const best=
 price!==null&&
 lowest!==null&&
 price===lowest;
-products
-.insertAdjacentHTML(
+products.insertAdjacentHTML(
 "beforeend",
-productHTML(
-product,
-best,
-saving
-)
+productHTML(product,best,saving)
 );
 });
 updateFavoriteButtons();
-loadHistories(
-products,
-sorted
-);
+loadHistories(products,sorted);
 }
 function renderFavorites(){
 favoriteProducts.innerHTML="";
 favoriteCount.textContent=
 favorites.length+
-(
-favorites.length===1
-?
-" producto"
-:
-" productos"
-);
+(favorites.length===1?" producto":" productos");
 if(!favorites.length){
-favoriteProducts.innerHTML=
-`
+favoriteProducts.innerHTML=`
 <div class="empty">
 ❤️
 <br><br>
@@ -1033,44 +805,22 @@ para guardarlo aquí.
 return;
 }
 favorites.forEach(product=>{
-favoriteProducts
-.insertAdjacentHTML(
+favoriteProducts.insertAdjacentHTML(
 "beforeend",
 productHTML(product)
 );
 });
 updateFavoriteButtons();
-loadHistories(
-favoriteProducts,
-favorites
-);
+loadHistories(favoriteProducts,favorites);
 }
-/* CAMBIO DE SECCIÓN */
 function setTab(tab){
 homeSection.style.display=
-tab==="favorites"
-?
-"none"
-:
-"";
+tab==="favorites"?"none":"";
 favoritesSection.style.display=
-tab==="favorites"
-?
-""
-:
-"none";
-bottomHome.classList.toggle(
-"active",
-tab==="home"
-);
-bottomSearch.classList.toggle(
-"active",
-tab==="search"
-);
-bottomFavorites.classList.toggle(
-"active",
-tab==="favorites"
-);
+tab==="favorites"?"":"none";
+bottomHome.classList.toggle("active",tab==="home");
+bottomSearch.classList.toggle("active",tab==="search");
+bottomFavorites.classList.toggle("active",tab==="favorites");
 if(tab==="favorites"){
 renderFavorites();
 }
@@ -1093,10 +843,8 @@ setTab("search");
 bottomFavorites.onclick=()=>{
 setTab("favorites");
 };
-/* BÚSQUEDA */
 async function search(){
-const query=
-q.value.trim();
+const query=q.value.trim();
 if(!query){
 featuredSection.style.display="";
 resultsSection.style.display="none";
@@ -1108,32 +856,21 @@ featuredSection.style.display="none";
 resultsSection.style.display="";
 status.textContent=
 "Buscando productos reales...";
-products.innerHTML=
-`
+products.innerHTML=`
 <div class="loading">
 🔎 Buscando...
 </div>
 `;
 try{
-const response=
-await fetch(
-API+
-"?q="+
-encodeURIComponent(query)
+const response=await fetch(
+API+"?q="+encodeURIComponent(query)
 );
-const data=
-await response.json();
-if(!response.ok)
-throw new Error();
-let list=
-data.shopping_results||
-[];
+const data=await response.json();
+if(!response.ok) throw new Error();
+let list=data.shopping_results||[];
 if(category!=="all"){
-list=
-list.filter(product=>{
-const title=
-(product.title||"")
-.toLowerCase();
+list=list.filter(product=>{
+const title=(product.title||"").toLowerCase();
 if(category==="sneakers"){
 return /shoe|sneaker|jordan|nike|adidas|air max/.test(title);
 }
@@ -1143,16 +880,13 @@ return /hoodie|shirt|jacket|pants|t-shirt/.test(title);
 return /cap|bag|wallet|belt/.test(title);
 });
 }
-resultCount.textContent=
-list.length+
-" productos";
+resultCount.textContent=list.length+" productos";
 status.textContent="";
 renderResults(list);
 }catch(error){
 status.textContent=
 "Error conectando con StreetFind API.";
-products.innerHTML=
-`
+products.innerHTML=`
 <div class="empty">
 No se pudieron cargar los productos.
 <br><br>
@@ -1162,29 +896,21 @@ Inténtalo de nuevo.
 }
 }
 go.onclick=search;
-q.addEventListener(
-"keydown",
-event=>{
+q.addEventListener("keydown",event=>{
 if(event.key==="Enter")
 search();
 });
-document
-.querySelectorAll(".filter")
-.forEach(button=>{
+document.querySelectorAll(".filter").forEach(button=>{
 button.onclick=()=>{
-document
-.querySelectorAll(".filter")
-.forEach(x=>
+document.querySelectorAll(".filter").forEach(x=>
 x.classList.remove("active")
 );
 button.classList.add("active");
-category=
-button.dataset.c;
+category=button.dataset.c;
 if(q.value.trim())
 search();
 };
 });
-/* PRODUCTOS DESTACADOS */
 async function loadFeatured(){
 try{
 const searches=[
@@ -1193,55 +919,36 @@ const searches=[
 "streetwear hoodie"
 ];
 let all=[];
-for(
-const term of searches
-){
+for(const term of searches){
 try{
-const response=
-await fetch(
-API+
-"?q="+
-encodeURIComponent(term)
+const response=await fetch(
+API+"?q="+encodeURIComponent(term)
 );
-if(!response.ok)
-continue;
-const data=
-await response.json();
-if(
-Array.isArray(
-data.shopping_results
-)
-){
-all.push(
-...data.shopping_results
-);
+if(!response.ok) continue;
+const data=await response.json();
+if(Array.isArray(data.shopping_results)){
+all.push(...data.shopping_results);
 }
 }catch(e){}
 }
 const unique=[];
 const seen=new Set();
 all.forEach(product=>{
-const key=
-product.product_link||
-product.title;
-if(!key)
-return;
-if(seen.has(key))
-return;
+const key=product.product_link||product.title;
+if(!key) return;
+if(seen.has(key)) return;
 seen.add(key);
 unique.push(product);
 });
 renderFeatured(unique);
 }catch(e){
-featuredProducts.innerHTML=
-`
+featuredProducts.innerHTML=`
 <div class="empty">
 No se pudieron cargar los productos.
 </div>
 `;
 }
 }
-/* INICIO */
 renderFavorites();
 loadFeatured();
 </script>
