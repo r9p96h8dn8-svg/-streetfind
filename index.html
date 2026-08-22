@@ -362,7 +362,7 @@ font-weight:800
 }
 
 .saving strong{
-color:#fff
+color:#9cffaa
 }
 
 /* =========================
@@ -381,14 +381,10 @@ min-width:0
 font-size:16px;
 font-weight:900;
 white-space:nowrap;
-flex:0 0 auto;
+flex:1 1 auto;
 min-width:0;
 letter-spacing:-.2px
 }
-
-/* =========================
-   ACTIONS
-========================= */
 
 .actions{
 display:flex;
@@ -401,7 +397,7 @@ min-width:max-content
 }
 
 /* =========================
-   ❤️ FAVORITO LLAMATIVO
+   CORAZÓN LLAMATIVO
 ========================= */
 
 .favorite,
@@ -409,42 +405,45 @@ min-width:max-content
 width:30px;
 height:30px;
 flex:0 0 30px;
-border:1px solid #444;
-border-radius:8px;
+border:1px solid #333;
+border-radius:9px;
 background:#191919;
-color:#ff2d55;
-font-size:19px;
+color:#aaa;
+font-size:18px;
 display:flex;
 align-items:center;
 justify-content:center;
 padding:0;
 margin:0;
 line-height:1;
-transition:.18s ease
-}
-
-.favorite:not(.active){
-color:#ff2d55;
+transition:
+transform .15s,
+background .15s,
+color .15s,
+border-color .15s,
+box-shadow .15s
 }
 
 .favorite.active{
 background:#ff2d55!important;
 border-color:#ff2d55!important;
 color:#fff!important;
-box-shadow:0 0 12px rgba(255,45,85,.45);
-transform:scale(1.05)
+box-shadow:
+0 0 12px rgba(255,45,85,.45),
+0 0 22px rgba(255,45,85,.15)
+}
+
+.favorite.active:hover{
+background:#ff1748!important;
+border-color:#ff1748!important
 }
 
 .favorite:active{
-transform:scale(.90)
+transform:scale(.88)
 }
 
-.share{
-color:#aaa;
-font-size:17px
-}
-
-.share:active{
+.share:active,
+.buy:active{
 transform:scale(.94)
 }
 
@@ -463,10 +462,6 @@ text-decoration:none;
 font-size:10px;
 font-weight:900;
 white-space:nowrap
-}
-
-.buy:active{
-transform:scale(.94)
 }
 
 /* =========================
@@ -549,12 +544,6 @@ margin-top:8px;
 font-size:15px;
 font-weight:900;
 white-space:nowrap
-}
-
-.top-offer-saving{
-margin-top:4px;
-font-size:9px;
-color:#8cff9d
 }
 
 /* =========================
@@ -691,7 +680,6 @@ font-size:9px
 
 /* =========================
    MODAL
-   SIN HISTORIAL
 ========================= */
 
 .product-modal{
@@ -950,11 +938,7 @@ margin:0
 }
 
 .price{
-font-size:15px;
-flex:1 1 auto;
-min-width:0;
-overflow:visible;
-text-overflow:clip
+font-size:15px
 }
 
 .actions{
@@ -966,10 +950,6 @@ gap:3px
 width:28px;
 height:28px;
 flex-basis:28px
-}
-
-.favorite{
-font-size:18px
 }
 
 .buy{
@@ -1067,21 +1047,10 @@ BUSCAR
 
 <div class="filters">
 
-<button class="filter active" data-c="all" type="button">
-Todo
-</button>
-
-<button class="filter" data-c="sneakers" type="button">
-Zapatillas
-</button>
-
-<button class="filter" data-c="clothing" type="button">
-Ropa
-</button>
-
-<button class="filter" data-c="accessories" type="button">
-Accesorios
-</button>
+<button class="filter active" data-c="all" type="button">Todo</button>
+<button class="filter" data-c="sneakers" type="button">Zapatillas</button>
+<button class="filter" data-c="clothing" type="button">Ropa</button>
+<button class="filter" data-c="accessories" type="button">Accesorios</button>
 
 </div>
 
@@ -1091,13 +1060,9 @@ Accesorios
 
 <div class="section-title">
 
-<h2>
-🔥 Mejores precios
-</h2>
+<h2>🔥 Mejores precios</h2>
 
-<span>
-Más baratos
-</span>
+<span>Más baratos</span>
 
 </div>
 
@@ -1115,9 +1080,7 @@ Buscando los mejores precios...
 
 <div class="section-title">
 
-<h2>
-Resultados
-</h2>
+<h2>Resultados</h2>
 
 <span id="resultCount"></span>
 
@@ -1172,7 +1135,7 @@ StockX
 <section class="products" id="products"></section>
 
 <div class="note">
-* El ahorro se calcula comparando los precios encontrados en la búsqueda.
+* StreetFind muestra el precio encontrado en cada tienda. El ahorro solo se muestra cuando existe un precio anterior proporcionado por la tienda.
 </div>
 
 </div>
@@ -1183,13 +1146,9 @@ StockX
 
 <div class="section-title">
 
-<h2>
-❤️ Mis favoritos
-</h2>
+<h2>❤️ Mis favoritos</h2>
 
-<span id="favoriteCount">
-0 productos
-</span>
+<span id="favoriteCount">0 productos</span>
 
 </div>
 
@@ -1197,25 +1156,17 @@ StockX
 
 <div class="favorite-stat">
 
-<strong id="streetFavTotal">
-0
-</strong>
+<strong id="streetFavTotal">0</strong>
 
-<span>
-Guardados
-</span>
+<span>Guardados</span>
 
 </div>
 
 <div class="favorite-stat">
 
-<strong id="streetFavDrops">
-0
-</strong>
+<strong id="streetFavDrops">0</strong>
 
-<span>
-Han bajado
-</span>
+<span>Han bajado</span>
 
 </div>
 
@@ -1227,13 +1178,9 @@ Han bajado
 
 <div class="section-title">
 
-<h2>
-🔔 Mis alertas
-</h2>
+<h2>🔔 Mis alertas</h2>
 
-<span>
-Precios objetivo
-</span>
+<span>Precios objetivo</span>
 
 </div>
 
@@ -1249,9 +1196,7 @@ Precios objetivo
 
 <button id="bottomHome" class="active" type="button">
 
-<span class="nav-icon">
-⌂
-</span>
+<span class="nav-icon">⌂</span>
 
 Inicio
 
@@ -1259,9 +1204,7 @@ Inicio
 
 <button id="bottomSearch" type="button">
 
-<span class="nav-icon">
-⌕
-</span>
+<span class="nav-icon">⌕</span>
 
 Buscar
 
@@ -1269,15 +1212,11 @@ Buscar
 
 <button id="bottomFavorites" type="button">
 
-<span class="nav-icon">
-♥
-</span>
+<span class="nav-icon">♡</span>
 
 Favoritos
 
-<span id="favoriteBadge" class="favorite-badge">
-0
-</span>
+<span id="favoriteBadge" class="favorite-badge">0</span>
 
 </button>
 
@@ -1293,7 +1232,7 @@ Favoritos
    API
 ========================= */
 
-const API=
+const API =
 "https://streetfind-rose.vercel.app/api/search";
 
 
@@ -1343,6 +1282,7 @@ let currentFilteredResults=[];
 
 let searchInProgress=false;
 let searchController=null;
+
 let toastTimer=null;
 
 
@@ -1399,20 +1339,25 @@ return String(value??"")
 }
 
 
+/* Convierte correctamente un precio
+   de texto a número */
+
 function getPrice(value){
 
 if(value==null)
 return null;
 
-const match=
-String(value).match(
-/(\d{1,5}(?:[.,]\d{1,2})?)/
+const text=String(value).trim();
+
+const matches=
+text.match(
+/\d+(?:[.,]\d{1,2})?/g
 );
 
-if(!match)
+if(!matches||!matches.length)
 return null;
 
-let number=match[1];
+let number=matches[matches.length-1];
 
 if(
 number.includes(",")&&
@@ -1452,9 +1397,16 @@ return Number.isFinite(price)
 }
 
 
+/* Precio siempre con 2 decimales */
+
 function money(value){
 
-return Number(value)
+const price=getPrice(value);
+
+if(price===null)
+return "—";
+
+return price
 .toFixed(2)
 .replace(".",",")+" €";
 
@@ -1492,8 +1444,7 @@ const price=getPrice(product.price);
 if(price===null)
 return 50;
 
-const prices=
-list
+const prices=list
 .map(item=>getPrice(item.price))
 .filter(price=>price!==null);
 
@@ -1512,7 +1463,10 @@ let score=
 
 const old=getPrice(product.old_price);
 
-if(old!==null&&old>price){
+if(
+old!==null&&
+old>price
+){
 
 const discount=
 ((old-price)/old)*100;
@@ -1530,6 +1484,7 @@ Math.max(
 Math.min(100,score)
 )
 );
+
 
 }
 
@@ -1582,31 +1537,51 @@ ${scoreText(score)}
 
 
 /* =========================
-   AHORRO
-========================= */
+   AHORRO REAL
+   =========================
 
-function savingFor(product,list){
+   IMPORTANTE:
+   Ya NO calculamos ahorro comparando
+   contra el precio más alto de los
+   resultados.
 
-const price=getPrice(product.price);
+   Solo mostramos ahorro cuando la API
+   proporciona old_price y ese precio
+   anterior es superior al actual.
+*/
 
-const prices=
-list
-.map(item=>getPrice(item.price))
-.filter(price=>price!==null);
+function savingFor(product){
 
-if(price===null||prices.length<2)
+const price=getPrice(product?.price);
+
+if(price===null)
 return null;
 
-const highest=Math.max(...prices);
+const oldPrice=
+getPrice(product?.old_price);
 
-if(highest<=price)
+if(
+oldPrice===null||
+oldPrice<=price
+)
 return null;
 
-const amount=highest-price;
+const amount=
+oldPrice-price;
 
-return{
-amount,
-percent:(amount/highest)*100
+if(
+amount<=0||
+amount>oldPrice
+)
+return null;
+
+return {
+
+amount:amount,
+
+percent:
+(amount/oldPrice)*100
+
 };
 
 }
@@ -1650,12 +1625,18 @@ const count=favorites.length;
 
 favoriteCount.textContent=
 count+
-(count===1?" producto":" productos");
+(
+count===1
+?" producto"
+:" productos"
+);
 
 favoriteBadge.textContent=count;
 
 favoriteBadge.style.display=
-count>0?"block":"none";
+count>0
+?"block"
+:"none";
 
 const total=
 document.getElementById("streetFavTotal");
@@ -1667,14 +1648,7 @@ let drops=0;
 
 favorites.forEach(product=>{
 
-const current=getPrice(product.price);
-const old=getPrice(product.old_price);
-
-if(
-current!==null&&
-old!==null&&
-current<old
-)
+if(savingFor(product))
 drops++;
 
 });
@@ -1715,7 +1689,9 @@ showToast("Añadido a favoritos");
 }
 
 saveFavorites();
+
 updateFavoriteButtons();
+
 renderFavorites();
 
 if(button){
@@ -1728,7 +1704,9 @@ active
 );
 
 button.innerHTML=
-active?"♥":"♡";
+active
+?"♥"
+:"♡";
 
 }
 
@@ -1815,9 +1793,15 @@ saving.amount>0
 savingHTML=`
 
 <div class="saving">
+
 Ahorras
-<strong>${money(saving.amount)}</strong>
+
+<strong>
+${money(saving.amount)}
+</strong>
+
 · ${saving.percent.toFixed(0)}%
+
 </div>
 
 `;
@@ -1859,7 +1843,11 @@ ${scoreHTML(product,scoreList)}
 <div class="bottom">
 
 <div class="price">
-${esc(product.price||"Precio no disponible")}
+
+${product.price
+?money(product.price)
+:"Precio no disponible"}
+
 </div>
 
 <div class="actions">
@@ -1875,7 +1863,9 @@ favorite
 data-product="${encodeURIComponent(
 JSON.stringify(product)
 )}">
+
 ${favorite?"♥":"♡"}
+
 </button>
 
 <button
@@ -1885,7 +1875,9 @@ aria-label="Compartir producto"
 data-share-product="${encodeURIComponent(
 JSON.stringify(product)
 )}">
+
 ↗
+
 </button>
 
 <a
@@ -1893,7 +1885,9 @@ class="buy"
 href="${esc(getProductUrl(product))}"
 target="_blank"
 rel="noopener noreferrer">
+
 VER
+
 </a>
 
 </div>
@@ -1930,7 +1924,10 @@ button.dataset.product
 )
 );
 
-toggleFavorite(product,button);
+toggleFavorite(
+product,
+button
+);
 
 }catch(e){}
 
@@ -1976,8 +1973,9 @@ product.title||
 "Producto en StreetFind";
 
 const price=
-product.price||
-"";
+product.price
+?money(product.price)
+:"";
 
 const url=getProductUrl(product);
 
@@ -2023,10 +2021,10 @@ return [...list].sort(
 if(sortMode==="saving"){
 
 const sa=
-savingFor(a,list)?.amount||0;
+savingFor(a)?.amount||0;
 
 const sb=
-savingFor(b,list)?.amount||0;
+savingFor(b)?.amount||0;
 
 return sb-sa;
 
@@ -2078,7 +2076,7 @@ section.innerHTML=`
 </h2>
 
 <span>
-Las mejores oportunidades
+Los precios más bajos
 </span>
 
 </div>
@@ -2123,8 +2121,6 @@ container.innerHTML="";
 usable.forEach(
 (product,index)=>{
 
-const saving=savingFor(product,list);
-
 const button=
 document.createElement("button");
 
@@ -2137,6 +2133,7 @@ button.className=
 button.innerHTML=`
 
 <div class="top-rank">
+
 ${
 index===0
 ?"🥇"
@@ -2144,6 +2141,7 @@ index===0
 ?"🥈"
 :"🥉"
 }
+
 </div>
 
 <div>
@@ -2152,26 +2150,20 @@ index===0
 ${esc(product.title||"Producto")}
 </div>
 
-${
-saving
-?`
-<div class="top-offer-saving">
-Ahorras ${money(saving.amount)}
-</div>
-`
-:""
-}
-
 </div>
 
 <div class="top-offer-price">
-${esc(product.price||"—")}
+${money(product.price)}
 </div>
 
 `;
 
-button.onclick=()=>{
-openStreetProduct(product,list);
+button.onclick=
+()=>{
+openStreetProduct(
+product,
+list
+);
 };
 
 container.appendChild(button);
@@ -2218,7 +2210,7 @@ productHTML(
 product,
 index===0&&
 getPrice(product.price)!==null,
-savingFor(product,list),
+savingFor(product),
 list
 )
 
@@ -2286,7 +2278,7 @@ products.insertAdjacentHTML(
 productHTML(
 product,
 best,
-savingFor(product,list),
+savingFor(product),
 list
 )
 
@@ -2344,7 +2336,7 @@ favoriteProducts.insertAdjacentHTML(
 productHTML(
 product,
 false,
-null,
+savingFor(product),
 favorites
 )
 
@@ -2353,6 +2345,7 @@ favorites
 });
 
 updateFavoriteButtons();
+
 renderAlerts();
 
 }
@@ -2417,7 +2410,9 @@ if(
 target<=0
 ){
 
-showToast("Precio objetivo no válido");
+showToast(
+"Precio objetivo no válido"
+);
 
 return;
 
@@ -2427,7 +2422,8 @@ const key=productKey(product);
 
 alerts=
 alerts.filter(
-alert=>alert.productKey!==key
+alert=>
+alert.productKey!==key
 );
 
 alerts.push({
@@ -2440,14 +2436,18 @@ product:product,
 
 target:target,
 
-createdAt:new Date().toISOString()
+createdAt:
+new Date().toISOString()
 
 });
 
 saveAlerts();
+
 renderAlerts();
 
-showToast("Alerta creada");
+showToast(
+"Alerta creada"
+);
 
 }
 
@@ -2460,16 +2460,20 @@ alert=>alert.id!==id
 );
 
 saveAlerts();
+
 renderAlerts();
 
-showToast("Alerta eliminada");
+showToast(
+"Alerta eliminada"
+);
 
 }
 
 
 function renderAlerts(){
 
-const list=document.getElementById("alertList");
+const list=
+document.getElementById("alertList");
 
 if(!list)
 return;
@@ -2522,7 +2526,8 @@ Math.max(
 Math.min(
 100,
 (
-1-current/(target*1.5)
+1-
+current/(target*1.5)
 )*100
 )
 );
@@ -2531,8 +2536,7 @@ content=`
 
 <div class="alert-progress">
 
-<div style="width:${progress}%">
-</div>
+<div style="width:${progress}%"></div>
 
 </div>
 
@@ -2556,14 +2560,18 @@ ${money(current-target)}
 
 }
 
-const item=document.createElement("div");
+const item=
+document.createElement("div");
 
 item.className="alert-item";
 
 item.innerHTML=`
 
 <div class="alert-item-title">
-${esc(alert.product?.title||"Producto")}
+${esc(
+alert.product?.title||
+"Producto"
+)}
 </div>
 
 <div class="alert-item-price">
@@ -2588,7 +2596,9 @@ ${content}
 <button
 class="alert-delete"
 type="button">
+
 ELIMINAR ALERTA
+
 </button>
 
 `;
@@ -2609,7 +2619,6 @@ list.appendChild(item);
 
 /* =========================
    MODAL
-   SIN HISTORIAL
 ========================= */
 
 let modalProduct=null;
@@ -2619,7 +2628,9 @@ let modalList=[];
 function ensureModal(){
 
 if(
-document.getElementById("streetProductModal")
+document.getElementById(
+"streetProductModal"
+)
 )
 return;
 
@@ -2636,7 +2647,9 @@ modal.innerHTML=`
 class="product-modal-close"
 id="streetProductClose"
 type="button">
+
 ×
+
 </button>
 
 <div
@@ -2695,7 +2708,9 @@ justify-content:center;
 text-decoration:none"
 target="_blank"
 rel="noopener noreferrer">
+
 VER OFERTA
+
 </a>
 
 </div>
@@ -2710,7 +2725,8 @@ document.body.appendChild(modal);
 
 document.getElementById(
 "streetProductClose"
-).onclick=closeStreetProduct;
+).onclick=
+closeStreetProduct;
 
 modal.addEventListener(
 "click",
@@ -2766,19 +2782,23 @@ Sin imagen
 document.getElementById(
 "streetProductBrand"
 ).textContent=
-product.source||"Tienda";
+product.source||
+"Tienda";
 
 document.getElementById(
 "streetProductTitle"
 ).textContent=
-product.title||"Producto";
+product.title||
+"Producto";
 
 document.getElementById(
 "streetProductPrice"
 ).textContent=
-product.price||"Precio no disponible";
+product.price
+?money(product.price)
+:"Precio no disponible";
 
-const saving=savingFor(product,list);
+const saving=savingFor(product);
 
 document.getElementById(
 "streetProductSaving"
@@ -2820,7 +2840,8 @@ isFavorite(product)
 
 document.getElementById(
 "streetProductAlert"
-).onclick=()=>{
+).onclick=
+()=>{
 openAlert(product);
 };
 
@@ -2858,17 +2879,21 @@ event.target.closest(".card");
 if(!card)
 return;
 
-if(event.target.closest("button,a"))
+if(
+event.target.closest("button,a")
+)
 return;
 
-const key=card.dataset.productKey;
+const key=
+card.dataset.productKey;
 
 const product=
 [
 ...lastResults,
 ...favorites
 ].find(
-item=>productKey(item)===key
+item=>
+productKey(item)===key
 );
 
 if(product){
@@ -2898,7 +2923,8 @@ button.onclick=()=>{
 storeFilters
 .querySelectorAll(".store-filter")
 .forEach(
-item=>item.classList.remove("active")
+item=>
+item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -2907,7 +2933,8 @@ const store=button.dataset.store;
 
 if(store==="all"){
 
-currentFilteredResults=[...lastResults];
+currentFilteredResults=
+[...lastResults];
 
 }else{
 
@@ -2921,7 +2948,9 @@ String(product.source||"")
 
 }
 
-renderResults(currentFilteredResults);
+renderResults(
+currentFilteredResults
+);
 
 };
 
@@ -2950,15 +2979,20 @@ const suggestions=[
 
 ];
 
-const autocomplete=document.createElement("div");
+const autocomplete=
+document.createElement("div");
 
-autocomplete.id="streetAutocomplete";
-autocomplete.className="autocomplete";
+autocomplete.id=
+"streetAutocomplete";
+
+autocomplete.className=
+"autocomplete";
 
 document
 .querySelector(".search-box")
-.appendChild(autocomplete);
-
+.appendChild(
+autocomplete
+);
 
 q.addEventListener(
 "input",
@@ -2974,7 +3008,9 @@ q.value.trim().toLowerCase();
 
 if(!term){
 
-autocomplete.classList.remove("show");
+autocomplete.classList.remove(
+"show"
+);
 
 return;
 
@@ -2992,11 +3028,14 @@ autocomplete.innerHTML="";
 
 matches.forEach(text=>{
 
-const button=document.createElement("button");
+const button=
+document.createElement("button");
 
 button.type="button";
 button.className="autocomplete-item";
-button.innerHTML=`🔎 ${esc(text)}`;
+
+button.innerHTML=
+`🔎 ${esc(text)}`;
 
 button.onclick=()=>{
 
@@ -3032,7 +3071,9 @@ if(
 .contains(event.target)
 ){
 
-autocomplete.classList.remove("show");
+autocomplete.classList.remove(
+"show"
+);
 
 }
 
@@ -3099,17 +3140,14 @@ behavior:"smooth"
 }
 
 
-bottomHome.onclick=()=>{
-setTab("home");
-};
+bottomHome.onclick=
+()=>setTab("home");
 
-bottomSearch.onclick=()=>{
-setTab("search");
-};
+bottomSearch.onclick=
+()=>setTab("search");
 
-bottomFavorites.onclick=()=>{
-setTab("favorites");
-};
+bottomFavorites.onclick=
+()=>setTab("favorites");
 
 
 /* =========================
@@ -3135,7 +3173,8 @@ return;
 if(searchController)
 searchController.abort();
 
-searchController=new AbortController();
+searchController=
+new AbortController();
 
 searchInProgress=true;
 
@@ -3214,7 +3253,11 @@ currentFilteredResults=[...list];
 
 resultCount.textContent=
 list.length+
-(list.length===1?" producto":" productos");
+(
+list.length===1
+?" producto"
+:" productos"
+);
 
 status.textContent="";
 
@@ -3244,7 +3287,9 @@ Comprueba tu conexión e inténtalo de nuevo.
 class="retry"
 type="button"
 id="retrySearch">
+
 REINTENTAR
+
 </button>
 
 </div>
@@ -3316,7 +3361,8 @@ button.onclick=()=>{
 document
 .querySelectorAll(".filter")
 .forEach(
-item=>item.classList.remove("active")
+item=>
+item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -3344,7 +3390,8 @@ button.onclick=()=>{
 document
 .querySelectorAll(".sort-btn")
 .forEach(
-item=>item.classList.remove("active")
+item=>
+item.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -3384,7 +3431,9 @@ const searches=[
 
 let all=[];
 
-for(const term of searches){
+for(
+const term of searches
+){
 
 try{
 
@@ -3401,10 +3450,13 @@ cache:"no-store"
 if(!response.ok)
 continue;
 
-const data=await response.json();
+const data=
+await response.json();
 
 if(
-Array.isArray(data.shopping_results)
+Array.isArray(
+data.shopping_results
+)
 ){
 
 all.push(
@@ -3430,6 +3482,7 @@ if(!key||seen.has(key))
 return;
 
 seen.add(key);
+
 unique.push(product);
 
 });
