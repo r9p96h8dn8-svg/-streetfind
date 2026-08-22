@@ -18,10 +18,6 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,vie
 
 <style>
 
-/* =========================
-   BASE
-========================= */
-
 *{
 box-sizing:border-box;
 -webkit-tap-highlight-color:transparent
@@ -54,9 +50,7 @@ button{
 cursor:pointer
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
 padding:20px 16px;
@@ -80,9 +74,7 @@ font-size:12px;
 margin-top:4px
 }
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 main{
 max-width:1100px;
@@ -102,9 +94,7 @@ color:#999;
 line-height:1.5
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 .search{
 display:flex;
@@ -164,9 +154,7 @@ color:#000;
 font-weight:900
 }
 
-/* =========================
-   FILTERS
-========================= */
+/* FILTERS */
 
 .filters,
 .store-filters{
@@ -199,9 +187,7 @@ color:#000;
 border-color:#fff
 }
 
-/* =========================
-   SECTIONS
-========================= */
+/* SECTIONS */
 
 .section-title{
 display:flex;
@@ -221,9 +207,7 @@ font-size:12px;
 color:#777
 }
 
-/* =========================
-   RESULTS TOOLS
-========================= */
+/* RESULTS TOOLS */
 
 .results-tools{
 display:flex;
@@ -258,18 +242,14 @@ color:#000
 color:#9cffaa
 }
 
-/* =========================
-   STATUS
-========================= */
+/* STATUS */
 
 .status{
 color:#888;
 margin:18px 0
 }
 
-/* =========================
-   PRODUCTS
-========================= */
+/* PRODUCTS */
 
 .products{
 display:grid;
@@ -286,9 +266,7 @@ min-width:0;
 width:100%
 }
 
-/* =========================
-   BEST PRICE
-========================= */
+/* BEST */
 
 .best{
 padding:9px 7px;
@@ -300,9 +278,7 @@ text-align:center;
 letter-spacing:.2px
 }
 
-/* =========================
-   IMAGE
-========================= */
+/* IMAGE */
 
 .image{
 aspect-ratio:1;
@@ -327,9 +303,7 @@ text-align:center;
 padding:15px
 }
 
-/* =========================
-   PRODUCT INFO
-========================= */
+/* PRODUCT INFO */
 
 .info{
 padding:12px
@@ -365,10 +339,7 @@ font-weight:800
 color:#fff
 }
 
-/* =========================
-   PRICE
-   CORREGIDO PARA NO CORTAR
-========================= */
+/* PRICE */
 
 .bottom{
 display:flex;
@@ -382,9 +353,10 @@ min-width:0
 font-size:16px;
 font-weight:900;
 white-space:nowrap;
-flex:0 0 auto;
+flex:1 1 auto;
 min-width:0;
-letter-spacing:-.2px
+letter-spacing:-.2px;
+overflow:visible
 }
 
 .actions{
@@ -446,9 +418,7 @@ white-space:nowrap
 transform:scale(.94)
 }
 
-/* =========================
-   STREETFIND SCORE
-========================= */
+/* SCORE */
 
 .street-score{
 display:flex;
@@ -478,9 +448,7 @@ margin-top:2px;
 text-align:right
 }
 
-/* =========================
-   TOP OFERTAS
-========================= */
+/* TOP OFFERS */
 
 .top-offers{
 display:grid;
@@ -534,9 +502,7 @@ font-size:9px;
 color:#8cff9d
 }
 
-/* =========================
-   AUTOCOMPLETADO
-========================= */
+/* AUTOCOMPLETE */
 
 .autocomplete{
 position:absolute;
@@ -575,9 +541,7 @@ font-size:12px
 background:#202020
 }
 
-/* =========================
-   FAVORITOS
-========================= */
+/* FAVORITES */
 
 .favorite-summary{
 display:flex;
@@ -605,9 +569,7 @@ color:#777;
 font-size:9px
 }
 
-/* =========================
-   ALERTAS
-========================= */
+/* ALERTS */
 
 .alerts-section{
 margin-top:25px
@@ -666,9 +628,7 @@ padding:6px 9px;
 font-size:9px
 }
 
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 
 .product-modal{
 position:fixed;
@@ -775,9 +735,7 @@ font-size:20px;
 z-index:2
 }
 
-/* =========================
-   ESTADOS
-========================= */
+/* STATES */
 
 .empty,
 .loading,
@@ -806,9 +764,7 @@ margin-top:15px;
 line-height:1.5
 }
 
-/* =========================
-   NAVEGACIÓN
-========================= */
+/* NAV */
 
 .bottom-nav{
 position:fixed;
@@ -888,9 +844,7 @@ opacity:1;
 transform:translate(-50%,0)
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(min-width:700px){
 
@@ -924,8 +878,6 @@ margin:0
 .top-offer-price{
 margin:0
 }
-
-/* Precio completo en móvil */
 
 .price{
 font-size:15px;
@@ -1041,31 +993,19 @@ BUSCAR
 
 <div class="filters">
 
-<button
-class="filter active"
-data-c="all"
-type="button">
+<button class="filter active" data-c="all" type="button">
 Todo
 </button>
 
-<button
-class="filter"
-data-c="sneakers"
-type="button">
+<button class="filter" data-c="sneakers" type="button">
 Zapatillas
 </button>
 
-<button
-class="filter"
-data-c="clothing"
-type="button">
+<button class="filter" data-c="clothing" type="button">
 Ropa
 </button>
 
-<button
-class="filter"
-data-c="accessories"
-type="button">
+<button class="filter" data-c="accessories" type="button">
 Accesorios
 </button>
 
@@ -1142,62 +1082,38 @@ Mayor ahorro
 id="streetStoreFilters"
 class="store-filters">
 
-<button
-class="store-filter active"
-data-store="all"
-type="button">
+<button class="store-filter active" data-store="all" type="button">
 Todas
 </button>
 
-<button
-class="store-filter"
-data-store="Nike"
-type="button">
+<button class="store-filter" data-store="Nike" type="button">
 Nike
 </button>
 
-<button
-class="store-filter"
-data-store="Adidas"
-type="button">
+<button class="store-filter" data-store="Adidas" type="button">
 Adidas
 </button>
 
-<button
-class="store-filter"
-data-store="JD"
-type="button">
+<button class="store-filter" data-store="JD" type="button">
 JD
 </button>
 
-<button
-class="store-filter"
-data-store="Foot Locker"
-type="button">
+<button class="store-filter" data-store="Foot Locker" type="button">
 Foot Locker
 </button>
 
-<button
-class="store-filter"
-data-store="StockX"
-type="button">
+<button class="store-filter" data-store="StockX" type="button">
 StockX
 </button>
 
 </div>
 
-<div
-class="status"
-id="status">
-</div>
+<div class="status" id="status"></div>
 
-<section
-class="products"
-id="products">
-</section>
+<section class="products" id="products"></section>
 
 <div class="note">
-* El ahorro se calcula comparando los precios encontrados en la búsqueda.
+* El ahorro solo se muestra cuando la tienda proporciona un precio anterior real.
 </div>
 
 </div>
@@ -1281,10 +1197,7 @@ Precios objetivo
 class="bottom-nav"
 aria-label="Navegación">
 
-<button
-id="bottomHome"
-class="active"
-type="button">
+<button id="bottomHome" class="active" type="button">
 
 <span class="nav-icon">
 ⌂
@@ -1294,9 +1207,7 @@ Inicio
 
 </button>
 
-<button
-id="bottomSearch"
-type="button">
+<button id="bottomSearch" type="button">
 
 <span class="nav-icon">
 ⌕
@@ -1306,9 +1217,7 @@ Buscar
 
 </button>
 
-<button
-id="bottomFavorites"
-type="button">
+<button id="bottomFavorites" type="button">
 
 <span class="nav-icon">
 ♡
@@ -1316,9 +1225,7 @@ type="button">
 
 Favoritos
 
-<span
-id="favoriteBadge"
-class="favorite-badge">
+<span id="favoriteBadge" class="favorite-badge">
 0
 </span>
 
@@ -1326,10 +1233,7 @@ class="favorite-badge">
 
 </nav>
 
-<div
-id="toast"
-class="toast">
-</div>
+<div id="toast" class="toast"></div>
 
 <script>
 
@@ -1339,7 +1243,7 @@ class="toast">
    API
 ========================= */
 
-const API=
+const API =
 "https://streetfind-rose.vercel.app/api/search";
 
 
@@ -1347,85 +1251,50 @@ const API=
    ELEMENTOS
 ========================= */
 
-const q=
-document.getElementById("q");
+const q = document.getElementById("q");
+const go = document.getElementById("go");
+const clearSearch = document.getElementById("clearSearch");
 
-const go=
-document.getElementById("go");
+const homeSection = document.getElementById("homeSection");
+const favoritesSection = document.getElementById("favoritesSection");
 
-const clearSearch=
-document.getElementById("clearSearch");
+const featuredSection = document.getElementById("featuredSection");
+const featuredProducts = document.getElementById("featuredProducts");
 
-const homeSection=
-document.getElementById("homeSection");
+const resultsSection = document.getElementById("resultsSection");
+const products = document.getElementById("products");
 
-const favoritesSection=
-document.getElementById("favoritesSection");
+const status = document.getElementById("status");
+const resultCount = document.getElementById("resultCount");
 
-const featuredSection=
-document.getElementById("featuredSection");
+const favoriteProducts = document.getElementById("favoriteProducts");
+const favoriteCount = document.getElementById("favoriteCount");
+const favoriteBadge = document.getElementById("favoriteBadge");
 
-const featuredProducts=
-document.getElementById("featuredProducts");
+const bottomHome = document.getElementById("bottomHome");
+const bottomSearch = document.getElementById("bottomSearch");
+const bottomFavorites = document.getElementById("bottomFavorites");
 
-const resultsSection=
-document.getElementById("resultsSection");
-
-const products=
-document.getElementById("products");
-
-const status=
-document.getElementById("status");
-
-const resultCount=
-document.getElementById("resultCount");
-
-const favoriteProducts=
-document.getElementById("favoriteProducts");
-
-const favoriteCount=
-document.getElementById("favoriteCount");
-
-const favoriteBadge=
-document.getElementById("favoriteBadge");
-
-const bottomHome=
-document.getElementById("bottomHome");
-
-const bottomSearch=
-document.getElementById("bottomSearch");
-
-const bottomFavorites=
-document.getElementById("bottomFavorites");
-
-const toast=
-document.getElementById("toast");
-
-const storeFilters=
-document.getElementById("streetStoreFilters");
+const toast = document.getElementById("toast");
+const storeFilters = document.getElementById("streetStoreFilters");
 
 
 /* =========================
    ESTADO
 ========================= */
 
-let category="all";
+let category = "all";
+let sortMode = "low";
 
-let sortMode="low";
+let favorites = [];
+let alerts = [];
 
-let favorites=[];
+let lastResults = [];
+let currentFilteredResults = [];
 
-let alerts=[];
-
-let lastResults=[];
-
-let currentFilteredResults=[];
-
-let searchInProgress=false;
-
-let searchController=null;
-
-let toastTimer=null;
+let searchInProgress = false;
+let searchController = null;
+let toastTimer = null;
 
 
 /* =========================
@@ -1434,37 +1303,33 @@ let toastTimer=null;
 
 try{
 
-favorites=
+favorites =
 JSON.parse(
-localStorage.getItem(
-"streetfind_favorites"
-)||"[]"
+localStorage.getItem("streetfind_favorites") || "[]"
 );
 
 if(!Array.isArray(favorites))
-favorites=[];
+favorites = [];
 
 }catch(e){
 
-favorites=[];
+favorites = [];
 
 }
 
 try{
 
-alerts=
+alerts =
 JSON.parse(
-localStorage.getItem(
-"streetfind_alerts"
-)||"[]"
+localStorage.getItem("streetfind_alerts") || "[]"
 );
 
 if(!Array.isArray(alerts))
-alerts=[];
+alerts = [];
 
 }catch(e){
 
-alerts=[];
+alerts = [];
 
 }
 
@@ -1475,7 +1340,7 @@ alerts=[];
 
 function esc(value){
 
-return String(value??"")
+return String(value ?? "")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
@@ -1485,32 +1350,68 @@ return String(value??"")
 }
 
 
+/*
+   Convierte cualquier formato razonable
+   de precio a número.
+*/
+
 function getPrice(value){
 
-if(value==null)
+if(value == null)
 return null;
 
-const match=
-String(value).match(
-/(\d{1,5}(?:[.,]\d{1,2})?)/
+if(typeof value === "number"){
+
+return Number.isFinite(value)
+?value
+:null;
+
+}
+
+const text = String(value).trim();
+
+if(!text)
+return null;
+
+
+/*
+   Primero buscamos un número.
+
+   Ejemplos:
+   89.99 €
+   89,99 €
+   EUR 89.99
+   1.299,99 €
+*/
+
+const match =
+text.match(
+/\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?/
 );
 
 if(!match)
 return null;
 
-let number=match[1];
+let number = match[0];
+
+
+/*
+   Si aparecen ambos separadores:
+   1.299,99 -> 1299.99
+   1,299.99 -> 1299.99
+*/
 
 if(
-number.includes(",")&&
+number.includes(",") &&
 number.includes(".")
 ){
 
 if(
-number.lastIndexOf(",")>
+number.lastIndexOf(",") >
 number.lastIndexOf(".")
 ){
 
-number=
+number =
 number
 .replace(/\./g,"")
 .replace(",",".")
@@ -1518,18 +1419,52 @@ number
 
 }else{
 
-number=
+number =
 number.replace(/,/g,"");
 
 }
 
+}else if(number.includes(",")){
+
+const parts = number.split(",");
+
+if(parts.length===2 && parts[1].length<=2){
+
+number =
+parts[0].replace(/\./g,"")+
+"."+parts[1];
+
 }else{
 
-number=
-number.replace(",",".");
+number =
+number.replace(/,/g,"");
+
 }
 
-const price=
+}else if(number.includes(".")){
+
+const parts = number.split(".");
+
+if(
+parts.length>2
+){
+
+number =
+number.replace(/\./g,"");
+
+}else if(
+parts.length===2 &&
+parts[1].length===3
+){
+
+number =
+number.replace(/\./g,"");
+
+}
+
+}
+
+const price =
 parseFloat(number);
 
 return Number.isFinite(price)
@@ -1539,11 +1474,25 @@ return Number.isFinite(price)
 }
 
 
+/*
+   Todos los precios visibles de StreetFind
+   pasan por aquí.
+*/
+
 function money(value){
 
-return Number(value)
-.toFixed(2)
-.replace(".",",")+" €";
+const price = getPrice(value);
+
+if(price === null)
+return "Precio no disponible";
+
+return new Intl.NumberFormat(
+"es-ES",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+).format(price)+" €";
 
 }
 
@@ -1551,8 +1500,9 @@ return Number(value)
 function productKey(product){
 
 return String(
-product?.product_link||
-product?.title||
+product?.product_link ||
+product?.link ||
+product?.title ||
 ""
 );
 
@@ -1561,8 +1511,8 @@ product?.title||
 
 function getProductUrl(product){
 
-return product?.product_link||
-product?.link||
+return product?.product_link ||
+product?.link ||
 "#";
 
 }
@@ -1574,47 +1524,48 @@ product?.link||
 
 function streetScore(product,list){
 
-const price=
+const price =
 getPrice(product.price);
 
-if(price===null)
+if(price === null)
 return 50;
 
-const prices=
+const prices =
 list
 .map(item=>getPrice(item.price))
-.filter(
-price=>price!==null
-);
+.filter(price=>price!==null);
 
 if(!prices.length)
 return 50;
 
-const min=
-Math.min(...prices);
-
-const max=
-Math.max(...prices);
+const min = Math.min(...prices);
+const max = Math.max(...prices);
 
 if(max===min)
 return 90;
 
-let score=
-100-
+let score =
+100 -
 ((price-min)/(max-min))*60;
 
-const old=
+
+/*
+   Solo usamos old_price real
+   para el extra de descuento.
+*/
+
+const old =
 getPrice(product.old_price);
 
 if(
-old!==null&&
+old!==null &&
 old>price
 ){
 
-const discount=
+const discount =
 ((old-price)/old)*100;
 
-score+=Math.min(
+score += Math.min(
 15,
 discount*.35
 );
@@ -1627,6 +1578,7 @@ Math.max(
 Math.min(100,score)
 )
 );
+
 
 }
 
@@ -1649,7 +1601,7 @@ return "Precio normal";
 
 function scoreHTML(product,list){
 
-const score=
+const score =
 streetScore(product,list);
 
 return `
@@ -1680,40 +1632,57 @@ ${scoreText(score)}
 
 
 /* =========================
-   AHORRO
+   AHORRO CORREGIDO
 ========================= */
+
+/*
+   IMPORTANTE:
+
+   StreetFind NO calcula el ahorro comparando
+   el producto con otros productos.
+
+   Solo muestra ahorro si la API proporciona
+   un old_price real para ESE MISMO producto.
+
+   Esto evita cosas absurdas como:
+
+   "Ahorras 670 €"
+
+   cuando simplemente se estaba comparando
+   con otro producto más caro.
+*/
 
 function savingFor(product,list){
 
-const price=
+const price =
 getPrice(product.price);
 
-const prices=
-list
-.map(item=>getPrice(item.price))
-.filter(
-price=>price!==null
-);
+const oldPrice =
+getPrice(product.old_price);
 
 if(
-price===null||
-prices.length<2
-)
+price === null ||
+oldPrice === null ||
+oldPrice <= price
+){
+
 return null;
 
-const highest=
-Math.max(...prices);
+}
 
-if(highest<=price)
+const amount =
+oldPrice-price;
+
+if(amount<=0)
 return null;
-
-const amount=
-highest-price;
 
 return {
-amount,
+
+amount:amount,
+
 percent:
-(amount/highest)*100
+(amount/oldPrice)*100
+
 };
 
 }
@@ -1725,12 +1694,12 @@ percent:
 
 function isFavorite(product){
 
-const key=
+const key =
 productKey(product);
 
-return !!key&&
+return !!key &&
 favorites.some(
-item=>
+item =>
 productKey(item)===key
 );
 
@@ -1755,76 +1724,77 @@ updateFavoriteCounter();
 
 function updateFavoriteCounter(){
 
-const count=
+const count =
 favorites.length;
 
-favoriteCount.textContent=
-count+
+favoriteCount.textContent =
+count +
 (
 count===1
 ?" producto"
 :" productos"
 );
 
-favoriteBadge.textContent=count;
+favoriteBadge.textContent =
+count;
 
-favoriteBadge.style.display=
+favoriteBadge.style.display =
 count>0
 ?"block"
 :"none";
 
-const total=
+const total =
 document.getElementById(
 "streetFavTotal"
 );
 
 if(total)
-total.textContent=count;
+total.textContent = count;
 
-let drops=0;
+let drops = 0;
 
 favorites.forEach(product=>{
 
-const current=
+const current =
 getPrice(product.price);
 
-const old=
+const old =
 getPrice(product.old_price);
 
 if(
-current!==null&&
-old!==null&&
+current!==null &&
+old!==null &&
 current<old
-)
+){
+
 drops++;
+
+}
 
 });
 
-const dropsElement=
+const dropsElement =
 document.getElementById(
 "streetFavDrops"
 );
 
 if(dropsElement)
-dropsElement.textContent=drops;
+dropsElement.textContent = drops;
 
 }
 
 
-function toggleFavorite(
-product,
-button
-){
+function toggleFavorite(product,button){
 
-const key=
+const key =
 productKey(product);
 
 if(!key)
 return;
 
-const index=
+const index =
 favorites.findIndex(
-item=>
+item =>
 productKey(item)===key
 );
 
@@ -1854,7 +1824,7 @@ renderFavorites();
 
 if(button){
 
-const active=
+const active =
 isFavorite(product);
 
 button.classList.toggle(
@@ -1862,7 +1832,7 @@ button.classList.toggle(
 active
 );
 
-button.innerHTML=
+button.innerHTML =
 active
 ?"♥"
 :"♡";
@@ -1878,14 +1848,14 @@ active
 
 function showToast(message){
 
-toast.textContent=
+toast.textContent =
 message;
 
 toast.classList.add("show");
 
 clearTimeout(toastTimer);
 
-toastTimer=
+toastTimer =
 setTimeout(
 ()=>{
 toast.classList.remove("show");
@@ -1897,7 +1867,7 @@ toast.classList.remove("show");
 
 
 /* =========================
-   TARJETA DE PRODUCTO
+   TARJETA
 ========================= */
 
 function productHTML(
@@ -1907,14 +1877,14 @@ saving=null,
 scoreList=[]
 ){
 
-const favorite=
+const favorite =
 isFavorite(product);
 
-let imageHTML="";
+let imageHTML = "";
 
 if(product.thumbnail){
 
-imageHTML=`
+imageHTML = `
 
 <img
 src="${esc(product.thumbnail)}"
@@ -1935,7 +1905,7 @@ Imagen no disponible
 
 }else{
 
-imageHTML=`
+imageHTML = `
 
 <div class="image-fallback">
 Sin imagen
@@ -1945,14 +1915,14 @@ Sin imagen
 
 }
 
-let savingHTML="";
+let savingHTML = "";
 
 if(
-saving&&
+saving &&
 saving.amount>0
 ){
 
-savingHTML=`
+savingHTML = `
 
 <div class="saving">
 Ahorras
@@ -1964,19 +1934,30 @@ Ahorras
 
 }
 
+
+/*
+   Precio siempre formateado por money()
+*/
+
+const displayPrice =
+getPrice(product.price)!==null
+?money(product.price)
+:"Precio no disponible";
+
+
 return `
 
 <article
 class="card"
 data-product-key="${esc(productKey(product))}">
 
-${best?`
+${best ? `
 
 <div class="best">
 🟢 MEJOR PRECIO
 </div>
 
-`:""}
+` : ""}
 
 <div class="image">
 ${imageHTML}
@@ -1999,10 +1980,7 @@ ${scoreHTML(product,scoreList)}
 <div class="bottom">
 
 <div class="price">
-${esc(
-product.price||
-"Precio no disponible"
-)}
+${esc(displayPrice)}
 </div>
 
 <div class="actions">
@@ -2053,7 +2031,7 @@ VER
 
 
 /* =========================
-   BOTONES DE TARJETAS
+   BOTONES TARJETAS
 ========================= */
 
 function updateFavoriteButtons(){
@@ -2062,11 +2040,11 @@ document
 .querySelectorAll(".favorite")
 .forEach(button=>{
 
-button.onclick=()=>{
+button.onclick = ()=>{
 
 try{
 
-const product=
+const product =
 JSON.parse(
 decodeURIComponent(
 button.dataset.product
@@ -2089,11 +2067,11 @@ document
 .querySelectorAll(".share")
 .forEach(button=>{
 
-button.onclick=()=>{
+button.onclick = ()=>{
 
 try{
 
-const product=
+const product =
 JSON.parse(
 decodeURIComponent(
 button.dataset.shareProduct
@@ -2117,18 +2095,19 @@ shareProduct(product);
 
 async function shareProduct(product){
 
-const title=
-product.title||
+const title =
+product.title ||
 "Producto en StreetFind";
 
-const price=
-product.price||
-"";
+const price =
+getPrice(product.price)!==null
+?money(product.price)
+:"";
 
-const url=
+const url =
 getProductUrl(product);
 
-const text=
+const text =
 `${title}${price?" · "+price:""}
 Encontrado en StreetFind`;
 
@@ -2173,24 +2152,24 @@ return [...list].sort(
 
 if(sortMode==="saving"){
 
-const sa=
-savingFor(a,list)?.amount||0;
+const sa =
+savingFor(a,list)?.amount || 0;
 
-const sb=
-savingFor(b,list)?.amount||0;
+const sb =
+savingFor(b,list)?.amount || 0;
 
 return sb-sa;
 
 }
 
-const pa=
+const pa =
 getPrice(a.price);
 
-const pb=
+const pb =
 getPrice(b.price);
 
 if(
-pa===null&&
+pa===null &&
 pb===null
 )
 return 0;
@@ -2217,20 +2196,20 @@ return sortMode==="low"
 
 function renderTopOffers(list){
 
-let section=
+let section =
 document.getElementById(
 "streetTopOffers"
 );
 
 if(!section){
 
-section=
+section =
 document.createElement("div");
 
-section.id=
+section.id =
 "streetTopOffers";
 
-section.innerHTML=`
+section.innerHTML = `
 
 <div class="section-title">
 
@@ -2258,7 +2237,7 @@ featuredSection.firstChild
 
 }
 
-const container=
+const container =
 document.getElementById(
 "streetTopOffersList"
 );
@@ -2266,10 +2245,10 @@ document.getElementById(
 if(!container)
 return;
 
-const usable=
+const usable =
 list
 .filter(
-product=>
+product =>
 getPrice(product.price)!==null
 )
 .sort(
@@ -2279,24 +2258,29 @@ getPrice(b.price)
 )
 .slice(0,3);
 
-container.innerHTML="";
+container.innerHTML = "";
 
 usable.forEach(
 (product,index)=>{
 
-const saving=
+/*
+   AHORA savingFor() solo usa
+   old_price real.
+*/
+
+const saving =
 savingFor(product,list);
 
-const button=
+const button =
 document.createElement("button");
 
-button.type="button";
+button.type = "button";
 
-button.className=
+button.className =
 "top-offer"+
 (index===0?" first":"");
 
-button.innerHTML=`
+button.innerHTML = `
 
 <div class="top-rank">
 ${
@@ -2327,12 +2311,16 @@ Ahorras ${money(saving.amount)}
 </div>
 
 <div class="top-offer-price">
-${esc(product.price||"—")}
+${
+getPrice(product.price)!==null
+?money(product.price)
+:"—"
+}
 </div>
 
 `;
 
-button.onclick=
+button.onclick =
 ()=>{
 openStreetProduct(
 product,
@@ -2353,13 +2341,13 @@ container.appendChild(button);
 
 function renderFeatured(list){
 
-featuredProducts.innerHTML="";
+featuredProducts.innerHTML = "";
 
 renderTopOffers(list);
 
 if(!list.length){
 
-featuredProducts.innerHTML=`
+featuredProducts.innerHTML = `
 
 <div class="empty">
 No hay productos disponibles.
@@ -2371,7 +2359,7 @@ return;
 
 }
 
-const sorted=
+const sorted =
 sortProducts(list)
 .slice(0,8);
 
@@ -2383,7 +2371,7 @@ featuredProducts.insertAdjacentHTML(
 
 productHTML(
 product,
-index===0&&
+index===0 &&
 getPrice(product.price)!==null,
 savingFor(product,list),
 list
@@ -2404,11 +2392,11 @@ updateFavoriteButtons();
 
 function renderResults(list){
 
-products.innerHTML="";
+products.innerHTML = "";
 
 if(!list.length){
 
-products.innerHTML=`
+products.innerHTML = `
 
 <div class="empty">
 
@@ -2426,33 +2414,33 @@ return;
 
 }
 
-const sorted=
+const sorted =
 sortProducts(list);
 
-const prices=
+const prices =
 sorted
 .map(
-product=>
+product =>
 getPrice(product.price)
 )
 .filter(
-price=>
+price =>
 price!==null
 );
 
-const lowest=
+const lowest =
 prices.length
 ?Math.min(...prices)
 :null;
 
 sorted.forEach(product=>{
 
-const price=
+const price =
 getPrice(product.price);
 
-const best=
-price!==null&&
-lowest!==null&&
+const best =
+price!==null &&
+lowest!==null &&
 price===lowest;
 
 products.insertAdjacentHTML(
@@ -2480,13 +2468,13 @@ updateFavoriteButtons();
 
 function renderFavorites(){
 
-favoriteProducts.innerHTML="";
+favoriteProducts.innerHTML = "";
 
 updateFavoriteCounter();
 
 if(!favorites.length){
 
-favoriteProducts.innerHTML=`
+favoriteProducts.innerHTML = `
 
 <div class="empty">
 
@@ -2519,8 +2507,8 @@ favoriteProducts.insertAdjacentHTML(
 productHTML(
 product,
 false,
-null,
-favorites
+savingFor(product,[product]),
+[product]
 )
 
 );
@@ -2554,10 +2542,10 @@ JSON.stringify(alerts)
 
 function openAlert(product){
 
-const current=
+const current =
 getPrice(product.price);
 
-const defaultTarget=
+const defaultTarget =
 current!==null
 ?Math.max(
 1,
@@ -2565,7 +2553,7 @@ Math.floor(current*0.9)
 )
 :0;
 
-const input=
+const input =
 prompt(
 `¿A qué precio quieres recibir la alerta para:
 
@@ -2584,14 +2572,14 @@ String(defaultTarget)
 if(input===null)
 return;
 
-const target=
+const target =
 parseFloat(
 String(input)
 .replace(",",".")
 );
 
 if(
-!Number.isFinite(target)||
+!Number.isFinite(target) ||
 target<=0
 ){
 
@@ -2603,12 +2591,12 @@ return;
 
 }
 
-const key=
+const key =
 productKey(product);
 
-alerts=
+alerts =
 alerts.filter(
-alert=>
+alert =>
 alert.productKey!==key
 );
 
@@ -2644,9 +2632,9 @@ showToast(
 
 function deleteAlert(id){
 
-alerts=
+alerts =
 alerts.filter(
-alert=>
+alert =>
 alert.id!==id
 );
 
@@ -2663,7 +2651,7 @@ showToast(
 
 function renderAlerts(){
 
-const list=
+const list =
 document.getElementById(
 "alertList"
 );
@@ -2673,7 +2661,7 @@ return;
 
 if(!alerts.length){
 
-list.innerHTML=`
+list.innerHTML = `
 
 <div class="empty">
 No tienes alertas creadas.
@@ -2685,28 +2673,28 @@ return;
 
 }
 
-list.innerHTML="";
+list.innerHTML = "";
 
 alerts.forEach(alert=>{
 
-const current=
+const current =
 getPrice(
 alert.product?.price
 );
 
-const target=
+const target =
 Number(alert.target);
 
-let content="";
+let content = "";
 
 if(
-current!==null&&
+current!==null &&
 target>0
 ){
 
 if(current<=target){
 
-content=`
+content = `
 
 <div class="alert-reached">
 🟢 ¡PRECIO ALCANZADO!
@@ -2716,19 +2704,19 @@ content=`
 
 }else{
 
-const progress=
+const progress =
 Math.max(
 0,
 Math.min(
 100,
 (
-1-
+1 -
 current/(target*1.5)
 )*100
 )
 );
 
-content=`
+content = `
 
 <div class="alert-progress">
 
@@ -2758,17 +2746,17 @@ ${money(current-target)}
 
 }
 
-const item=
+const item =
 document.createElement("div");
 
-item.className=
+item.className =
 "alert-item";
 
-item.innerHTML=`
+item.innerHTML = `
 
 <div class="alert-item-title">
 ${esc(
-alert.product?.title||
+alert.product?.title ||
 "Producto"
 )}
 </div>
@@ -2802,7 +2790,7 @@ ELIMINAR ALERTA
 
 item
 .querySelector(".alert-delete")
-.onclick=
+.onclick =
 ()=>{
 deleteAlert(alert.id);
 };
@@ -2816,12 +2804,10 @@ list.appendChild(item);
 
 /* =========================
    MODAL
-   SIN HISTORIAL
 ========================= */
 
-let modalProduct=null;
-
-let modalList=[];
+let modalProduct = null;
+let modalList = [];
 
 
 function ensureModal(){
@@ -2833,16 +2819,16 @@ document.getElementById(
 )
 return;
 
-const modal=
+const modal =
 document.createElement("div");
 
-modal.id=
+modal.id =
 "streetProductModal";
 
-modal.className=
+modal.className =
 "product-modal";
 
-modal.innerHTML=`
+modal.innerHTML = `
 
 <div class="product-modal-card">
 
@@ -2925,7 +2911,7 @@ document.body.appendChild(modal);
 
 document.getElementById(
 "streetProductClose"
-).onclick=
+).onclick =
 closeStreetProduct;
 
 modal.addEventListener(
@@ -2940,32 +2926,26 @@ closeStreetProduct();
 }
 
 
-function openStreetProduct(
-product,
-list=[]
-){
+function openStreetProduct(product,list=[]){
 
 ensureModal();
 
-modalProduct=
-product;
+modalProduct = product;
+modalList = list;
 
-modalList=
-list;
-
-const modal=
+const modal =
 document.getElementById(
 "streetProductModal"
 );
 
-const image=
+const image =
 document.getElementById(
 "streetProductImage"
 );
 
 if(product.thumbnail){
 
-image.innerHTML=`
+image.innerHTML = `
 
 <img
 src="${esc(product.thumbnail)}"
@@ -2977,7 +2957,7 @@ product.title||"Producto"
 
 }else{
 
-image.innerHTML=`
+image.innerHTML = `
 
 <div class="image-fallback">
 Sin imagen
@@ -2989,35 +2969,38 @@ Sin imagen
 
 document.getElementById(
 "streetProductBrand"
-).textContent=
-product.source||
+).textContent =
+product.source ||
 "Tienda";
 
 document.getElementById(
 "streetProductTitle"
-).textContent=
-product.title||
+).textContent =
+product.title ||
 "Producto";
 
 document.getElementById(
 "streetProductPrice"
-).textContent=
-product.price||
-"Precio no disponible";
+).textContent =
+getPrice(product.price)!==null
+?money(product.price)
+:"Precio no disponible";
 
-const saving=
+
+const saving =
 savingFor(product,list);
 
 document.getElementById(
 "streetProductSaving"
-).textContent=
+).textContent =
 saving
 ?`Ahorras ${money(saving.amount)} · ${saving.percent.toFixed(0)}%`
 :"";
 
+
 document.getElementById(
 "streetProductScore"
-).innerHTML=
+).innerHTML =
 scoreHTML(
 product,
 list
@@ -3025,25 +3008,25 @@ list
 
 document.getElementById(
 "streetProductBuy"
-).href=
+).href =
 getProductUrl(product);
 
-const favButton=
+const favButton =
 document.getElementById(
 "streetProductFav"
 );
 
-favButton.textContent=
+favButton.textContent =
 isFavorite(product)
 ?"♥ Favorito"
 :"♡ Favorito";
 
-favButton.onclick=
+favButton.onclick =
 ()=>{
 
 toggleFavorite(product);
 
-favButton.textContent=
+favButton.textContent =
 isFavorite(product)
 ?"♥ Favorito"
 :"♡ Favorito";
@@ -3052,7 +3035,7 @@ isFavorite(product)
 
 document.getElementById(
 "streetProductAlert"
-).onclick=
+).onclick =
 ()=>{
 
 openAlert(product);
@@ -3066,7 +3049,7 @@ modal.classList.add("show");
 
 function closeStreetProduct(){
 
-const modal=
+const modal =
 document.getElementById(
 "streetProductModal"
 );
@@ -3074,41 +3057,39 @@ document.getElementById(
 if(modal)
 modal.classList.remove("show");
 
-modalProduct=null;
+modalProduct = null;
 
 }
 
 
 /* =========================
-   CLICK EN TARJETA
+   CLICK TARJETA
 ========================= */
 
 document.addEventListener(
 "click",
 event=>{
 
-const card=
+const card =
 event.target.closest(".card");
 
 if(!card)
 return;
 
 if(
-event.target.closest(
-"button,a"
-)
+event.target.closest("button,a")
 )
 return;
 
-const key=
+const key =
 card.dataset.productKey;
 
-const product=
+const product =
 [
 ...lastResults,
 ...favorites
 ].find(
-item=>
+item =>
 productKey(item)===key
 );
 
@@ -3134,31 +3115,31 @@ storeFilters
 .querySelectorAll(".store-filter")
 .forEach(button=>{
 
-button.onclick=
+button.onclick =
 ()=>{
 
 storeFilters
 .querySelectorAll(".store-filter")
 .forEach(
-item=>
+item =>
 item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-const store=
+const store =
 button.dataset.store;
 
 if(store==="all"){
 
-currentFilteredResults=
+currentFilteredResults =
 [...lastResults];
 
 }else{
 
-currentFilteredResults=
+currentFilteredResults =
 lastResults.filter(
-product=>
+product =>
 String(
 product.source||""
 )
@@ -3180,10 +3161,10 @@ currentFilteredResults
 
 
 /* =========================
-   AUTOCOMPLETADO
+   AUTOCOMPLETE
 ========================= */
 
-const suggestions=[
+const suggestions = [
 
 "Jordan 4 Retro",
 "Jordan 4 Military Black",
@@ -3201,13 +3182,13 @@ const suggestions=[
 
 ];
 
-const autocomplete=
+const autocomplete =
 document.createElement("div");
 
-autocomplete.id=
+autocomplete.id =
 "streetAutocomplete";
 
-autocomplete.className=
+autocomplete.className =
 "autocomplete";
 
 document
@@ -3225,7 +3206,7 @@ clearSearch.classList.toggle(
 q.value.length>0
 );
 
-const term=
+const term =
 q.value
 .trim()
 .toLowerCase();
@@ -3240,35 +3221,33 @@ return;
 
 }
 
-const matches=
+const matches =
 suggestions
 .filter(
-item=>
+item =>
 item
 .toLowerCase()
 .includes(term)
 )
 .slice(0,5);
 
-autocomplete.innerHTML="";
+autocomplete.innerHTML = "";
 
 matches.forEach(text=>{
 
-const button=
+const button =
 document.createElement("button");
 
-button.type="button";
+button.type = "button";
+button.className = "autocomplete-item";
 
-button.className=
-"autocomplete-item";
-
-button.innerHTML=
+button.innerHTML =
 `🔎 ${esc(text)}`;
 
-button.onclick=
+button.onclick =
 ()=>{
 
-q.value=text;
+q.value = text;
 
 clearSearch.classList.add(
 "show"
@@ -3319,12 +3298,12 @@ autocomplete.classList.remove(
 
 function setTab(tab){
 
-homeSection.style.display=
+homeSection.style.display =
 tab==="favorites"
 ?"none"
 :"";
 
-favoritesSection.style.display=
+favoritesSection.style.display =
 tab==="favorites"
 ?""
 :"none";
@@ -3373,17 +3352,17 @@ behavior:"smooth"
 }
 
 
-bottomHome.onclick=
+bottomHome.onclick =
 ()=>{
 setTab("home");
 };
 
-bottomSearch.onclick=
+bottomSearch.onclick =
 ()=>{
 setTab("search");
 };
 
-bottomFavorites.onclick=
+bottomFavorites.onclick =
 ()=>{
 setTab("favorites");
 };
@@ -3395,13 +3374,13 @@ setTab("favorites");
 
 async function search(){
 
-const query=
+const query =
 q.value.trim();
 
 if(!query){
 
-featuredSection.style.display="";
-resultsSection.style.display="none";
+featuredSection.style.display = "";
+resultsSection.style.display = "none";
 
 return;
 
@@ -3413,24 +3392,24 @@ return;
 if(searchController)
 searchController.abort();
 
-searchController=
+searchController =
 new AbortController();
 
-searchInProgress=true;
+searchInProgress = true;
 
-go.textContent=
+go.textContent =
 "BUSCANDO...";
 
-featuredSection.style.display=
+featuredSection.style.display =
 "none";
 
-resultsSection.style.display=
+resultsSection.style.display =
 "";
 
-status.textContent=
+status.textContent =
 "Buscando productos reales...";
 
-products.innerHTML=`
+products.innerHTML = `
 
 <div class="loading">
 🔎 Buscando...
@@ -3440,7 +3419,7 @@ products.innerHTML=`
 
 try{
 
-const response=
+const response =
 await fetch(
 API+
 "?q="+
@@ -3452,13 +3431,13 @@ cache:"no-store"
 }
 );
 
-const data=
+const data =
 await response.json();
 
 if(!response.ok)
 throw new Error();
 
-let list=
+let list =
 Array.isArray(
 data.shopping_results
 )
@@ -3466,14 +3445,14 @@ data.shopping_results
 :[];
 
 
-/* FILTRO CATEGORÍA */
+/* CATEGORÍA */
 
 if(category!=="all"){
 
-list=
+list =
 list.filter(product=>{
 
-const title=
+const title =
 (product.title||"")
 .toLowerCase();
 
@@ -3498,13 +3477,11 @@ return /cap|bag|wallet|belt|backpack|hat|beanie|sunglasses/
 
 }
 
-lastResults=
-list;
+lastResults = list;
 
-currentFilteredResults=
-[...list];
+currentFilteredResults = [...list];
 
-resultCount.textContent=
+resultCount.textContent =
 list.length+
 (
 list.length===1
@@ -3512,7 +3489,7 @@ list.length===1
 :" productos"
 );
 
-status.textContent="";
+status.textContent = "";
 
 renderResults(list);
 
@@ -3523,10 +3500,10 @@ error.name==="AbortError"
 )
 return;
 
-status.textContent=
+status.textContent =
 "Error conectando con StreetFind API.";
 
-products.innerHTML=`
+products.innerHTML = `
 
 <div class="error-box">
 
@@ -3549,19 +3526,19 @@ REINTENTAR
 
 `;
 
-const retry=
+const retry =
 document.getElementById(
 "retrySearch"
 );
 
 if(retry)
-retry.onclick=search;
+retry.onclick = search;
 
 }finally{
 
-searchInProgress=false;
+searchInProgress = false;
 
-go.textContent=
+go.textContent =
 "BUSCAR";
 
 }
@@ -3569,7 +3546,7 @@ go.textContent=
 }
 
 
-go.onclick=
+go.onclick =
 search;
 
 
@@ -3588,22 +3565,20 @@ search();
 });
 
 
-clearSearch.onclick=
+clearSearch.onclick =
 ()=>{
 
-q.value="";
+q.value = "";
 
 clearSearch.classList.remove(
 "show"
 );
 
-lastResults=[];
+lastResults = [];
+currentFilteredResults = [];
 
-currentFilteredResults=[];
-
-featuredSection.style.display="";
-
-resultsSection.style.display="none";
+featuredSection.style.display = "";
+resultsSection.style.display = "none";
 
 setTab("search");
 
@@ -3618,19 +3593,19 @@ document
 .querySelectorAll(".filter")
 .forEach(button=>{
 
-button.onclick=
+button.onclick =
 ()=>{
 
 document
 .querySelectorAll(".filter")
 .forEach(
-item=>
+item =>
 item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-category=
+category =
 button.dataset.c;
 
 if(q.value.trim())
@@ -3649,19 +3624,19 @@ document
 .querySelectorAll(".sort-btn")
 .forEach(button=>{
 
-button.onclick=
+button.onclick =
 ()=>{
 
 document
 .querySelectorAll(".sort-btn")
 .forEach(
-item=>
+item =>
 item.classList.remove("active")
 );
 
 button.classList.add("active");
 
-sortMode=
+sortMode =
 button.dataset.sort;
 
 if(lastResults.length){
@@ -3680,14 +3655,14 @@ currentFilteredResults.length
 
 
 /* =========================
-   PRODUCTOS DESTACADOS
+   DESTACADOS
 ========================= */
 
 async function loadFeatured(){
 
 try{
 
-const searches=[
+const searches = [
 
 "Jordan Nike sneakers",
 "Adidas sneakers",
@@ -3695,7 +3670,7 @@ const searches=[
 
 ];
 
-let all=[];
+let all = [];
 
 for(
 const term of searches
@@ -3703,7 +3678,7 @@ const term of searches
 
 try{
 
-const response=
+const response =
 await fetch(
 API+
 "?q="+
@@ -3716,7 +3691,7 @@ cache:"no-store"
 if(!response.ok)
 continue;
 
-const data=
+const data =
 await response.json();
 
 if(
@@ -3735,25 +3710,22 @@ all.push(
 
 }
 
-const unique=[];
-
-const seen=
-new Set();
+const unique = [];
+const seen = new Set();
 
 all.forEach(product=>{
 
-const key=
-product.product_link||
+const key =
+product.product_link ||
 product.title;
 
 if(
-!key||
+!key ||
 seen.has(key)
 )
 return;
 
 seen.add(key);
-
 unique.push(product);
 
 });
@@ -3762,7 +3734,7 @@ renderFeatured(unique);
 
 }catch(e){
 
-featuredProducts.innerHTML=`
+featuredProducts.innerHTML = `
 
 <div class="empty">
 
