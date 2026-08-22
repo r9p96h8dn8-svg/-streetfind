@@ -332,22 +332,31 @@ main{
   padding:15px
 }
 
+/* FAVORITO DE LA TARJETA */
 .card-fav{
   position:absolute;
   top:9px;
   right:9px;
-  width:34px;
-  height:34px;
-  border:1px solid rgba(255,255,255,.18);
+  width:36px;
+  height:36px;
+  border:1px solid rgba(255,255,255,.22);
   border-radius:50%;
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.72);
   backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
   color:#fff;
-  font-size:18px;
+  font-size:17px;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:2
+  z-index:2;
+  padding:0;
+  line-height:1;
+  transition:.18s ease
+}
+
+.card-fav:active{
+  transform:scale(.9)
 }
 
 .card-fav.active{
@@ -407,11 +416,12 @@ main{
   color:#fff
 }
 
+/* PRECIO */
 .price-row{
   display:flex;
   flex-direction:column;
   align-items:stretch;
-  gap:8px;
+  gap:9px;
   margin-top:10px;
   width:100%;
   min-width:0;
@@ -446,23 +456,23 @@ main{
   text-overflow:ellipsis
 }
 
+/* ACCIONES */
 .actions{
   display:flex;
   align-items:center;
-  justify-content:flex-start;
-  gap:5px;
+  gap:6px;
   width:100%;
   min-width:0
 }
 
 .favorite,
 .share{
-  width:30px;
-  height:30px;
-  flex:0 0 30px;
-  min-width:30px;
+  width:32px;
+  height:32px;
+  flex:0 0 32px;
+  min-width:32px;
   border:1px solid #333;
-  border-radius:8px;
+  border-radius:9px;
   background:#191919;
   color:#aaa;
   font-size:17px;
@@ -474,30 +484,42 @@ main{
   line-height:1
 }
 
+.favorite{
+  transition:.18s ease
+}
+
+.favorite:active,
+.share:active{
+  transform:scale(.93)
+}
+
 .favorite.active{
   background:#fff;
   border-color:#fff;
-  color:#000;
-  box-shadow:0 0 8px rgba(255,255,255,.18)
+  color:#000
 }
 
+/* BOTÓN VER OFERTA CORREGIDO */
 .buy{
   display:flex;
   align-items:center;
   justify-content:center;
-  width:44px;
-  height:30px;
-  flex:0 0 44px;
-  min-width:44px;
+  width:auto;
+  height:32px;
+  min-width:0;
+  flex:1 1 auto;
+  padding:0 9px;
   box-sizing:border-box;
-  border-radius:8px;
+  border-radius:9px;
   background:#fff;
   color:#000;
   text-decoration:none;
   font-size:9px;
   font-weight:900;
+  line-height:1;
   overflow:hidden;
-  white-space:nowrap
+  white-space:nowrap;
+  text-overflow:ellipsis
 }
 
 .store-info{
@@ -516,67 +538,6 @@ main{
   font-size:10px;
   color:#777;
   margin-top:3px
-}
-
-.history{
-  margin-top:10px;
-  padding:10px;
-  border:1px solid #252525;
-  border-radius:10px;
-  background:#0b0b0b
-}
-
-.history-title{
-  font-size:10px;
-  font-weight:900;
-  color:#888;
-  text-transform:uppercase;
-  margin-bottom:6px
-}
-
-.history-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:10px;
-  margin-top:5px;
-  gap:8px
-}
-
-.history-low{
-  color:#aaa
-}
-
-.history-change{
-  font-weight:900
-}
-
-.history-down{
-  color:#fff
-}
-
-.history-up{
-  color:#777
-}
-
-.history-loading{
-  font-size:10px;
-  color:#666
-}
-
-.history-chart{
-  height:30px;
-  display:flex;
-  align-items:flex-end;
-  gap:3px;
-  margin-top:7px
-}
-
-.history-bar{
-  flex:1;
-  background:#444;
-  min-height:3px;
-  border-radius:2px 2px 0 0
 }
 
 .alert-box{
@@ -859,33 +820,31 @@ main{
 }
 
 @media(max-width:520px){
+
   .search{
     flex-direction:column
   }
 
   .price{
-    font-size:18px;
-  }
-
-  .price-row{
-    gap:8px
+    font-size:18px
   }
 
   .actions{
-    gap:4px
+    gap:5px
   }
 
   .favorite,
   .share{
-    width:29px;
-    flex-basis:29px;
-    min-width:29px
+    width:30px;
+    flex-basis:30px;
+    min-width:30px
   }
 
   .buy{
-    width:42px;
-    flex-basis:42px;
-    min-width:42px
+    flex:1 1 auto;
+    min-width:0;
+    padding:0 7px;
+    font-size:8px
   }
 }
 </style>
@@ -1000,8 +959,8 @@ main{
 
   <p>
     Preparado para futuras funciones premium:
-    alertas avanzadas, favoritos ilimitados,
-    historial completo y destacados.
+    alertas avanzadas, favoritos ilimitados
+    y destacados.
   </p>
 
   <div class="panel-row">
@@ -1066,8 +1025,8 @@ main{
 </div>
 
 <script>
+
 const API="https://streetfind-rose.vercel.app/api/search";
-const HISTORY_API="https://streetfind-rose.vercel.app/api/history";
 
 const q=document.getElementById("q");
 const go=document.getElementById("go");
@@ -1102,81 +1061,107 @@ let searchController=null;
 let alertProduct=null;
 
 try{
-  favorites=JSON.parse(localStorage.getItem("streetfind_favorites")||"[]");
-  if(!Array.isArray(favorites))favorites=[]
+  favorites=JSON.parse(
+    localStorage.getItem("streetfind_favorites")||"[]"
+  );
+
+  if(!Array.isArray(favorites))
+    favorites=[];
 }catch(e){
   favorites=[]
 }
 
 try{
-  alerts=JSON.parse(localStorage.getItem("streetfind_alerts")||"[]");
-  if(!Array.isArray(alerts))alerts=[]
+  alerts=JSON.parse(
+    localStorage.getItem("streetfind_alerts")||"[]"
+  );
+
+  if(!Array.isArray(alerts))
+    alerts=[];
 }catch(e){
   alerts=[]
 }
 
 try{
-  recent=JSON.parse(localStorage.getItem("streetfind_recent")||"[]");
-  if(!Array.isArray(recent))recent=[]
+  recent=JSON.parse(
+    localStorage.getItem("streetfind_recent")||"[]"
+  );
+
+  if(!Array.isArray(recent))
+    recent=[];
 }catch(e){
   recent=[]
 }
 
 function save(key,value){
+
   try{
-    localStorage.setItem(key,JSON.stringify(value))
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    )
   }catch(e){}
+
 }
 
 function productKey(p){
-  return String(p?.product_link||p?.affiliate_url||p?.affiliateUrl||p?.title||"")
-}
-
-/* NUEVO: obtiene el enlace de afiliación si existe.
-   Si no existe, utiliza el enlace normal del producto. */
-function getProductUrl(p){
-
-  if(!p)return "#";
 
   return String(
-    p.affiliate_url||
-    p.affiliateUrl||
-    p.product_link||
-    p.link||
-    "#"
-  ).trim()||"#";
+    p?.product_link||
+    p?.title||
+    ""
+  )
 
 }
 
 function isFavorite(p){
+
   const k=productKey(p);
-  return !!k&&favorites.some(x=>productKey(x)===k)
+
+  return !!k&&favorites.some(
+    x=>productKey(x)===k
+  )
+
 }
 
 function updateCounters(){
 
   favoriteCount.textContent=
     favorites.length+
-    (favorites.length===1?" producto":" productos");
+    (
+      favorites.length===1
+        ?" producto"
+        :" productos"
+    );
 
   favoriteBadge.textContent=favorites.length;
 
   favoriteBadge.style.display=
-    favorites.length?"block":"none";
+    favorites.length
+      ?"block"
+      :"none";
 
-  document.getElementById("alertCount").textContent=
-    alerts.length;
+  document.getElementById(
+    "alertCount"
+  ).textContent=alerts.length;
 
-  document.getElementById("alertBadge").textContent=
-    alerts.length;
+  document.getElementById(
+    "alertBadge"
+  ).textContent=alerts.length;
 
-  document.getElementById("alertBadge").style.display=
-    alerts.length?"block":"none"
+  document.getElementById(
+    "alertBadge"
+  ).style.display=
+    alerts.length
+      ?"block"
+      :"none"
+
 }
 
 function showToast(m){
 
   toast.textContent=m;
+
   toast.classList.add("show");
 
   clearTimeout(showToast.t);
@@ -1185,6 +1170,7 @@ function showToast(m){
     ()=>toast.classList.remove("show"),
     1800
   )
+
 }
 
 function esc(v){
@@ -1194,7 +1180,8 @@ function esc(v){
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll("'","&#039;")
+
 }
 
 function getPrice(v){
@@ -1209,19 +1196,28 @@ function getPrice(v){
 
   let n=m[1];
 
-  if(n.includes(",")&&n.includes(".")){
+  if(
+    n.includes(",")&&
+    n.includes(".")
+  ){
 
-    n=n.lastIndexOf(",")>n.lastIndexOf(".")
-      ?n.replace(/\./g,"").replace(",",".")
-      :n.replace(/,/g,"")
+    n=
+      n.lastIndexOf(",")>
+      n.lastIndexOf(".")
+        ?n.replace(/\./g,"").replace(",",".")
+        :n.replace(/,/g,"")
 
   }else{
+
     n=n.replace(",",".")
   }
 
   const p=parseFloat(n);
 
-  return Number.isFinite(p)?p:null
+  return Number.isFinite(p)
+    ?p
+    :null
+
 }
 
 function money(v){
@@ -1229,11 +1225,28 @@ function money(v){
   return Number(v)
     .toFixed(2)
     .replace(".",",")+" €"
+
+}
+
+function getProductUrl(p){
+
+  return (
+    p?.affiliate_url||
+    p?.affiliateUrl||
+    p?.product_link||
+    p?.link||
+    "#"
+  )
+
 }
 
 function saveFavorites(){
 
-  save("streetfind_favorites",favorites);
+  save(
+    "streetfind_favorites",
+    favorites
+  );
+
   updateCounters()
 
 }
@@ -1251,24 +1264,34 @@ function toggleFavorite(product){
   if(i>=0){
 
     favorites.splice(i,1);
-    showToast("Eliminado de favoritos")
+
+    showToast(
+      "Eliminado de favoritos"
+    )
 
   }else{
 
     favorites.push(product);
-    showToast("Añadido a favoritos")
+
+    showToast(
+      "Añadido a favoritos"
+    )
 
   }
 
   saveFavorites();
+
   updateFavoriteButtons();
+
   renderFavorites()
 
 }
 
 function updateFavoriteButtons(){
 
-  document.querySelectorAll(".favorite").forEach(b=>{
+  document.querySelectorAll(
+    ".favorite"
+  ).forEach(b=>{
 
     try{
 
@@ -1280,10 +1303,15 @@ function updateFavoriteButtons(){
 
       const active=isFavorite(p);
 
-      b.classList.toggle("active",active);
+      b.classList.toggle(
+        "active",
+        active
+      );
 
       b.textContent=
-        active?"♥":"♡";
+        active
+          ?"♥"
+          :"♡";
 
     }catch(e){}
 
@@ -1293,31 +1321,48 @@ function updateFavoriteButtons(){
 
 function updateRecent(){
 
-  const wrap=document.getElementById("recentWrap");
-  const list=document.getElementById("recentList");
+  const wrap=
+    document.getElementById(
+      "recentWrap"
+    );
+
+  const list=
+    document.getElementById(
+      "recentList"
+    );
 
   list.innerHTML="";
 
   if(!recent.length){
 
-    wrap.classList.remove("show");
-    return
+    wrap.classList.remove(
+      "show"
+    );
 
+    return
   }
 
   wrap.classList.add("show");
 
   recent.forEach(term=>{
 
-    const b=document.createElement("button");
+    const b=
+      document.createElement(
+        "button"
+      );
 
     b.className="recent-item";
+
     b.textContent=term;
 
     b.onclick=()=>{
 
       q.value=term;
-      clearSearch.classList.add("show");
+
+      clearSearch.classList.add(
+        "show"
+      );
+
       search()
 
     };
@@ -1337,132 +1382,18 @@ function addRecent(term){
   recent=[
     term,
     ...recent.filter(
-      x=>x.toLowerCase()!==term.toLowerCase()
+      x=>
+        x.toLowerCase()!==
+        term.toLowerCase()
     )
   ].slice(0,8);
 
-  save("streetfind_recent",recent);
+  save(
+    "streetfind_recent",
+    recent
+  );
+
   updateRecent()
-
-}
-
-async function loadHistory(product){
-
-  const k=productKey(product);
-
-  if(!k)return null;
-
-  try{
-
-    const r=await fetch(
-      HISTORY_API+
-      "?product_key="+
-      encodeURIComponent(k),
-      {cache:"no-store"}
-    );
-
-    if(!r.ok)return null;
-
-    const d=await r.json();
-
-    return Array.isArray(d.history)
-      ?d.history
-      :null;
-
-  }catch(e){
-
-    return null
-
-  }
-
-}
-
-function historyHTML(h){
-
-  if(!h||!h.length){
-
-    return `
-      <div class="history">
-        <div class="history-loading">
-          Historial no disponible todavía.
-        </div>
-      </div>
-    `
-
-  }
-
-  const prices=h
-    .map(x=>Number(x.price))
-    .filter(Number.isFinite);
-
-  if(!prices.length)return "";
-
-  const now=prices.at(-1);
-  const low=Math.min(...prices);
-  const first=prices[0];
-  const diff=now-first;
-
-  const recentPrices=prices.slice(-12);
-  const min=Math.min(...recentPrices);
-  const max=Math.max(...recentPrices);
-  const range=max-min||1;
-
-  const bars=recentPrices.map(p=>`
-    <div
-      class="history-bar"
-      style="height:${20+((p-min)/range)*80}%">
-    </div>
-  `).join("");
-
-  return `
-    <div class="history">
-
-      <div class="history-title">
-        📊 Historial de precio
-      </div>
-
-      <div class="history-row">
-        <span>Ahora</span>
-        <strong>${money(now)}</strong>
-      </div>
-
-      <div class="history-row">
-        <span class="history-low">Mínimo</span>
-        <strong>${money(low)}</strong>
-      </div>
-
-      <div class="history-row">
-        <span>Variación</span>
-
-        <strong class="history-change ${
-          diff<=0?"history-down":"history-up"
-        }">
-
-          ${
-            diff===0
-              ?"—"
-              :(diff<0?"↓ ":"↑ ")+money(Math.abs(diff))
-          }
-
-        </strong>
-      </div>
-
-      <div class="history-chart">
-        ${bars}
-      </div>
-
-    </div>
-  `
-}
-
-async function addHistory(card,p){
-
-  const c=card.querySelector(".history-container");
-
-  if(!c)return;
-
-  c.innerHTML=
-    historyHTML(await loadHistory(p))
 
 }
 
@@ -1479,20 +1410,26 @@ function storeInfo(p){
       </div>
     </div>
   `
+
 }
 
-function productHTML(p,best=false,saving=null){
+function productHTML(
+  p,
+  best=false,
+  saving=null
+){
 
   const fav=isFavorite(p);
 
   const price=getPrice(p.price);
 
   const alert=alerts.find(
-    a=>productKey(a.product)===productKey(p)
+    a=>
+      productKey(a.product)===
+      productKey(p)
   );
 
-  /* NUEVO: el botón utiliza afiliación si existe */
-  const productUrl=getProductUrl(p);
+  const offerUrl=getProductUrl(p);
 
   return `
     <article class="card">
@@ -1501,13 +1438,17 @@ function productHTML(p,best=false,saving=null){
         type="button"
         class="card-fav favorite ${fav?"active":""}"
         aria-label="${fav?"Quitar":"Añadir"} a favoritos"
-        data-product="${encodeURIComponent(JSON.stringify(p))}">
+        data-product="${encodeURIComponent(
+          JSON.stringify(p)
+        )}">
         ${fav?"♥":"♡"}
       </button>
 
       ${
         best
-          ?`<div class="best">🟢 MEJOR PRECIO</div>`
+          ?`<div class="best">
+              🟢 MEJOR PRECIO
+            </div>`
           :""
       }
 
@@ -1519,7 +1460,9 @@ function productHTML(p,best=false,saving=null){
 
               <img
                 src="${esc(p.thumbnail)}"
-                alt="${esc(p.title||"Producto")}"
+                alt="${esc(
+                  p.title||"Producto"
+                )}"
                 loading="lazy"
                 onerror="
                   this.style.display='none';
@@ -1566,7 +1509,9 @@ function productHTML(p,best=false,saving=null){
 
               <div class="saving">
                 Ahorras
-                <strong>${money(saving.amount)}</strong>
+                <strong>
+                  ${money(saving.amount)}
+                </strong>
                 · ${saving.percent.toFixed(0)}%
               </div>
 
@@ -1577,8 +1522,12 @@ function productHTML(p,best=false,saving=null){
         <div class="price-row">
 
           <div>
+
             <div class="price">
-              ${esc(p.price||"Precio no disponible")}
+              ${esc(
+                p.price||
+                "Precio no disponible"
+              )}
             </div>
 
             ${
@@ -1600,22 +1549,29 @@ function productHTML(p,best=false,saving=null){
             <button
               type="button"
               class="favorite ${fav?"active":""}"
-              data-product="${encodeURIComponent(JSON.stringify(p))}">
+              aria-label="${fav?"Quitar":"Añadir"} a favoritos"
+              data-product="${encodeURIComponent(
+                JSON.stringify(p)
+              )}">
               ${fav?"♥":"♡"}
             </button>
 
             <button
               type="button"
               class="share"
-              data-share-product="${encodeURIComponent(JSON.stringify(p))}">
+              aria-label="Compartir producto"
+              data-share-product="${encodeURIComponent(
+                JSON.stringify(p)
+              )}">
               ↗
             </button>
 
             <a
               class="buy"
-              href="${esc(productUrl)}"
+              href="${esc(offerUrl)}"
               target="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer"
+              aria-label="Ver oferta">
               VER OFERTA
             </a>
 
@@ -1624,16 +1580,6 @@ function productHTML(p,best=false,saving=null){
         </div>
 
         ${storeInfo(p)}
-
-        <div class="history-container">
-
-          <div class="history">
-            <div class="history-loading">
-              Cargando historial...
-            </div>
-          </div>
-
-        </div>
 
         ${
           alert
@@ -1645,12 +1591,15 @@ function productHTML(p,best=false,saving=null){
 
                   <span>
                     🔔 Alerta activa ·
-                    objetivo ${money(alert.target)}
+                    objetivo
+                    ${money(alert.target)}
                   </span>
 
                   <button
                     type="button"
-                    data-remove-alert="${esc(alert.id)}">
+                    data-remove-alert="${esc(
+                      alert.id
+                    )}">
                     Quitar
                   </button>
 
@@ -1672,7 +1621,9 @@ function productHTML(p,best=false,saving=null){
 
                     <button
                       type="button"
-                      data-alert-product="${encodeURIComponent(JSON.stringify(p))}">
+                      data-alert-product="${encodeURIComponent(
+                        JSON.stringify(p)
+                      )}">
                       Crear alerta
                     </button>
 
@@ -1688,11 +1639,14 @@ function productHTML(p,best=false,saving=null){
 
     </article>
   `
+
 }
 
 function bindButtons(){
 
-  document.querySelectorAll(".favorite").forEach(b=>{
+  document.querySelectorAll(
+    ".favorite"
+  ).forEach(b=>{
 
     b.onclick=()=>{
 
@@ -1712,7 +1666,9 @@ function bindButtons(){
 
   });
 
-  document.querySelectorAll(".share").forEach(b=>{
+  document.querySelectorAll(
+    ".share"
+  ).forEach(b=>{
 
     b.onclick=async()=>{
 
@@ -1728,7 +1684,11 @@ function bindButtons(){
 
         const text=
           (p.title||"Producto")+
-          (p.price?" · "+p.price:"")+
+          (
+            p.price
+              ?" · "+p.price
+              :""
+          )+
           "\nEncontrado en StreetFind";
 
         if(navigator.share){
@@ -1745,7 +1705,9 @@ function bindButtons(){
             text+"\n"+url
           );
 
-          showToast("Enlace copiado")
+          showToast(
+            "Enlace copiado"
+          )
 
         }
 
@@ -1755,7 +1717,9 @@ function bindButtons(){
 
   });
 
-  document.querySelectorAll("[data-alert-product]").forEach(b=>{
+  document.querySelectorAll(
+    "[data-alert-product]"
+  ).forEach(b=>{
 
     b.onclick=()=>openAlert(
       JSON.parse(
@@ -1767,38 +1731,35 @@ function bindButtons(){
 
   });
 
-  document.querySelectorAll("[data-remove-alert]").forEach(b=>{
+  document.querySelectorAll(
+    "[data-remove-alert]"
+  ).forEach(b=>{
 
     b.onclick=()=>{
 
       alerts=alerts.filter(
-        a=>a.id!==b.dataset.removeAlert
+        a=>
+          a.id!==b.dataset.removeAlert
       );
 
-      save("streetfind_alerts",alerts);
+      save(
+        "streetfind_alerts",
+        alerts
+      );
+
       updateCounters();
+
       renderAlerts();
+
       renderFavorites();
 
-      showToast("Alerta eliminada")
+      showToast(
+        "Alerta eliminada"
+      )
 
     }
 
   })
-
-}
-
-async function loadHistories(container,list){
-
-  const cards=[
-    ...container.querySelectorAll(".card")
-  ];
-
-  await Promise.all(
-    cards.map(
-      (c,i)=>addHistory(c,list[i])
-    )
-  )
 
 }
 
@@ -1811,7 +1772,11 @@ function applyPriceFilter(list){
     return v===null||
       (
         v>=priceMin&&
-        v<=(priceMax===999999?Infinity:priceMax)
+        v<=(
+          priceMax===999999
+            ?Infinity
+            :priceMax
+        )
       )
 
   })
@@ -1820,20 +1785,27 @@ function applyPriceFilter(list){
 
 function sortByPrice(list){
 
-  return [...list].sort((a,b)=>{
+  return [...list].sort(
+    (a,b)=>{
 
-    const pa=getPrice(a.price);
-    const pb=getPrice(b.price);
+      const pa=getPrice(a.price);
+      const pb=getPrice(b.price);
 
-    if(pa==null&&pb==null)return 0;
-    if(pa==null)return 1;
-    if(pb==null)return -1;
+      if(
+        pa==null&&
+        pb==null
+      )return 0;
 
-    return sortMode==="low"
-      ?pa-pb
-      :pb-pa
+      if(pa==null)return 1;
 
-  })
+      if(pb==null)return -1;
+
+      return sortMode==="low"
+        ?pa-pb
+        :pb-pa
+
+    }
+  )
 
 }
 
@@ -1859,18 +1831,14 @@ function renderFeatured(list){
       "beforeend",
       productHTML(
         p,
-        i===0&&getPrice(p.price)!=null
+        i===0&&
+        getPrice(p.price)!=null
       )
     )
 
   });
 
-  bindButtons();
-
-  loadHistories(
-    featuredProducts,
-    sorted
-  )
+  bindButtons()
 
 }
 
@@ -1889,7 +1857,8 @@ function renderResults(list){
 
   }
 
-  const sorted=sortByPrice(list);
+  const sorted=
+    sortByPrice(list);
 
   const prices=sorted
     .map(p=>getPrice(p.price))
@@ -1905,7 +1874,8 @@ function renderResults(list){
 
   sorted.forEach(p=>{
 
-    const price=getPrice(p.price);
+    const price=
+      getPrice(p.price);
 
     let saving=null;
 
@@ -1919,7 +1889,8 @@ function renderResults(list){
 
       saving={
         amount:price-low,
-        percent:((price-low)/high)*100
+        percent:
+          ((price-low)/high)*100
       }
 
     }
@@ -1928,19 +1899,15 @@ function renderResults(list){
       "beforeend",
       productHTML(
         p,
-        price!=null&&price===low,
+        price!=null&&
+        price===low,
         saving
       )
     )
 
   });
 
-  bindButtons();
-
-  loadHistories(
-    products,
-    sorted
-  )
+  bindButtons()
 
 }
 
@@ -1957,7 +1924,8 @@ function renderFavorites(){
       <div class="empty">
         ❤️<br><br>
         Todavía no tienes favoritos.<br><br>
-        Pulsa ♡ en cualquier producto para guardarlo aquí.
+        Pulsa ♡ en cualquier producto
+        para guardarlo aquí.
       </div>
 
     `;
@@ -1975,18 +1943,16 @@ function renderFavorites(){
 
   });
 
-  bindButtons();
-
-  loadHistories(
-    favoriteProducts,
-    favorites
-  )
+  bindButtons()
 
 }
 
 function renderAlerts(){
 
-  const el=document.getElementById("alertList");
+  const el=
+    document.getElementById(
+      "alertList"
+    );
 
   el.innerHTML="";
 
@@ -2007,28 +1973,39 @@ function renderAlerts(){
 
   alerts.forEach(a=>{
 
-    const d=document.createElement("div");
+    const d=
+      document.createElement(
+        "div"
+      );
 
     d.className="alert-item";
 
     d.innerHTML=`
 
       <strong>
-        ${esc(a.product.title||"Producto")}
+        ${esc(
+          a.product.title||
+          "Producto"
+        )}
       </strong>
 
       <span>
         Objetivo:
         ${money(a.target)}
         ·
-        ${esc(a.product.source||"Tienda")}
+        ${esc(
+          a.product.source||
+          "Tienda"
+        )}
       </span>
 
       <div style="margin-top:8px">
 
         <button
           class="panel-btn"
-          data-remove-alert="${esc(a.id)}">
+          data-remove-alert="${esc(
+            a.id
+          )}">
           Eliminar
         </button>
 
@@ -2050,7 +2027,8 @@ function openAlert(p){
 
   document.getElementById(
     "alertProductName"
-  ).textContent=p.title||"Producto";
+  ).textContent=
+    p.title||"Producto";
 
   document.getElementById(
     "alertTarget"
@@ -2101,7 +2079,8 @@ document.getElementById(
   }
 
   alerts=alerts.filter(
-    a=>productKey(a.product)!==
+    a=>
+      productKey(a.product)!==
       productKey(alertProduct)
   );
 
@@ -2109,16 +2088,25 @@ document.getElementById(
     id:String(Date.now()),
     product:alertProduct,
     target,
-    createdAt:new Date().toISOString()
+    createdAt:
+      new Date().toISOString()
   });
 
-  save("streetfind_alerts",alerts);
+  save(
+    "streetfind_alerts",
+    alerts
+  );
+
   updateCounters();
+
   closeAlert();
 
-  showToast("Alerta creada");
+  showToast(
+    "Alerta creada"
+  );
 
   renderAlerts();
+
   renderResults(lastResults)
 
 }
@@ -2128,7 +2116,8 @@ let lastResults=[];
 function setTab(tab){
 
   homeSection.style.display=
-    tab==="favorites"||tab==="alerts"
+    tab==="favorites"||
+    tab==="alerts"
       ?"none"
       :"";
 
@@ -2190,14 +2179,22 @@ function setTab(tab){
 
 }
 
-bottomHome.onclick=()=>setTab("home");
-bottomSearch.onclick=()=>setTab("search");
-bottomFavorites.onclick=()=>setTab("favorites");
-bottomAlerts.onclick=()=>setTab("alerts");
+bottomHome.onclick=
+  ()=>setTab("home");
+
+bottomSearch.onclick=
+  ()=>setTab("search");
+
+bottomFavorites.onclick=
+  ()=>setTab("favorites");
+
+bottomAlerts.onclick=
+  ()=>setTab("alerts");
 
 async function search(){
 
-  const query=q.value.trim();
+  const query=
+    q.value.trim();
 
   if(!query){
 
@@ -2215,7 +2212,8 @@ async function search(){
   if(searchController)
     searchController.abort();
 
-  searchController=new AbortController();
+  searchController=
+    new AbortController();
 
   searchInProgress=true;
 
@@ -2237,19 +2235,25 @@ async function search(){
   try{
 
     const r=await fetch(
-      API+"?q="+encodeURIComponent(query),
+      API+
+      "?q="+
+      encodeURIComponent(query),
       {
-        signal:searchController.signal,
+        signal:
+          searchController.signal,
         cache:"no-store"
       }
     );
 
     const d=await r.json();
 
-    if(!r.ok)throw new Error();
+    if(!r.ok)
+      throw new Error();
 
     let list=
-      Array.isArray(d.shopping_results)
+      Array.isArray(
+        d.shopping_results
+      )
         ?d.shopping_results
         :[];
 
@@ -2258,7 +2262,8 @@ async function search(){
       list=list.filter(p=>{
 
         const t=
-          (p.title||"").toLowerCase();
+          (p.title||"")
+          .toLowerCase();
 
         if(category==="sneakers")
           return /shoe|sneaker|jordan|nike|adidas|air max|new balance|asics|puma/.test(t);
@@ -2284,7 +2289,8 @@ async function search(){
 
   }catch(e){
 
-    if(e.name==="AbortError")return;
+    if(e.name==="AbortError")
+      return;
 
     status.textContent=
       "Error conectando con StreetFind API.";
@@ -2297,7 +2303,8 @@ async function search(){
 
         <br><br>
 
-        Comprueba tu conexión e inténtalo de nuevo.
+        Comprueba tu conexión
+        e inténtalo de nuevo.
 
         <br>
 
@@ -2318,6 +2325,7 @@ async function search(){
   }finally{
 
     searchInProgress=false;
+
     go.textContent="BUSCAR"
 
   }
@@ -2345,6 +2353,7 @@ q.addEventListener(
     if(e.key==="Enter"){
 
       e.preventDefault();
+
       search()
 
     }
@@ -2356,7 +2365,9 @@ clearSearch.onclick=()=>{
 
   q.value="";
 
-  clearSearch.classList.remove("show");
+  clearSearch.classList.remove(
+    "show"
+  );
 
   featuredSection.style.display="";
   resultsSection.style.display="none";
@@ -2365,13 +2376,17 @@ clearSearch.onclick=()=>{
 
 };
 
-document.querySelectorAll(".filter")
-.forEach(b=>{
+document.querySelectorAll(
+  ".filter"
+).forEach(b=>{
 
   b.onclick=()=>{
 
-    document.querySelectorAll(".filter")
-    .forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(
+      ".filter"
+    ).forEach(x=>
+      x.classList.remove("active")
+    );
 
     b.classList.add("active");
 
@@ -2384,18 +2399,25 @@ document.querySelectorAll(".filter")
 
 });
 
-document.querySelectorAll(".price-filter")
-.forEach(b=>{
+document.querySelectorAll(
+  ".price-filter"
+).forEach(b=>{
 
   b.onclick=()=>{
 
-    document.querySelectorAll(".price-filter")
-    .forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(
+      ".price-filter"
+    ).forEach(x=>
+      x.classList.remove("active")
+    );
 
     b.classList.add("active");
 
-    priceMin=Number(b.dataset.min);
-    priceMax=Number(b.dataset.max);
+    priceMin=
+      Number(b.dataset.min);
+
+    priceMax=
+      Number(b.dataset.max);
 
     if(lastResults.length)
       renderResults(lastResults)
@@ -2404,13 +2426,17 @@ document.querySelectorAll(".price-filter")
 
 });
 
-document.querySelectorAll(".sort-btn")
-.forEach(b=>{
+document.querySelectorAll(
+  ".sort-btn"
+).forEach(b=>{
 
   b.onclick=()=>{
 
-    document.querySelectorAll(".sort-btn")
-    .forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(
+      ".sort-btn"
+    ).forEach(x=>
+      x.classList.remove("active")
+    );
 
     b.classList.add("active");
 
@@ -2446,16 +2472,28 @@ async function loadFeatured(){
       try{
 
         const r=await fetch(
-          API+"?q="+encodeURIComponent(term),
-          {cache:"no-store"}
+          API+
+          "?q="+
+          encodeURIComponent(term),
+          {
+            cache:"no-store"
+          }
         );
 
-        if(!r.ok)continue;
+        if(!r.ok)
+          continue;
 
-        const d=await r.json();
+        const d=
+          await r.json();
 
-        if(Array.isArray(d.shopping_results))
-          all.push(...d.shopping_results)
+        if(
+          Array.isArray(
+            d.shopping_results
+          )
+        )
+          all.push(
+            ...d.shopping_results
+          )
 
       }catch(e){}
 
@@ -2463,18 +2501,21 @@ async function loadFeatured(){
 
     const seen=new Set();
 
-    const unique=all.filter(p=>{
+    const unique=
+      all.filter(p=>{
 
-      const k=p.product_link||p.affiliate_url||p.affiliateUrl||p.title;
+        const k=
+          p.product_link||
+          p.title;
 
-      if(!k||seen.has(k))
-        return false;
+        if(!k||seen.has(k))
+          return false;
 
-      seen.add(k);
+        seen.add(k);
 
-      return true
+        return true
 
-    });
+      });
 
     renderFeatured(unique)
 
@@ -2484,11 +2525,13 @@ async function loadFeatured(){
 
       <div class="empty">
 
-        No se pudieron cargar los productos.
+        No se pudieron cargar
+        los productos.
 
         <br><br>
 
-        Prueba a actualizar la página.
+        Prueba a actualizar
+        la página.
 
       </div>
 
@@ -2514,6 +2557,7 @@ if("serviceWorker" in navigator){
   )
 
 }
+
 </script>
 
 </body>
