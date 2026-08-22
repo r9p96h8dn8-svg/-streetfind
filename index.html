@@ -332,37 +332,50 @@ main{
   padding:15px
 }
 
-/* FAVORITO DE LA TARJETA */
+/* FAVORITO SUPERIOR — NUEVO DISEÑO */
 .card-fav{
   position:absolute;
   top:9px;
   right:9px;
-  width:36px;
-  height:36px;
-  border:1px solid rgba(255,255,255,.22);
+  width:40px;
+  height:40px;
+  border:1px solid rgba(255,255,255,.18);
   border-radius:50%;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  background:rgba(15,15,15,.82);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   color:#fff;
-  font-size:17px;
+  font-size:21px;
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:2;
   padding:0;
   line-height:1;
-  transition:.18s ease
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+  box-shadow:0 4px 14px rgba(0,0,0,.35)
 }
 
 .card-fav:active{
-  transform:scale(.9)
+  transform:scale(.86)
 }
 
 .card-fav.active{
-  background:#fff;
-  color:#000;
-  border-color:#fff
+  background:linear-gradient(
+    135deg,
+    #ff2d55,
+    #ff375f
+  );
+  color:#fff;
+  border-color:#ff5575;
+  box-shadow:
+    0 0 0 3px rgba(255,45,85,.12),
+    0 5px 18px rgba(255,45,85,.35)
 }
 
 .info{
@@ -416,7 +429,6 @@ main{
   color:#fff
 }
 
-/* PRECIO */
 .price-row{
   display:flex;
   flex-direction:column;
@@ -465,14 +477,55 @@ main{
   min-width:0
 }
 
-.favorite,
-.share{
-  width:32px;
-  height:32px;
-  flex:0 0 32px;
-  min-width:32px;
+/* FAVORITO INFERIOR — NUEVO DISEÑO */
+.favorite{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  min-width:34px;
   border:1px solid #333;
-  border-radius:9px;
+  border-radius:10px;
+  background:#191919;
+  color:#aaa;
+  font-size:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  margin:0;
+  line-height:1;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease
+}
+
+.favorite:active{
+  transform:scale(.88)
+}
+
+.favorite.active{
+  background:linear-gradient(
+    135deg,
+    #ff2d55,
+    #ff375f
+  );
+  border-color:#ff5575;
+  color:#fff;
+  box-shadow:
+    0 0 0 3px rgba(255,45,85,.10),
+    0 4px 12px rgba(255,45,85,.25)
+}
+
+.share{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  min-width:34px;
+  border:1px solid #333;
+  border-radius:10px;
   background:#191919;
   color:#aaa;
   font-size:17px;
@@ -484,33 +537,22 @@ main{
   line-height:1
 }
 
-.favorite{
-  transition:.18s ease
-}
-
-.favorite:active,
 .share:active{
   transform:scale(.93)
 }
 
-.favorite.active{
-  background:#fff;
-  border-color:#fff;
-  color:#000
-}
-
-/* BOTÓN VER OFERTA CORREGIDO */
+/* VER OFERTA */
 .buy{
   display:flex;
   align-items:center;
   justify-content:center;
   width:auto;
-  height:32px;
+  height:34px;
   min-width:0;
   flex:1 1 auto;
   padding:0 9px;
   box-sizing:border-box;
-  border-radius:9px;
+  border-radius:10px;
   background:#fff;
   color:#000;
   text-decoration:none;
@@ -835,9 +877,13 @@ main{
 
   .favorite,
   .share{
-    width:30px;
-    flex-basis:30px;
-    min-width:30px
+    width:32px;
+    flex-basis:32px;
+    min-width:32px
+  }
+
+  .favorite{
+    font-size:18px
   }
 
   .buy{
