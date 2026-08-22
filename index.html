@@ -1,1527 +1,3700 @@
-<!-- STREETFIND V4 — MEJORAS -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
+<meta name="theme-color" content="#050505">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="StreetFind">
+
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./A517A001-A63D-443E-A927-C33D2EB0CC4F.png">
+
+<title>StreetFind</title>
+
 <style>
-/* =========================
-   STREETFIND SCORE
-========================= */
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent
+}
+
+html{
+margin:0;
+padding:0;
+background:#050505;
+overscroll-behavior:none
+}
+
+body{
+margin:0;
+padding:0 0 calc(90px + env(safe-area-inset-bottom));
+background:#050505;
+color:#fff;
+font-family:Arial,sans-serif;
+min-height:100vh;
+-webkit-text-size-adjust:100%
+}
+
+button,input,a{
+font-family:inherit
+}
+
+button{
+cursor:pointer
+}
+
+header{
+padding:20px 16px;
+padding-top:calc(20px + env(safe-area-inset-top));
+border-bottom:1px solid #222
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+letter-spacing:-1px
+}
+
+.logo span{
+color:#777
+}
+
+.tag{
+color:#888;
+font-size:12px;
+margin-top:4px
+}
+
+main{
+max-width:1100px;
+margin:auto;
+padding:25px 15px 50px
+}
+
+.hero h1{
+font-size:clamp(40px,10vw,70px);
+line-height:.9;
+letter-spacing:-3px;
+margin:20px 0
+}
+
+.hero p{
+color:#999;
+line-height:1.5
+}
+
+.search{
+display:flex;
+gap:9px;
+margin:20px 0
+}
+
+.search-box{
+position:relative;
+flex:1
+}
+
+.search input{
+width:100%;
+height:50px;
+padding:0 42px 0 15px;
+border:1px solid #333;
+border-radius:12px;
+background:#151515;
+color:#fff;
+font-size:16px;
+outline:none;
+-webkit-appearance:none
+}
+
+.search input:focus{
+border-color:#777
+}
+
+.clear-search{
+position:absolute;
+right:8px;
+top:7px;
+width:36px;
+height:36px;
+border:0;
+border-radius:50%;
+background:#292929;
+color:#aaa;
+font-size:18px;
+display:none;
+align-items:center;
+justify-content:center
+}
+
+.clear-search.show{
+display:flex
+}
+
+.main-search{
+height:50px;
+padding:0 18px;
+border:0;
+border-radius:12px;
+background:#fff;
+color:#000;
+font-weight:900
+}
+
+.filters,
+.store-filters{
+display:flex;
+gap:8px;
+overflow:auto;
+margin-bottom:15px;
+scrollbar-width:none
+}
+
+.filters::-webkit-scrollbar,
+.store-filters::-webkit-scrollbar{
+display:none
+}
+
+.filter,
+.store-filter{
+padding:9px 14px;
+border:1px solid #333;
+border-radius:999px;
+background:#151515;
+color:#bbb;
+white-space:nowrap
+}
+
+.filter.active,
+.store-filter.active{
+background:#fff;
+color:#000;
+border-color:#fff
+}
+
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin:25px 0 14px
+}
+
+.section-title h2{
+font-size:20px;
+margin:0
+}
+
+.section-title span{
+font-size:12px;
+color:#777
+}
+
+.results-tools{
+display:flex;
+gap:8px;
+overflow:auto;
+margin:-3px 0 15px;
+scrollbar-width:none
+}
+
+.results-tools::-webkit-scrollbar{
+display:none
+}
+
+.sort-btn{
+height:36px;
+padding:0 12px;
+border:1px solid #333;
+border-radius:9px;
+background:#151515;
+color:#bbb;
+font-size:11px;
+font-weight:800;
+white-space:nowrap
+}
+
+.sort-btn.active{
+background:#fff;
+color:#000
+}
+
+.sort-btn[data-sort="saving"]{
+color:#9cffaa
+}
+
+.status{
+color:#888;
+margin:18px 0
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:15px;
+overflow:hidden;
+min-width:0;
+width:100%
+}
+
+.best{
+padding:9px 7px;
+background:linear-gradient(90deg,#d7ffdf,#fff);
+color:#071008;
+font-size:10px;
+font-weight:900;
+text-align:center;
+letter-spacing:.2px
+}
+
+.image{
+aspect-ratio:1;
+background:#191919;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden
+}
+
+.image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block
+}
+
+.image-fallback{
+font-size:11px;
+color:#666;
+text-align:center;
+padding:15px
+}
+
+.info{
+padding:12px
+}
+
+.brand{
+font-size:11px;
+color:#888;
+text-transform:uppercase;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
+}
+
+.name{
+margin-top:5px;
+font-weight:700;
+line-height:1.3;
+display:-webkit-box;
+-webkit-line-clamp:3;
+-webkit-box-orient:vertical;
+overflow:hidden
+}
+
+.saving{
+margin-top:8px;
+font-size:11px;
+color:#aaa;
+font-weight:800
+}
+
+.saving strong{
+color:#fff
+}
+
+.bottom{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:7px;
+margin-top:12px;
+min-width:0
+}
+
+.price{
+font-size:16px;
+font-weight:900;
+white-space:nowrap;
+min-width:0;
+overflow:hidden;
+text-overflow:ellipsis;
+flex:1
+}
+
+.actions{
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:4px;
+flex:0 0 auto;
+min-width:max-content
+}
+
+.favorite,
+.share{
+width:30px;
+height:30px;
+flex:0 0 30px;
+border:1px solid #333;
+border-radius:8px;
+background:#191919;
+color:#aaa;
+font-size:17px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0;
+margin:0;
+line-height:1;
+transition:.15s
+}
+
+.favorite.active{
+background:#fff!important;
+border-color:#fff!important;
+color:#000!important;
+box-shadow:0 0 8px rgba(255,255,255,.18)
+}
+
+.buy{
+display:flex;
+align-items:center;
+justify-content:center;
+width:42px;
+height:30px;
+flex:0 0 42px;
+padding:0;
+border-radius:8px;
+background:#fff;
+color:#000;
+text-decoration:none;
+font-size:10px;
+font-weight:900;
+white-space:nowrap;
+overflow:hidden
+}
+
+.favorite:active,
+.share:active,
+.buy:active{
+transform:scale(.94)
+}
+
+/* SCORE */
 
 .street-score{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  margin-top:9px;
-  padding:8px 9px;
-  border:1px solid #242424;
-  border-radius:10px;
-  background:linear-gradient(135deg,#151515,#0d0d0d)
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+margin-top:9px;
+padding:8px 9px;
+border:1px solid #242424;
+border-radius:10px;
+background:linear-gradient(135deg,#151515,#0d0d0d)
 }
 
 .street-score-main{
-  font-size:15px;
-  font-weight:900
+font-size:15px;
+font-weight:900
 }
 
 .street-score-main span{
-  color:#fff
+color:#fff
 }
 
 .street-score-label{
-  font-size:9px;
-  color:#888;
-  margin-top:2px
+font-size:9px;
+color:#888;
+margin-top:2px
 }
 
-.street-score-good{
-  color:#9cffb0!important
-}
-
-/* =========================
-   MEJOR PRECIO
-========================= */
-
-.best{
-  padding:9px 7px;
-  background:linear-gradient(90deg,#d7ffdf,#fff);
-  color:#071008;
-  font-size:10px;
-  font-weight:900;
-  text-align:center;
-  letter-spacing:.2px
-}
-
-/* =========================
-   TOP OFERTAS
-========================= */
+/* TOP OFERTAS */
 
 .top-offers{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:9px;
-  margin-bottom:20px
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:9px;
+margin-bottom:20px
 }
 
 .top-offer{
-  position:relative;
-  min-width:0;
-  padding:12px;
-  border:1px solid #292929;
-  border-radius:14px;
-  background:#101010;
-  overflow:hidden
+position:relative;
+min-width:0;
+padding:12px;
+border:1px solid #292929;
+border-radius:14px;
+background:#101010;
+overflow:hidden;
+color:#fff;
+text-align:left
 }
 
 .top-offer.first{
-  border-color:#555;
-  background:linear-gradient(145deg,#181818,#0d0d0d)
+border-color:#555;
+background:linear-gradient(145deg,#181818,#0d0d0d)
 }
 
 .top-rank{
-  font-size:18px;
-  margin-bottom:8px
+font-size:18px;
+margin-bottom:8px
 }
 
 .top-offer-title{
-  font-size:10px;
-  font-weight:900;
-  line-height:1.3;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden
+font-size:10px;
+font-weight:900;
+line-height:1.3;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden
 }
 
 .top-offer-price{
-  margin-top:8px;
-  font-size:15px;
-  font-weight:900
+margin-top:8px;
+font-size:15px;
+font-weight:900
 }
 
 .top-offer-saving{
-  margin-top:4px;
-  font-size:9px;
-  color:#8cff9d
+margin-top:4px;
+font-size:9px;
+color:#8cff9d
 }
 
-@media(max-width:520px){
-  .top-offers{
-    grid-template-columns:1fr
-  }
-
-  .top-offer{
-    display:grid;
-    grid-template-columns:34px 1fr auto;
-    align-items:center;
-    gap:8px
-  }
-
-  .top-rank{
-    margin:0
-  }
-
-  .top-offer-price{
-    margin:0
-  }
-}
-
-/* =========================
-   AUTOCOMPLETADO
-========================= */
+/* AUTOCOMPLETADO */
 
 .autocomplete{
-  position:absolute;
-  left:0;
-  right:0;
-  top:56px;
-  z-index:150;
-  display:none;
-  padding:6px;
-  border:1px solid #292929;
-  border-radius:12px;
-  background:#111;
-  box-shadow:0 15px 35px rgba(0,0,0,.5)
+position:absolute;
+left:0;
+right:0;
+top:56px;
+z-index:150;
+display:none;
+padding:6px;
+border:1px solid #292929;
+border-radius:12px;
+background:#111;
+box-shadow:0 15px 35px rgba(0,0,0,.5)
 }
 
 .autocomplete.show{
-  display:block
+display:block
 }
 
 .autocomplete-item{
-  width:100%;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px;
-  border:0;
-  border-radius:8px;
-  background:transparent;
-  color:#ddd;
-  text-align:left;
-  font-size:12px
+width:100%;
+display:flex;
+align-items:center;
+gap:10px;
+padding:11px;
+border:0;
+border-radius:8px;
+background:transparent;
+color:#ddd;
+text-align:left;
+font-size:12px
 }
 
-.autocomplete-item:active,
-.autocomplete-item:hover{
-  background:#202020
+.autocomplete-item:hover,
+.autocomplete-item:active{
+background:#202020
 }
 
-/* =========================
-   FILTRO TIENDAS
-========================= */
+/* HISTORIAL */
 
-.store-filters{
-  display:flex;
-  gap:7px;
-  overflow:auto;
-  margin:-4px 0 15px;
-  scrollbar-width:none
-}
-
-.store-filters::-webkit-scrollbar{
-  display:none
-}
-
-.store-filter{
-  padding:8px 11px;
-  border:1px solid #292929;
-  border-radius:999px;
-  background:#101010;
-  color:#888;
-  font-size:10px;
-  font-weight:800;
-  white-space:nowrap
-}
-
-.store-filter.active{
-  background:#222;
-  color:#fff;
-  border-color:#555
-}
-
-/* =========================
-   PRODUCT MODAL
-========================= */
-
-.product-modal{
-  position:fixed;
-  inset:0;
-  z-index:400;
-  display:none;
-  align-items:flex-end;
-  padding:10px;
-  background:rgba(0,0,0,.78)
-}
-
-.product-modal.show{
-  display:flex
-}
-
-.product-modal-card{
-  width:100%;
-  max-height:90vh;
-  overflow:auto;
-  border:1px solid #333;
-  border-radius:20px;
-  background:#111;
-  padding:14px
-}
-
-.product-modal-image{
-  width:100%;
-  aspect-ratio:1.15;
-  border-radius:15px;
-  overflow:hidden;
-  background:#191919
-}
-
-.product-modal-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.product-modal-info{
-  padding:14px 3px 5px
-}
-
-.product-modal-brand{
-  color:#888;
-  font-size:10px;
-  text-transform:uppercase
-}
-
-.product-modal-title{
-  margin-top:6px;
-  font-size:20px;
-  font-weight:900;
-  line-height:1.2
-}
-
-.product-modal-price{
-  margin-top:12px;
-  font-size:28px;
-  font-weight:900
-}
-
-.product-modal-saving{
-  margin-top:5px;
-  color:#9cffaa;
-  font-size:11px;
-  font-weight:900
-}
-
-.product-modal-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:15px
-}
-
-.product-modal-btn{
-  height:45px;
-  border:1px solid #333;
-  border-radius:11px;
-  background:#191919;
-  color:#fff;
-  font-weight:900
-}
-
-.product-modal-btn.primary{
-  background:#fff;
-  color:#000;
-  border-color:#fff
-}
-
-.product-modal-close{
-  position:absolute;
-  top:18px;
-  right:18px;
-  width:36px;
-  height:36px;
-  border:1px solid #444;
-  border-radius:50%;
-  background:#151515;
-  color:#fff;
-  font-size:20px;
-  z-index:2
-}
-
-/* =========================
-   FAVORITOS
-========================= */
-
-.favorite-summary{
-  display:flex;
-  gap:8px;
-  margin-bottom:15px
-}
-
-.favorite-stat{
-  flex:1;
-  padding:11px;
-  border:1px solid #252525;
-  border-radius:11px;
-  background:#0e0e0e
-}
-
-.favorite-stat strong{
-  display:block;
-  font-size:17px
-}
-
-.favorite-stat span{
-  display:block;
-  margin-top:3px;
-  color:#777;
-  font-size:9px
-}
-
-.price-drop{
-  margin-top:7px;
-  color:#8cff9d;
-  font-size:10px;
-  font-weight:900
-}
-
-/* =========================
-   ALERTAS
-========================= */
-
-.alert-progress{
-  margin-top:8px;
-  height:5px;
-  border-radius:99px;
-  background:#222;
-  overflow:hidden
-}
-
-.alert-progress div{
-  height:100%;
-  border-radius:99px;
-  background:#fff
-}
-
-.alert-reached{
-  margin-top:8px;
-  padding:8px;
-  border-radius:8px;
-  background:#102315;
-  color:#8cff9d;
-  font-size:10px;
-  font-weight:900
-}
-
-/* =========================
-   HISTORIAL
-========================= */
-
-.history-box{
-  margin-top:12px;
-  padding:12px;
-  border:1px solid #252525;
-  border-radius:12px;
-  background:#0b0b0b
+.history{
+margin-top:12px;
+padding:11px;
+border:1px solid #252525;
+border-radius:10px;
+background:#0b0b0b
 }
 
 .history-title{
-  font-size:11px;
-  font-weight:900
+font-size:10px;
+font-weight:900;
+color:#888;
+text-transform:uppercase;
+margin-bottom:7px
 }
 
-.history-line{
-  display:flex;
-  align-items:flex-end;
-  gap:4px;
-  height:70px;
-  margin-top:12px
+.history-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:11px;
+margin-top:5px;
+gap:8px
 }
 
-.history-bar{
-  flex:1;
-  min-width:4px;
-  border-radius:4px 4px 0 0;
-  background:#555
+.history-low{
+color:#aaa
 }
 
-.history-current{
-  background:#fff
+.history-loading{
+font-size:10px;
+color:#666
 }
 
-/* =========================
-   ORDENAR POR AHORRO
-========================= */
+/* FAVORITOS */
 
-.sort-btn[data-sort="saving"]{
-  color:#9cffaa
+.favorite-summary{
+display:flex;
+gap:8px;
+margin-bottom:15px
+}
+
+.favorite-stat{
+flex:1;
+padding:11px;
+border:1px solid #252525;
+border-radius:11px;
+background:#0e0e0e
+}
+
+.favorite-stat strong{
+display:block;
+font-size:17px
+}
+
+.favorite-stat span{
+display:block;
+margin-top:3px;
+color:#777;
+font-size:9px
+}
+
+/* ALERTAS */
+
+.alerts-section{
+margin-top:25px
+}
+
+.alert-item{
+padding:12px;
+margin-bottom:10px;
+border:1px solid #252525;
+border-radius:12px;
+background:#0e0e0e
+}
+
+.alert-item-title{
+font-size:12px;
+font-weight:900
+}
+
+.alert-item-price{
+margin-top:5px;
+font-size:11px;
+color:#aaa
+}
+
+.alert-progress{
+margin-top:8px;
+height:5px;
+border-radius:99px;
+background:#222;
+overflow:hidden
+}
+
+.alert-progress div{
+height:100%;
+border-radius:99px;
+background:#fff
+}
+
+.alert-reached{
+margin-top:8px;
+padding:8px;
+border-radius:8px;
+background:#102315;
+color:#8cff9d;
+font-size:10px;
+font-weight:900
+}
+
+.alert-delete{
+margin-top:8px;
+border:1px solid #333;
+border-radius:8px;
+background:#171717;
+color:#aaa;
+padding:6px 9px;
+font-size:9px
+}
+
+/* MODAL */
+
+.product-modal{
+position:fixed;
+inset:0;
+z-index:400;
+display:none;
+align-items:flex-end;
+padding:10px;
+background:rgba(0,0,0,.78)
+}
+
+.product-modal.show{
+display:flex
+}
+
+.product-modal-card{
+position:relative;
+width:100%;
+max-height:90vh;
+overflow:auto;
+border:1px solid #333;
+border-radius:20px;
+background:#111;
+padding:14px
+}
+
+.product-modal-image{
+width:100%;
+aspect-ratio:1.15;
+border-radius:15px;
+overflow:hidden;
+background:#191919
+}
+
+.product-modal-image img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.product-modal-info{
+padding:14px 3px 5px
+}
+
+.product-modal-brand{
+color:#888;
+font-size:10px;
+text-transform:uppercase
+}
+
+.product-modal-title{
+margin-top:6px;
+font-size:20px;
+font-weight:900;
+line-height:1.2
+}
+
+.product-modal-price{
+margin-top:12px;
+font-size:28px;
+font-weight:900
+}
+
+.product-modal-saving{
+margin-top:5px;
+color:#9cffaa;
+font-size:11px;
+font-weight:900
+}
+
+.product-modal-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:15px
+}
+
+.product-modal-btn{
+height:45px;
+border:1px solid #333;
+border-radius:11px;
+background:#191919;
+color:#fff;
+font-weight:900
+}
+
+.product-modal-btn.primary{
+background:#fff;
+color:#000;
+border-color:#fff
+}
+
+.product-modal-close{
+position:absolute;
+top:18px;
+right:18px;
+width:36px;
+height:36px;
+border:1px solid #444;
+border-radius:50%;
+background:#151515;
+color:#fff;
+font-size:20px;
+z-index:2
+}
+
+/* ESTADOS */
+
+.empty,
+.loading,
+.error-box{
+grid-column:1/-1;
+text-align:center;
+color:#777;
+padding:40px 15px
+}
+
+.retry{
+margin-top:15px;
+height:40px;
+padding:0 16px;
+border:1px solid #444;
+border-radius:10px;
+background:#171717;
+color:#fff;
+font-weight:800
+}
+
+.note{
+font-size:10px;
+color:#666;
+margin-top:15px;
+line-height:1.5
+}
+
+/* NAVEGACIÓN */
+
+.bottom-nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+z-index:100;
+display:flex;
+gap:6px;
+padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+background:rgba(10,10,10,.94);
+border-top:1px solid #252525;
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px)
+}
+
+.bottom-nav button{
+position:relative;
+flex:1;
+height:52px;
+border:0;
+border-radius:13px;
+background:transparent;
+color:#777;
+font-size:11px;
+font-weight:900
+}
+
+.bottom-nav button.active{
+background:#fff;
+color:#000
+}
+
+.nav-icon{
+display:block;
+font-size:20px;
+line-height:19px;
+margin-bottom:4px
+}
+
+.favorite-badge{
+position:absolute;
+top:5px;
+right:calc(50% - 28px);
+min-width:16px;
+height:16px;
+padding:0 4px;
+border-radius:99px;
+background:#fff;
+color:#000;
+font-size:9px;
+line-height:16px;
+display:none
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:calc(78px + env(safe-area-inset-bottom));
+transform:translate(-50%,15px);
+z-index:500;
+padding:10px 15px;
+border:1px solid #333;
+border-radius:10px;
+background:#181818;
+color:#fff;
+font-size:12px;
+font-weight:800;
+opacity:0;
+pointer-events:none;
+transition:.2s;
+white-space:nowrap
+}
+
+.toast.show{
+opacity:1;
+transform:translate(-50%,0)
+}
+
+@media(min-width:700px){
+.products{
+grid-template-columns:repeat(4,minmax(0,1fr))
+}
+}
+
+@media(max-width:520px){
+
+.search{
+flex-direction:column
+}
+
+.top-offers{
+grid-template-columns:1fr
+}
+
+.top-offer{
+display:grid;
+grid-template-columns:34px 1fr auto;
+align-items:center;
+gap:8px
+}
+
+.top-rank{
+margin:0
+}
+
+.top-offer-price{
+margin:0
+}
+
 }
 </style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+STREETFIND<span> V4</span>
+</div>
+
+<div class="tag">
+Streetwear · Sneakers · Precios
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+
+<h1>
+ENCUENTRA<br>
+EL MEJOR PRECIO.
+</h1>
+
+<p>
+Compara precios de sneakers, ropa y streetwear y encuentra la mejor oferta.
+</p>
+
+</section>
+
+<div class="search">
+
+<div class="search-box">
+
+<input
+id="q"
+type="search"
+inputmode="search"
+autocomplete="off"
+placeholder="Busca Jordan, Nike, hoodie..."
+aria-label="Buscar productos"
+>
+
+<button
+id="clearSearch"
+class="clear-search"
+type="button"
+aria-label="Borrar búsqueda">
+×
+</button>
+
+</div>
+
+<button
+id="go"
+class="main-search"
+type="button">
+BUSCAR
+</button>
+
+</div>
+
+<div class="filters">
+
+<button class="filter active" data-c="all" type="button">
+Todo
+</button>
+
+<button class="filter" data-c="sneakers" type="button">
+Zapatillas
+</button>
+
+<button class="filter" data-c="clothing" type="button">
+Ropa
+</button>
+
+<button class="filter" data-c="accessories" type="button">
+Accesorios
+</button>
+
+</div>
+
+<section id="homeSection">
+
+<div id="featuredSection">
+
+<div class="section-title">
+<h2>🔥 Mejores precios</h2>
+<span>Más baratos</span>
+</div>
+
+<section class="products" id="featuredProducts">
+
+<div class="loading">
+Buscando los mejores precios...
+</div>
+
+</section>
+
+</div>
+
+<div id="resultsSection" style="display:none">
+
+<div class="section-title">
+<h2>Resultados</h2>
+<span id="resultCount"></span>
+</div>
+
+<div class="results-tools">
+
+<button
+class="sort-btn active"
+data-sort="low"
+type="button">
+Precio ↑
+</button>
+
+<button
+class="sort-btn"
+data-sort="high"
+type="button">
+Precio ↓
+</button>
+
+<button
+class="sort-btn"
+data-sort="saving"
+type="button">
+Mayor ahorro
+</button>
+
+</div>
+
+<div
+id="streetStoreFilters"
+class="store-filters">
+
+<button
+class="store-filter active"
+data-store="all"
+type="button">
+Todas
+</button>
+
+<button
+class="store-filter"
+data-store="Nike"
+type="button">
+Nike
+</button>
+
+<button
+class="store-filter"
+data-store="Adidas"
+type="button">
+Adidas
+</button>
+
+<button
+class="store-filter"
+data-store="JD"
+type="button">
+JD
+</button>
+
+<button
+class="store-filter"
+data-store="Foot Locker"
+type="button">
+Foot Locker
+</button>
+
+<button
+class="store-filter"
+data-store="StockX"
+type="button">
+StockX
+</button>
+
+</div>
+
+<div class="status" id="status"></div>
+
+<section class="products" id="products">
+</section>
+
+<div class="note">
+* El ahorro se calcula comparando los precios encontrados en la búsqueda.
+</div>
+
+</div>
+
+</section>
+
+<section id="favoritesSection" style="display:none">
+
+<div class="section-title">
+
+<h2>
+❤️ Mis favoritos
+</h2>
+
+<span id="favoriteCount">
+0 productos
+</span>
+
+</div>
+
+<div
+id="streetFavoriteSummary"
+class="favorite-summary">
+
+<div class="favorite-stat">
+<strong id="streetFavTotal">0</strong>
+<span>Guardados</span>
+</div>
+
+<div class="favorite-stat">
+<strong id="streetFavDrops">0</strong>
+<span>Han bajado</span>
+</div>
+
+</div>
+
+<section class="products" id="favoriteProducts">
+</section>
+
+<div class="alerts-section">
+
+<div class="section-title">
+<h2>🔔 Mis alertas</h2>
+<span>Precios objetivo</span>
+</div>
+
+<div id="alertList"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<nav class="bottom-nav" aria-label="Navegación">
+
+<button id="bottomHome" class="active" type="button">
+
+<span class="nav-icon">
+⌂
+</span>
+
+Inicio
+
+</button>
+
+<button id="bottomSearch" type="button">
+
+<span class="nav-icon">
+⌕
+</span>
+
+Buscar
+
+</button>
+
+<button id="bottomFavorites" type="button">
+
+<span class="nav-icon">
+♡
+</span>
+
+Favoritos
+
+<span
+id="favoriteBadge"
+class="favorite-badge">
+0
+</span>
+
+</button>
+
+</nav>
+
+<div id="toast" class="toast"></div>
 
 <script>
-/* =========================================================
-   STREETFIND V4 — FEATURES PACK
-   Se añade sobre el código existente.
-========================================================= */
-
-(function(){
 
 "use strict";
+
+/* =========================
+   API
+========================= */
+
+const API=
+"https://streetfind-rose.vercel.app/api/search";
+
+const HISTORY_API=
+"https://streetfind-rose.vercel.app/api/history";
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const q=document.getElementById("q");
+const go=document.getElementById("go");
+const clearSearch=document.getElementById("clearSearch");
+
+const homeSection=document.getElementById("homeSection");
+const favoritesSection=document.getElementById("favoritesSection");
+
+const featuredSection=document.getElementById("featuredSection");
+const featuredProducts=document.getElementById("featuredProducts");
+
+const resultsSection=document.getElementById("resultsSection");
+const products=document.getElementById("products");
+
+const status=document.getElementById("status");
+const resultCount=document.getElementById("resultCount");
+
+const favoriteProducts=
+document.getElementById("favoriteProducts");
+
+const favoriteCount=
+document.getElementById("favoriteCount");
+
+const favoriteBadge=
+document.getElementById("favoriteBadge");
+
+const bottomHome=
+document.getElementById("bottomHome");
+
+const bottomSearch=
+document.getElementById("bottomSearch");
+
+const bottomFavorites=
+document.getElementById("bottomFavorites");
+
+const toast=document.getElementById("toast");
+
+const storeFilters=
+document.getElementById("streetStoreFilters");
+
+
+/* =========================
+   ESTADO
+========================= */
+
+let category="all";
+
+let sortMode="low";
+
+let favorites=[];
+
+let alerts=[];
+
+let lastResults=[];
+
+let currentFilteredResults=[];
+
+let searchInProgress=false;
+
+let searchController=null;
+
+let toastTimer=null;
+
+
+/* =========================
+   LOCAL STORAGE
+========================= */
+
+try{
+
+favorites=
+JSON.parse(
+localStorage.getItem(
+"streetfind_favorites"
+)||"[]"
+);
+
+if(!Array.isArray(favorites))
+favorites=[];
+
+}catch(e){
+
+favorites=[];
+
+}
+
+try{
+
+alerts=
+JSON.parse(
+localStorage.getItem(
+"streetfind_alerts"
+)||"[]"
+);
+
+if(!Array.isArray(alerts))
+alerts=[];
+
+}catch(e){
+
+alerts=[];
+
+}
+
 
 /* =========================
    HELPERS
 ========================= */
 
-function sfPrice(v){
-  if(v==null)return null;
+function esc(value){
 
-  const m=String(v).match(
-    /(\d{1,5}(?:[.,]\d{1,2})?)/
-  );
-
-  if(!m)return null;
-
-  let n=m[1];
-
-  if(n.includes(",")&&n.includes(".")){
-    n=n.lastIndexOf(",")>n.lastIndexOf(".")
-      ?n.replace(/\./g,"").replace(",",".")
-      :n.replace(/,/g,"");
-  }else{
-    n=n.replace(",",".");
-  }
-
-  const p=parseFloat(n);
-
-  return Number.isFinite(p)?p:null;
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 }
 
-function sfMoney(v){
-  return Number(v).toFixed(2).replace(".",",")+" €";
+
+function getPrice(value){
+
+if(value==null)
+return null;
+
+const match=
+String(value).match(
+/(\d{1,5}(?:[.,]\d{1,2})?)/
+);
+
+if(!match)
+return null;
+
+let number=match[1];
+
+if(
+number.includes(",")&&
+number.includes(".")
+){
+
+if(
+number.lastIndexOf(",")>
+number.lastIndexOf(".")
+){
+
+number=
+number
+.replace(/\./g,"")
+.replace(",",".")
+;
+
+}else{
+
+number=
+number.replace(/,/g,"");
+
 }
 
-function sfKey(p){
-  return String(
-    p?.product_link||
-    p?.title||
-    ""
-  );
+}else{
+
+number=
+number.replace(",",".");
 }
 
-function sfScore(p,list){
+const price=parseFloat(number);
 
-  const price=sfPrice(p.price);
-
-  if(price==null)return 50;
-
-  const prices=list
-    .map(x=>sfPrice(x.price))
-    .filter(x=>x!=null);
-
-  if(!prices.length)return 50;
-
-  const min=Math.min(...prices);
-  const max=Math.max(...prices);
-
-  if(max===min)return 90;
-
-  const priceScore=
-    100-((price-min)/(max-min))*60;
-
-  let score=Math.round(
-    Math.max(0,Math.min(100,priceScore))
-  );
-
-  if(p.old_price){
-
-    const old=sfPrice(p.old_price);
-
-    if(old&&old>price){
-
-      const discount=
-        ((old-price)/old)*100;
-
-      score+=Math.min(15,discount*.35);
-    }
-  }
-
-  return Math.round(
-    Math.max(0,Math.min(100,score))
-  );
+return Number.isFinite(price)
+?price
+:null;
 }
 
-function sfSaving(p,list){
 
-  const price=sfPrice(p.price);
+function money(value){
 
-  const prices=list
-    .map(x=>sfPrice(x.price))
-    .filter(x=>x!=null);
-
-  if(price==null||prices.length<2)return null;
-
-  const high=Math.max(...prices);
-
-  if(high<=price)return null;
-
-  return {
-    amount:high-price,
-    percent:((high-price)/high)*100
-  };
+return Number(value)
+.toFixed(2)
+.replace(".",",")+" €";
 }
+
+
+function productKey(product){
+
+return String(
+product?.product_link||
+product?.title||
+""
+);
+
+}
+
+
+function getProductUrl(product){
+
+return product?.product_link||
+product?.link||
+"#";
+}
+
 
 /* =========================
-   TOP OFFERS
+   SCORE
+========================= */
+
+function streetScore(product,list){
+
+const price=getPrice(product.price);
+
+if(price===null)
+return 50;
+
+const prices=list
+.map(item=>getPrice(item.price))
+.filter(price=>price!==null);
+
+if(!prices.length)
+return 50;
+
+const min=Math.min(...prices);
+const max=Math.max(...prices);
+
+if(max===min)
+return 90;
+
+let score=
+100-
+((price-min)/(max-min))*60;
+
+const old=getPrice(product.old_price);
+
+if(
+old!==null&&
+old>price
+){
+
+const discount=
+((old-price)/old)*100;
+
+score+=Math.min(
+15,
+discount*.35
+);
+
+}
+
+return Math.round(
+Math.max(
+0,
+Math.min(100,score)
+)
+);
+}
+
+
+function scoreText(score){
+
+if(score>=90)
+return "Oferta excelente";
+
+if(score>=75)
+return "Muy buena oferta";
+
+if(score>=60)
+return "Buena oferta";
+
+return "Precio normal";
+}
+
+
+function scoreHTML(product,list){
+
+const score=
+streetScore(product,list);
+
+return `
+<div class="street-score">
+
+<div>
+<div class="street-score-main">
+🔥 <span>${score}/100</span>
+</div>
+
+<div class="street-score-label">
+StreetFind Score
+</div>
+</div>
+
+<div class="street-score-label">
+${scoreText(score)}
+</div>
+
+</div>
+`;
+
+}
+
+
+/* =========================
+   AHORRO
+========================= */
+
+function savingFor(product,list){
+
+const price=getPrice(product.price);
+
+const prices=list
+.map(item=>getPrice(item.price))
+.filter(price=>price!==null);
+
+if(
+price===null||
+prices.length<2
+)
+return null;
+
+const highest=Math.max(...prices);
+
+if(highest<=price)
+return null;
+
+const amount=
+highest-price;
+
+return {
+amount,
+percent:
+(amount/highest)*100
+};
+
+}
+
+
+/* =========================
+   FAVORITOS
+========================= */
+
+function isFavorite(product){
+
+const key=productKey(product);
+
+return !!key&&
+favorites.some(
+item=>productKey(item)===key
+);
+
+}
+
+
+function saveFavorites(){
+
+try{
+
+localStorage.setItem(
+"streetfind_favorites",
+JSON.stringify(favorites)
+);
+
+}catch(e){}
+
+updateFavoriteCounter();
+
+}
+
+
+function updateFavoriteCounter(){
+
+const count=favorites.length;
+
+favoriteCount.textContent=
+count+
+(count===1
+?" producto"
+:" productos");
+
+favoriteBadge.textContent=count;
+
+favoriteBadge.style.display=
+count>0
+?"block"
+:"none";
+
+const total=
+document.getElementById(
+"streetFavTotal"
+);
+
+if(total)
+total.textContent=count;
+
+let drops=0;
+
+favorites.forEach(product=>{
+
+const current=getPrice(product.price);
+const old=getPrice(product.old_price);
+
+if(
+current!==null&&
+old!==null&&
+current<old
+)
+drops++;
+
+});
+
+const dropsElement=
+document.getElementById(
+"streetFavDrops"
+);
+
+if(dropsElement)
+dropsElement.textContent=drops;
+
+}
+
+
+function toggleFavorite(product,button){
+
+const key=productKey(product);
+
+if(!key)
+return;
+
+const index=
+favorites.findIndex(
+item=>productKey(item)===key
+);
+
+if(index>=0){
+
+favorites.splice(index,1);
+
+showToast(
+"Eliminado de favoritos"
+);
+
+}else{
+
+favorites.push(product);
+
+showToast(
+"Añadido a favoritos"
+);
+
+}
+
+saveFavorites();
+
+renderFavorites();
+
+updateFavoriteButtons();
+
+if(
+button
+){
+
+const active=
+isFavorite(product);
+
+button.classList.toggle(
+"active",
+active
+);
+
+button.innerHTML=
+active?"♥":"♡";
+
+}
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+toast.textContent=message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer=
+setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+1800
+);
+
+}
+
+
+/* =========================
+   HISTORIAL
+========================= */
+
+async function loadHistory(product){
+
+const key=
+productKey(product);
+
+if(!key)
+return null;
+
+try{
+
+const response=
+await fetch(
+HISTORY_API+
+"?product_key="+
+encodeURIComponent(key),
+{
+cache:"no-store"
+}
+);
+
+if(!response.ok)
+return null;
+
+const data=
+await response.json();
+
+return Array.isArray(
+data.history
+)
+?data.history
+:null;
+
+}catch(e){
+
+return null;
+
+}
+
+}
+
+
+function historyHTML(history){
+
+if(!history){
+
+return `
+<div class="history">
+
+<div class="history-title">
+📊 Historial de precio
+</div>
+
+<div class="history-loading">
+Historial no disponible todavía.
+</div>
+
+</div>
+`;
+
+}
+
+if(!history.length){
+
+return `
+<div class="history">
+
+<div class="history-title">
+📊 Historial de precio
+</div>
+
+<div class="history-loading">
+Aún no hay historial suficiente.
+</div>
+
+</div>
+`;
+
+}
+
+const prices=
+history
+.map(item=>Number(item.price))
+.filter(
+price=>Number.isFinite(price)
+);
+
+if(!prices.length)
+return "";
+
+const current=
+prices[prices.length-1];
+
+const lowest=
+Math.min(...prices);
+
+return `
+<div class="history">
+
+<div class="history-title">
+📊 Historial de precio
+</div>
+
+<div class="history-row">
+<span>Ahora</span>
+<strong>${money(current)}</strong>
+</div>
+
+<div class="history-row">
+<span class="history-low">
+Mínimo registrado
+</span>
+
+<strong>${money(lowest)}</strong>
+</div>
+
+</div>
+`;
+
+}
+
+
+async function addHistoryToCard(card,product){
+
+const container=
+card.querySelector(
+".history-container"
+);
+
+if(!container)
+return;
+
+const history=
+await loadHistory(product);
+
+container.innerHTML=
+historyHTML(history);
+
+}
+
+
+/* =========================
+   COMPARTIR
+========================= */
+
+async function shareProduct(product){
+
+const title=
+product.title||
+"Producto en StreetFind";
+
+const price=
+product.price||
+"";
+
+const url=
+getProductUrl(product);
+
+const text=
+`${title}${price?" · "+price:""}
+Encontrado en StreetFind`;
+
+try{
+
+if(navigator.share){
+
+await navigator.share({
+title:"StreetFind",
+text,
+url
+});
+
+}else if(
+navigator.clipboard
+){
+
+await navigator.clipboard.writeText(
+`${text}
+${url}`
+);
+
+showToast(
+"Enlace copiado"
+);
+
+}
+
+}catch(e){}
+
+}
+
+
+/* =========================
+   TARJETA
+========================= */
+
+function productHTML(
+product,
+best=false,
+saving=null,
+scoreList=[]
+){
+
+const favorite=
+isFavorite(product);
+
+let imageHTML="";
+
+if(product.thumbnail){
+
+imageHTML=`
+
+<img
+src="${esc(product.thumbnail)}"
+alt="${esc(product.title||"Producto")}"
+loading="lazy"
+onerror="
+this.style.display='none';
+this.nextElementSibling.style.display='block';
+">
+
+<div
+class="image-fallback"
+style="display:none">
+Imagen no disponible
+</div>
+`;
+
+}else{
+
+imageHTML=`
+<div class="image-fallback">
+Sin imagen
+</div>
+`;
+
+}
+
+let savingHTML="";
+
+if(
+saving&&
+saving.amount>0
+){
+
+savingHTML=`
+
+<div class="saving">
+Ahorras
+<strong>${money(saving.amount)}</strong>
+· ${saving.percent.toFixed(0)}%
+</div>
+`;
+
+}
+
+return `
+
+<article
+class="card"
+data-product-key="${esc(productKey(product))}">
+
+${best?`
+<div class="best">
+🟢 MEJOR PRECIO
+</div>
+`:""}
+
+<div class="image">
+${imageHTML}
+</div>
+
+<div class="info">
+
+<div class="brand">
+${esc(product.source||"Tienda")}
+</div>
+
+<div class="name">
+${esc(product.title||"Producto")}
+</div>
+
+${savingHTML}
+
+${scoreHTML(product,scoreList)}
+
+<div class="history-container">
+
+<div class="history">
+
+<div class="history-loading">
+Cargando historial...
+</div>
+
+</div>
+
+</div>
+
+<div class="bottom">
+
+<div class="price">
+${esc(
+product.price||
+"Precio no disponible"
+)}
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="favorite ${favorite?"active":""}"
+aria-label="${favorite
+?"Quitar de favoritos"
+:"Añadir a favoritos"}"
+data-product="${encodeURIComponent(
+JSON.stringify(product)
+)}">
+${favorite?"♥":"♡"}
+</button>
+
+<button
+type="button"
+class="share"
+aria-label="Compartir producto"
+data-share-product="${encodeURIComponent(
+JSON.stringify(product)
+)}">
+↗
+</button>
+
+<a
+class="buy"
+href="${esc(getProductUrl(product))}"
+target="_blank"
+rel="noopener noreferrer">
+VER
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+`;
+
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+function updateFavoriteButtons(){
+
+document
+.querySelectorAll(".favorite")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+try{
+
+const product=
+JSON.parse(
+decodeURIComponent(
+button.dataset.product
+)
+);
+
+toggleFavorite(
+product,
+button
+);
+
+}catch(e){}
+
+};
+
+});
+
+
+document
+.querySelectorAll(".share")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+try{
+
+const product=
+JSON.parse(
+decodeURIComponent(
+button.dataset.shareProduct
+)
+);
+
+shareProduct(product);
+
+}catch(e){}
+
+};
+
+});
+
+}
+
+
+/* =========================
+   HISTORIALES
+========================= */
+
+async function loadHistories(
+container,
+list
+){
+
+const cards=
+Array.from(
+container.querySelectorAll(".card")
+);
+
+await Promise.all(
+cards.map(
+(card,index)=>
+addHistoryToCard(
+card,
+list[index]
+)
+)
+);
+
+}
+
+
+/* =========================
+   ORDEN
+========================= */
+
+function sortProducts(list){
+
+return [...list].sort(
+(a,b)=>{
+
+if(sortMode==="saving"){
+
+const sa=
+savingFor(a,list)?.amount||0;
+
+const sb=
+savingFor(b,list)?.amount||0;
+
+return sb-sa;
+
+}
+
+const pa=getPrice(a.price);
+const pb=getPrice(b.price);
+
+if(pa===null&&pb===null)
+return 0;
+
+if(pa===null)
+return 1;
+
+if(pb===null)
+return -1;
+
+return sortMode==="low"
+?pa-pb
+:pb-pa;
+
+}
+);
+
+}
+
+
+/* =========================
+   DESTACADOS
 ========================= */
 
 function renderTopOffers(list){
 
-  let section=document.getElementById(
-    "streetTopOffers"
-  );
-
-  if(!section){
-
-    section=document.createElement("div");
-
-    section.id="streetTopOffers";
-
-    section.innerHTML=`
-      <div class="section-title">
-        <h2>🔥 Top ofertas</h2>
-        <span>Las mejores oportunidades</span>
-      </div>
-
-      <div class="top-offers" id="streetTopOffersList"></div>
-    `;
-
-    const featured=document.getElementById(
-      "featuredSection"
-    );
-
-    featured.insertBefore(
-      section,
-      featured.firstChild
-    );
-  }
-
-  const container=document.getElementById(
-    "streetTopOffersList"
-  );
-
-  const usable=list
-    .filter(p=>sfPrice(p.price)!=null)
-    .sort((a,b)=>sfPrice(a.price)-sfPrice(b.price))
-    .slice(0,3);
-
-  container.innerHTML="";
-
-  usable.forEach((p,i)=>{
-
-    const saving=sfSaving(p,list);
-
-    const el=document.createElement("button");
-
-    el.type="button";
-    el.className=
-      "top-offer"+
-      (i===0?" first":"");
-
-    el.innerHTML=`
-      <div class="top-rank">
-        ${i===0?"🥇":i===1?"🥈":"🥉"}
-      </div>
-
-      <div>
-        <div class="top-offer-title">
-          ${esc(p.title||"Producto")}
-        </div>
-
-        ${
-          saving
-            ?`
-              <div class="top-offer-saving">
-                Ahorras ${sfMoney(saving.amount)}
-              </div>
-            `
-            :""
-        }
-      </div>
-
-      <div class="top-offer-price">
-        ${esc(p.price||"—")}
-      </div>
-    `;
-
-    el.onclick=()=>openStreetProduct(p,list);
-
-    container.appendChild(el);
-  });
-}
-
-/* =========================
-   SCORE + SAVING
-========================= */
-
-function injectScore(p,list){
-
-  const score=sfScore(p,list);
-
-  return `
-    <div class="street-score">
-
-      <div>
-        <div class="street-score-main">
-          🔥 <span>${score}/100</span>
-        </div>
-
-        <div class="street-score-label">
-          StreetFind Score
-        </div>
-      </div>
-
-      <div class="street-score-label">
-        ${
-          score>=90
-            ?"Oferta excelente"
-            :score>=75
-              ?"Muy buena oferta"
-              :score>=60
-                ?"Buena oferta"
-                :"Precio normal"
-        }
-      </div>
-
-    </div>
-  `;
-}
-
-/* =========================
-   AUTOCOMPLETE
-========================= */
-
-const searchBox=document.querySelector(".search-box");
-
-if(searchBox&&!document.getElementById("streetAutocomplete")){
-
-  const ac=document.createElement("div");
-
-  ac.id="streetAutocomplete";
-  ac.className="autocomplete";
-
-  searchBox.appendChild(ac);
-
-  const suggestions=[
-    "Jordan 4 Retro",
-    "Jordan 4 Military Black",
-    "Jordan 4 White Cement",
-    "Nike Air Force 1",
-    "Nike Dunk Low",
-    "Nike Air Max 1",
-    "Adidas Samba",
-    "Adidas Campus",
-    "New Balance 550",
-    "New Balance 9060",
-    "hoodie streetwear",
-    "cargo pants",
-    "streetwear t-shirt"
-  ];
-
-  q.addEventListener("input",()=>{
-
-    const term=q.value.trim().toLowerCase();
-
-    if(!term){
-      ac.classList.remove("show");
-      return;
-    }
-
-    const matches=suggestions
-      .filter(x=>x.toLowerCase().includes(term))
-      .slice(0,5);
-
-    ac.innerHTML="";
-
-    matches.forEach(text=>{
-
-      const b=document.createElement("button");
-
-      b.type="button";
-      b.className="autocomplete-item";
-      b.innerHTML=`🔎 ${esc(text)}`;
-
-      b.onclick=()=>{
-
-        q.value=text;
-        clearSearch.classList.add("show");
-        ac.classList.remove("show");
-        search();
-
-      };
-
-      ac.appendChild(b);
-    });
-
-    ac.classList.toggle(
-      "show",
-      matches.length>0
-    );
-
-  });
-
-  document.addEventListener("click",e=>{
-
-    if(!searchBox.contains(e.target))
-      ac.classList.remove("show");
-
-  });
-}
-
-/* =========================
-   STORE FILTERS
-========================= */
-
-const resultsSectionEl=
-  document.getElementById("resultsSection");
-
-if(resultsSectionEl&&!document.getElementById("streetStoreFilters")){
-
-  const wrap=document.createElement("div");
-
-  wrap.id="streetStoreFilters";
-  wrap.className="store-filters";
-
-  wrap.innerHTML=`
-    <button class="store-filter active" data-store="all">
-      Todas las tiendas
-    </button>
-
-    <button class="store-filter" data-store="Nike">
-      Nike
-    </button>
-
-    <button class="store-filter" data-store="Adidas">
-      Adidas
-    </button>
-
-    <button class="store-filter" data-store="JD">
-      JD
-    </button>
-
-    <button class="store-filter" data-store="Foot Locker">
-      Foot Locker
-    </button>
-
-    <button class="store-filter" data-store="StockX">
-      StockX
-    </button>
-  `;
-
-  const tools=resultsSectionEl.querySelector(
-    ".results-tools"
-  );
-
-  tools.after(wrap);
-
-  wrap.querySelectorAll(".store-filter")
-    .forEach(btn=>{
-
-      btn.onclick=()=>{
-
-        wrap.querySelectorAll(
-          ".store-filter"
-        ).forEach(x=>
-          x.classList.remove("active")
-        );
-
-        btn.classList.add("active");
-
-        const store=btn.dataset.store;
-
-        let list=[...lastResults];
-
-        if(store!=="all"){
-
-          list=list.filter(p=>
-            String(p.source||"")
-              .toLowerCase()
-              .includes(store.toLowerCase())
-          );
-        }
-
-        renderResults(list);
-      };
-
-    });
-}
-
-/* =========================
-   SORT — MAYOR AHORRO
-========================= */
-
-const sortTools=document.querySelector(
-  ".results-tools"
+let section=
+document.getElementById(
+"streetTopOffers"
 );
 
-if(sortTools&&!sortTools.querySelector(
-  '[data-sort="saving"]'
-)){
+if(!section){
 
-  const b=document.createElement("button");
+section=
+document.createElement("div");
 
-  b.className="sort-btn";
-  b.dataset.sort="saving";
-  b.type="button";
-  b.textContent="Mayor ahorro";
+section.id=
+"streetTopOffers";
 
-  sortTools.appendChild(b);
+section.innerHTML=`
 
-  b.onclick=()=>{
+<div class="section-title">
 
-    sortTools.querySelectorAll(
-      ".sort-btn"
-    ).forEach(x=>
-      x.classList.remove("active")
-    );
+<h2>
+🔥 Top ofertas
+</h2>
 
-    b.classList.add("active");
+<span>
+Las mejores oportunidades
+</span>
 
-    sortMode="saving";
+</div>
 
-    if(lastResults.length)
-      renderResults(lastResults);
-  };
-}
+<div
+class="top-offers"
+id="streetTopOffersList">
+</div>
 
-/* =========================
-   PRODUCT MODAL
-========================= */
+`;
 
-function ensureModal(){
-
-  if(document.getElementById(
-    "streetProductModal"
-  ))return;
-
-  const modal=document.createElement("div");
-
-  modal.id="streetProductModal";
-  modal.className="product-modal";
-
-  modal.innerHTML=`
-    <button
-      class="product-modal-close"
-      id="streetProductClose">
-      ×
-    </button>
-
-    <div class="product-modal-card">
-
-      <div
-        id="streetProductImage"
-        class="product-modal-image">
-      </div>
-
-      <div class="product-modal-info">
-
-        <div
-          id="streetProductBrand"
-          class="product-modal-brand">
-        </div>
-
-        <div
-          id="streetProductTitle"
-          class="product-modal-title">
-        </div>
-
-        <div
-          id="streetProductPrice"
-          class="product-modal-price">
-        </div>
-
-        <div
-          id="streetProductSaving"
-          class="product-modal-saving">
-        </div>
-
-        <div id="streetProductScore"></div>
-
-        <div
-          id="streetProductHistory"
-          class="history-box">
-        </div>
-
-        <div class="product-modal-actions">
-
-          <button
-            id="streetProductFav"
-            class="product-modal-btn">
-            ♡ Favorito
-          </button>
-
-          <button
-            id="streetProductAlert"
-            class="product-modal-btn">
-            🔔 Crear alerta
-          </button>
-
-          <a
-            id="streetProductBuy"
-            class="product-modal-btn primary"
-            style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;text-decoration:none"
-            target="_blank"
-            rel="noopener noreferrer">
-            VER OFERTA
-          </a>
-
-        </div>
-
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  document.getElementById(
-    "streetProductClose"
-  ).onclick=closeStreetProduct;
-
-  modal.addEventListener("click",e=>{
-
-    if(e.target===modal)
-      closeStreetProduct();
-
-  });
-}
-
-let streetModalProduct=null;
-let streetModalList=[];
-
-function openStreetProduct(p,list=[]){
-
-  ensureModal();
-
-  streetModalProduct=p;
-  streetModalList=list;
-
-  const modal=document.getElementById(
-    "streetProductModal"
-  );
-
-  const image=document.getElementById(
-    "streetProductImage"
-  );
-
-  image.innerHTML=p.thumbnail
-    ?`
-      <img
-        src="${esc(p.thumbnail)}"
-        alt="${esc(p.title||"Producto")}">
-    `
-    :`
-      <div class="image-fallback">
-        Sin imagen
-      </div>
-    `;
-
-  document.getElementById(
-    "streetProductBrand"
-  ).textContent=p.source||"Tienda";
-
-  document.getElementById(
-    "streetProductTitle"
-  ).textContent=p.title||"Producto";
-
-  document.getElementById(
-    "streetProductPrice"
-  ).textContent=p.price||"Precio no disponible";
-
-  const saving=sfSaving(p,list);
-
-  document.getElementById(
-    "streetProductSaving"
-  ).textContent=saving
-    ?`Ahorras ${sfMoney(saving.amount)} · ${saving.percent.toFixed(0)}%`
-    :"";
-
-  document.getElementById(
-    "streetProductScore"
-  ).innerHTML=
-    injectScore(p,list);
-
-  document.getElementById(
-    "streetProductBuy"
-  ).href=getProductUrl(p);
-
-  document.getElementById(
-    "streetProductFav"
-  ).textContent=
-    isFavorite(p)
-      ?"♥ Favorito"
-      :"♡ Favorito";
-
-  document.getElementById(
-    "streetProductFav"
-  ).onclick=()=>{
-
-    toggleFavorite(p);
-
-    document.getElementById(
-      "streetProductFav"
-    ).textContent=
-      isFavorite(p)
-        ?"♥ Favorito"
-        :"♡ Favorito";
-  };
-
-  document.getElementById(
-    "streetProductAlert"
-  ).onclick=()=>{
-
-    closeStreetProduct();
-    openAlert(p);
-
-  };
-
-  renderStreetHistory(p,list);
-
-  modal.classList.add("show");
+featuredSection.insertBefore(
+section,
+featuredSection.firstChild
+);
 
 }
 
-function closeStreetProduct(){
+const container=
+document.getElementById(
+"streetTopOffersList"
+);
 
-  const modal=document.getElementById(
-    "streetProductModal"
-  );
+if(!container)
+return;
 
-  if(modal)
-    modal.classList.remove("show");
+const usable=
+list
+.filter(
+product=>
+getPrice(product.price)!==null
+)
+.sort(
+(a,b)=>
+getPrice(a.price)-
+getPrice(b.price)
+)
+.slice(0,3);
 
-  streetModalProduct=null;
+container.innerHTML="";
+
+usable.forEach(
+(product,index)=>{
+
+const saving=
+savingFor(product,list);
+
+const button=
+document.createElement("button");
+
+button.type="button";
+
+button.className=
+"top-offer"+
+(index===0?" first":"");
+
+button.innerHTML=`
+
+<div class="top-rank">
+${index===0?"🥇":
+index===1?"🥈":"🥉"}
+</div>
+
+<div>
+
+<div class="top-offer-title">
+${esc(product.title||"Producto")}
+</div>
+
+${
+saving
+?`
+<div class="top-offer-saving">
+Ahorras ${money(saving.amount)}
+</div>
+`
+:""
 }
 
-function renderStreetHistory(p,list){
+</div>
 
-  const el=document.getElementById(
-    "streetProductHistory"
-  );
+<div class="top-offer-price">
+${esc(product.price||"—")}
+</div>
+`;
 
-  if(!el)return;
+button.onclick=
+()=>openStreetProduct(
+product,
+list
+);
 
-  const prices=list
-    .map(x=>sfPrice(x.price))
-    .filter(x=>x!=null);
-
-  if(!prices.length){
-
-    el.innerHTML=`
-      <div class="history-title">
-        📉 Historial de precios
-      </div>
-
-      <div style="margin-top:8px;color:#666;font-size:10px">
-        Todavía no hay suficientes datos.
-      </div>
-    `;
-
-    return;
-  }
-
-  const min=Math.min(...prices);
-  const max=Math.max(...prices);
-
-  const bars=prices
-    .slice(0,10)
-    .map(price=>{
-
-      const height=max===min
-        ?55
-        :20+((price-min)/(max-min))*45;
-
-      return `
-        <div
-          class="history-bar ${
-            price===sfPrice(p.price)
-              ?"history-current"
-              :""
-          }"
-          style="height:${height}%">
-        </div>
-      `;
-    })
-    .join("");
-
-  el.innerHTML=`
-    <div class="history-title">
-      📉 Comparación de precios
-    </div>
-
-    <div class="history-line">
-      ${bars}
-    </div>
-
-    <div style="display:flex;justify-content:space-between;margin-top:7px;color:#666;font-size:9px">
-      <span>Más barato ${sfMoney(min)}</span>
-      <span>Más caro ${sfMoney(max)}</span>
-    </div>
-  `;
-}
-
-/* =========================
-   ABRIR PRODUCTO AL TOCAR
-========================= */
-
-document.addEventListener("click",e=>{
-
-  const card=e.target.closest(".card");
-
-  if(!card)return;
-
-  if(
-    e.target.closest(
-      "button,a,.favorite,.share"
-    )
-  )return;
-
-  const fav=card.querySelector(
-    ".favorite"
-  );
-
-  if(!fav)return;
-
-  try{
-
-    const p=JSON.parse(
-      decodeURIComponent(
-        fav.dataset.product
-      )
-    );
-
-    openStreetProduct(
-      p,
-      lastResults.length
-        ?lastResults
-        :favorites
-    );
-
-  }catch(err){}
+container.appendChild(button);
 
 });
 
-/* =========================
-   REEMPLAZAR PRODUCT RENDER
-========================= */
+}
 
-const originalProductHTML=
-  window.productHTML;
-
-window.productHTML=function(
-  p,
-  best=false,
-  saving=null
-){
-
-  const html=originalProductHTML
-    ?originalProductHTML(
-      p,
-      best,
-      saving
-    )
-    :"";
-
-  return html.replace(
-    "</div>\n\n        ${storeInfo",
-    "</div>"
-  );
-};
 
 /* =========================
-   SCORE EN TARJETAS
+   RENDER DESTACADOS
 ========================= */
 
-const originalRenderResults=
-  window.renderResults;
+function renderFeatured(list){
 
-window.renderResults=function(list){
+featuredProducts.innerHTML="";
 
-  if(
-    typeof originalRenderResults===
-    "function"
-  ){
+renderTopOffers(list);
 
-    originalRenderResults(list);
+if(!list.length){
 
-    setTimeout(()=>{
+featuredProducts.innerHTML=`
 
-      document.querySelectorAll(
-        "#products .card"
-      ).forEach(card=>{
+<div class="empty">
+No hay productos disponibles.
+</div>
+`;
 
-        const fav=card.querySelector(
-          ".favorite"
-        );
+return;
 
-        if(!fav)return;
+}
 
-        try{
+const sorted=
+sortProducts(list).slice(0,8);
 
-          const p=JSON.parse(
-            decodeURIComponent(
-              fav.dataset.product
-            )
-          );
+sorted.forEach(
+(product,index)=>{
 
-          const info=card.querySelector(
-            ".info"
-          );
+featuredProducts.insertAdjacentHTML(
+"beforeend",
 
-          if(
-            info&&
-            !info.querySelector(
-              ".street-score"
-            )
-          ){
+productHTML(
+product,
+index===0&&
+getPrice(product.price)!==null,
+savingFor(product,list),
+list
+)
 
-            info.insertAdjacentHTML(
-              "beforeend",
-              injectScore(
-                p,
-                list
-              )
-            );
-          }
+);
 
-        }catch(e){}
+});
 
-      });
+updateFavoriteButtons();
 
-    },0);
-  }
-};
+loadHistories(
+featuredProducts,
+sorted
+);
+
+}
+
 
 /* =========================
-   SCORE EN DESTACADOS
+   RENDER RESULTADOS
 ========================= */
 
-const originalRenderFeatured=
-  window.renderFeatured;
+function renderResults(list){
 
-window.renderFeatured=function(list){
+products.innerHTML="";
 
-  if(
-    typeof originalRenderFeatured===
-    "function"
-  ){
+if(!list.length){
 
-    originalRenderFeatured(list);
+products.innerHTML=`
 
-    renderTopOffers(list);
+<div class="empty">
 
-    setTimeout(()=>{
+No encontramos productos.
 
-      document.querySelectorAll(
-        "#featuredProducts .card"
-      ).forEach(card=>{
+<br><br>
 
-        const fav=card.querySelector(
-          ".favorite"
-        );
+Prueba otra búsqueda.
 
-        if(!fav)return;
+</div>
+`;
 
-        try{
+return;
 
-          const p=JSON.parse(
-            decodeURIComponent(
-              fav.dataset.product
-            )
-          );
+}
 
-          const info=card.querySelector(
-            ".info"
-          );
+const sorted=
+sortProducts(list);
 
-          if(info){
+const prices=
+sorted
+.map(product=>getPrice(product.price))
+.filter(price=>price!==null);
 
-            info.insertAdjacentHTML(
-              "beforeend",
-              injectScore(p,list)
-            );
-          }
+const lowest=
+prices.length
+?Math.min(...prices)
+:null;
 
-        }catch(e){}
+sorted.forEach(product=>{
 
-      });
+const price=
+getPrice(product.price);
 
-    },0);
-  }
-};
+const best=
+price!==null&&
+lowest!==null&&
+price===lowest;
+
+products.insertAdjacentHTML(
+"beforeend",
+
+productHTML(
+product,
+best,
+savingFor(product,list),
+list
+)
+
+);
+
+});
+
+updateFavoriteButtons();
+
+loadHistories(
+products,
+sorted
+);
+
+}
+
 
 /* =========================
-   FAVORITOS CON RESUMEN
+   FAVORITOS
 ========================= */
 
-const favSection=document.getElementById(
-  "favoritesSection"
+function renderFavorites(){
+
+favoriteProducts.innerHTML="";
+
+updateFavoriteCounter();
+
+if(!favorites.length){
+
+favoriteProducts.innerHTML=`
+
+<div class="empty">
+
+❤️
+
+<br><br>
+
+Todavía no tienes favoritos.
+
+<br><br>
+
+Pulsa ♡ en cualquier producto
+para guardarlo aquí.
+
+</div>
+`;
+
+renderAlerts();
+
+return;
+
+}
+
+favorites.forEach(product=>{
+
+favoriteProducts.insertAdjacentHTML(
+"beforeend",
+productHTML(
+product,
+false,
+null,
+favorites
+)
+);
+
+});
+
+updateFavoriteButtons();
+
+loadHistories(
+favoriteProducts,
+favorites
+);
+
+renderAlerts();
+
+}
+
+
+/* =========================
+   ALERTAS
+========================= */
+
+function saveAlerts(){
+
+try{
+
+localStorage.setItem(
+"streetfind_alerts",
+JSON.stringify(alerts)
+);
+
+}catch(e){}
+
+}
+
+
+function openAlert(product){
+
+const current=
+getPrice(product.price);
+
+const defaultTarget=
+current!==null
+?Math.max(
+1,
+Math.floor(current*0.9)
+)
+:0;
+
+const input=
+prompt(
+`¿A qué precio quieres recibir la alerta para:
+
+${product.title||"este producto"}?
+
+Precio actual: ${
+current!==null
+?money(current)
+:"desconocido"
+}
+
+Introduce el precio objetivo en euros:`,
+String(defaultTarget)
+);
+
+if(input===null)
+return;
+
+const target=
+parseFloat(
+String(input)
+.replace(",",".")
 );
 
 if(
-  favSection&&
-  !document.getElementById(
-    "streetFavoriteSummary"
-  )
+!Number.isFinite(target)||
+target<=0
 ){
 
-  const summary=document.createElement("div");
-
-  summary.id="streetFavoriteSummary";
-  summary.className="favorite-summary";
-
-  summary.innerHTML=`
-    <div class="favorite-stat">
-      <strong id="streetFavTotal">0</strong>
-      <span>Guardados</span>
-    </div>
-
-    <div class="favorite-stat">
-      <strong id="streetFavDrops">0</strong>
-      <span>Han bajado</span>
-    </div>
-  `;
-
-  favSection.insertBefore(
-    summary,
-    favSection.querySelector(".products")
-  );
-}
-
-function updateFavoriteSummary(){
-
-  const total=document.getElementById(
-    "streetFavTotal"
-  );
-
-  const drops=document.getElementById(
-    "streetFavDrops"
-  );
-
-  if(total)
-    total.textContent=favorites.length;
-
-  if(drops){
-
-    let count=0;
-
-    favorites.forEach(p=>{
-
-      const current=sfPrice(p.price);
-      const old=sfPrice(p.old_price);
-
-      if(
-        current!=null&&
-        old!=null&&
-        current<old
-      )count++;
-    });
-
-    drops.textContent=count;
-  }
-}
-
-const oldRenderFavorites=
-  window.renderFavorites;
-
-window.renderFavorites=function(){
-
-  if(
-    typeof oldRenderFavorites===
-    "function"
-  )
-    oldRenderFavorites();
-
-  setTimeout(updateFavoriteSummary,0);
-};
-
-/* =========================
-   ALERTAS MEJORADAS
-========================= */
-
-const oldRenderAlerts=
-  window.renderAlerts;
-
-window.renderAlerts=function(){
-
-  if(
-    typeof oldRenderAlerts===
-    "function"
-  )
-    oldRenderAlerts();
-
-  setTimeout(()=>{
-
-    document.querySelectorAll(
-      "#alertList .alert-item"
-    ).forEach((item,i)=>{
-
-      const alert=alerts[i];
-
-      if(!alert)return;
-
-      const current=
-        sfPrice(alert.product.price);
-
-      const target=
-        Number(alert.target);
-
-      if(
-        current!=null&&
-        target>0
-      ){
-
-        if(current<=target){
-
-          item.insertAdjacentHTML(
-            "afterbegin",
-            `
-              <div class="alert-reached">
-                🟢 ¡PRECIO ALCANZADO!
-              </div>
-            `
-          );
-
-        }else{
-
-          const progress=
-            Math.max(
-              0,
-              Math.min(
-                100,
-                (1-current/(target*1.5))*100
-              )
-            );
-
-          item.insertAdjacentHTML(
-            "beforeend",
-            `
-              <div class="alert-progress">
-                <div style="width:${progress}%"></div>
-              </div>
-
-              <div style="margin-top:6px;color:#666;font-size:9px">
-                Actual: ${sfMoney(current)}
-                · Faltan ${sfMoney(current-target)}
-              </div>
-            `
-          );
-        }
-      }
-
-    });
-
-  },0);
-};
-
-/* =========================
-   CORREGIR ORDEN POR AHORRO
-========================= */
-
-const originalSortByPrice=
-  window.sortByPrice;
-
-window.sortByPrice=function(list){
-
-  if(
-    typeof sortMode!=="undefined"&&
-    sortMode==="saving"
-  ){
-
-    return [...list].sort((a,b)=>{
-
-      const sa=sfSaving(a,list);
-      const sb=sfSaving(b,list);
-
-      return (
-        (sb?.amount||0)-
-        (sa?.amount||0)
-      );
-    });
-  }
-
-  return originalSortByPrice(list);
-};
-
-/* =========================
-   BOTÓN PRODUCTO EN TARJETAS
-========================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  ()=>{
-
-    ensureModal();
-
-  }
+showToast(
+"Precio objetivo no válido"
 );
+
+return;
+
+}
+
+const key=
+productKey(product);
+
+alerts=
+alerts.filter(
+alert=>alert.productKey!==key
+);
+
+alerts.push({
+id:
+Date.now().toString(),
+productKey:key,
+product:product,
+target:target,
+createdAt:
+new Date().toISOString()
+});
+
+saveAlerts();
+
+renderAlerts();
+
+showToast(
+"Alerta creada"
+);
+
+}
+
+
+function deleteAlert(id){
+
+alerts=
+alerts.filter(
+alert=>alert.id!==id
+);
+
+saveAlerts();
+
+renderAlerts();
+
+showToast(
+"Alerta eliminada"
+);
+
+}
+
+
+function renderAlerts(){
+
+const list=
+document.getElementById(
+"alertList"
+);
+
+if(!list)
+return;
+
+if(!alerts.length){
+
+list.innerHTML=`
+
+<div class="empty">
+No tienes alertas creadas.
+</div>
+`;
+
+return;
+
+}
+
+list.innerHTML="";
+
+alerts.forEach(alert=>{
+
+const current=
+getPrice(
+alert.product?.price
+);
+
+const target=
+Number(alert.target);
+
+let content="";
+
+if(
+current!==null&&
+target>0
+){
+
+if(current<=target){
+
+content=`
+
+<div class="alert-reached">
+🟢 ¡PRECIO ALCANZADO!
+</div>
+`;
+
+}else{
+
+const progress=
+Math.max(
+0,
+Math.min(
+100,
+(1-
+current/
+(target*1.5)
+)*100
+)
+);
+
+content=`
+
+<div class="alert-progress">
+<div
+style="width:${progress}%">
+</div>
+</div>
+
+<div
+style="
+margin-top:6px;
+color:#666;
+font-size:9px">
+Actual: ${money(current)}
+· Faltan ${money(current-target)}
+</div>
+`;
+
+}
+
+}
+
+const item=
+document.createElement("div");
+
+item.className="alert-item";
+
+item.innerHTML=`
+
+<div class="alert-item-title">
+${esc(
+alert.product?.title||
+"Producto"
+)}
+</div>
+
+<div class="alert-item-price">
+
+Objetivo:
+<strong>
+${money(target)}
+</strong>
+
+· Actual:
+${
+current!==null
+?money(current)
+:"No disponible"
+}
+
+</div>
+
+${content}
+
+<button
+class="alert-delete"
+type="button">
+ELIMINAR ALERTA
+</button>
+`;
+
+item
+.querySelector(".alert-delete")
+.onclick=
+()=>deleteAlert(alert.id);
+
+list.appendChild(item);
+
+});
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+let modalProduct=null;
+let modalList=[];
+
+
+function ensureModal(){
+
+if(
+document.getElementById(
+"streetProductModal"
+)
+)
+return;
+
+const modal=
+document.createElement("div");
+
+modal.id=
+"streetProductModal";
+
+modal.className=
+"product-modal";
+
+modal.innerHTML=`
+
+<div class="product-modal-card">
+
+<button
+class="product-modal-close"
+id="streetProductClose"
+type="button">
+×
+</button>
+
+<div
+id="streetProductImage"
+class="product-modal-image">
+</div>
+
+<div class="product-modal-info">
+
+<div
+id="streetProductBrand"
+class="product-modal-brand">
+</div>
+
+<div
+id="streetProductTitle"
+class="product-modal-title">
+</div>
+
+<div
+id="streetProductPrice"
+class="product-modal-price">
+</div>
+
+<div
+id="streetProductSaving"
+class="product-modal-saving">
+</div>
+
+<div id="streetProductScore">
+</div>
+
+<div
+id="streetProductHistory"
+class="history">
+</div>
+
+<div class="product-modal-actions">
+
+<button
+id="streetProductFav"
+class="product-modal-btn"
+type="button">
+♡ Favorito
+</button>
+
+<button
+id="streetProductAlert"
+class="product-modal-btn"
+type="button">
+🔔 Crear alerta
+</button>
+
+<a
+id="streetProductBuy"
+class="product-modal-btn primary"
+style="
+grid-column:1/-1;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none"
+target="_blank"
+rel="noopener noreferrer">
+VER OFERTA
+</a>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+document.body.appendChild(modal);
+
+document.getElementById(
+"streetProductClose"
+).onclick=
+closeStreetProduct;
+
+modal.addEventListener(
+"click",
+event=>{
+
+if(event.target===modal)
+closeStreetProduct();
+
+});
+
+}
+
+
+async function openStreetProduct(
+product,
+list=[]
+){
 
 ensureModal();
 
-})();
+modalProduct=product;
+modalList=list;
+
+const modal=
+document.getElementById(
+"streetProductModal"
+);
+
+const image=
+document.getElementById(
+"streetProductImage"
+);
+
+if(product.thumbnail){
+
+image.innerHTML=`
+
+<img
+src="${esc(product.thumbnail)}"
+alt="${esc(
+product.title||"Producto"
+)}"
+>
+`;
+
+}else{
+
+image.innerHTML=`
+
+<div class="image-fallback">
+Sin imagen
+</div>
+`;
+
+}
+
+document.getElementById(
+"streetProductBrand"
+).textContent=
+product.source||"Tienda";
+
+document.getElementById(
+"streetProductTitle"
+).textContent=
+product.title||"Producto";
+
+document.getElementById(
+"streetProductPrice"
+).textContent=
+product.price||
+"Precio no disponible";
+
+const saving=
+savingFor(product,list);
+
+document.getElementById(
+"streetProductSaving"
+).textContent=
+saving
+?`Ahorras ${money(saving.amount)} · ${saving.percent.toFixed(0)}%`
+:"";
+
+document.getElementById(
+"streetProductScore"
+).innerHTML=
+scoreHTML(product,list);
+
+document.getElementById(
+"streetProductBuy"
+).href=
+getProductUrl(product);
+
+const favButton=
+document.getElementById(
+"streetProductFav"
+);
+
+favButton.textContent=
+isFavorite(product)
+?"♥ Favorito"
+:"♡ Favorito";
+
+favButton.onclick=()=>{
+
+toggleFavorite(product);
+
+favButton.textContent=
+isFavorite(product)
+?"♥ Favorito"
+:"♡ Favorito";
+
+};
+
+document.getElementById(
+"streetProductAlert"
+).onclick=()=>{
+
+openAlert(product);
+
+};
+
+const history=
+await loadHistory(product);
+
+document.getElementById(
+"streetProductHistory"
+).innerHTML=
+historyHTML(history);
+
+modal.classList.add("show");
+
+}
+
+
+function closeStreetProduct(){
+
+const modal=
+document.getElementById(
+"streetProductModal"
+);
+
+if(modal)
+modal.classList.remove("show");
+
+modalProduct=null;
+
+}
+
+
+/* =========================
+   CLICK TARJETA
+========================= */
+
+document.addEventListener(
+"click",
+event=>{
+
+const card=
+event.target.closest(".card");
+
+if(!card)
+return;
+
+if(
+event.target.closest(
+"button,a"
+)
+)
+return;
+
+const key=
+card.dataset.productKey;
+
+const product=
+[
+...lastResults,
+...favorites
+].find(
+item=>productKey(item)===key
+);
+
+if(product){
+
+openStreetProduct(
+product,
+currentFilteredResults.length
+?currentFilteredResults
+:lastResults
+);
+
+}
+
+});
+
+
+/* =========================
+   TIENDAS
+========================= */
+
+storeFilters
+.querySelectorAll(".store-filter")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+storeFilters
+.querySelectorAll(".store-filter")
+.forEach(
+item=>
+item.classList.remove("active")
+);
+
+button.classList.add("active");
+
+const store=
+button.dataset.store;
+
+if(store==="all"){
+
+currentFilteredResults=
+[...lastResults];
+
+}else{
+
+currentFilteredResults=
+lastResults.filter(
+product=>
+String(
+product.source||""
+)
+.toLowerCase()
+.includes(
+store.toLowerCase()
+)
+);
+
+}
+
+renderResults(
+currentFilteredResults
+);
+
+};
+
+});
+
+
+/* =========================
+   AUTOCOMPLETADO
+========================= */
+
+const suggestions=[
+
+"Jordan 4 Retro",
+"Jordan 4 Military Black",
+"Jordan 4 White Cement",
+"Nike Air Force 1",
+"Nike Dunk Low",
+"Nike Air Max 1",
+"Adidas Samba",
+"Adidas Campus",
+"New Balance 550",
+"New Balance 9060",
+"hoodie streetwear",
+"cargo pants",
+"streetwear t-shirt"
+
+];
+
+const autocomplete=
+document.createElement("div");
+
+autocomplete.id=
+"streetAutocomplete";
+
+autocomplete.className=
+"autocomplete";
+
+document
+.querySelector(".search-box")
+.appendChild(
+autocomplete
+);
+
+
+q.addEventListener(
+"input",
+()=>{
+
+clearSearch.classList.toggle(
+"show",
+q.value.length>0
+);
+
+const term=
+q.value.trim().toLowerCase();
+
+if(!term){
+
+autocomplete.classList.remove(
+"show"
+);
+
+return;
+
+}
+
+const matches=
+suggestions
+.filter(
+item=>
+item.toLowerCase().includes(term)
+)
+.slice(0,5);
+
+autocomplete.innerHTML="";
+
+matches.forEach(text=>{
+
+const button=
+document.createElement("button");
+
+button.type="button";
+
+button.className=
+"autocomplete-item";
+
+button.innerHTML=
+`🔎 ${esc(text)}`;
+
+button.onclick=()=>{
+
+q.value=text;
+
+clearSearch.classList.add(
+"show"
+);
+
+autocomplete.classList.remove(
+"show"
+);
+
+search();
+
+};
+
+autocomplete.appendChild(button);
+
+});
+
+autocomplete.classList.toggle(
+"show",
+matches.length>0
+);
+
+});
+
+
+document.addEventListener(
+"click",
+event=>{
+
+if(
+!document
+.querySelector(".search-box")
+.contains(event.target)
+){
+
+autocomplete.classList.remove(
+"show"
+);
+
+}
+
+});
+
+
+/* =========================
+   PESTAÑAS
+========================= */
+
+function setTab(tab){
+
+homeSection.style.display=
+tab==="favorites"
+?"none"
+:"";
+
+favoritesSection.style.display=
+tab==="favorites"
+?""
+:"none";
+
+bottomHome.classList.toggle(
+"active",
+tab==="home"
+);
+
+bottomSearch.classList.toggle(
+"active",
+tab==="search"
+);
+
+bottomFavorites.classList.toggle(
+"active",
+tab==="favorites"
+);
+
+if(tab==="favorites")
+renderFavorites();
+
+if(tab==="search"){
+
+setTimeout(
+()=>{
+
+q.focus();
+
+q.scrollIntoView({
+block:"center",
+behavior:"smooth"
+});
+
+},
+100
+);
+
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+bottomHome.onclick=()=>{
+setTab("home");
+};
+
+bottomSearch.onclick=()=>{
+setTab("search");
+};
+
+bottomFavorites.onclick=()=>{
+setTab("favorites");
+};
+
+
+/* =========================
+   BÚSQUEDA
+========================= */
+
+async function search(){
+
+const query=
+q.value.trim();
+
+if(!query){
+
+featuredSection.style.display="";
+resultsSection.style.display="none";
+
+return;
+
+}
+
+if(searchInProgress)
+return;
+
+if(searchController)
+searchController.abort();
+
+searchController=
+new AbortController();
+
+searchInProgress=true;
+
+go.textContent=
+"BUSCANDO...";
+
+featuredSection.style.display=
+"none";
+
+resultsSection.style.display=
+"";
+
+status.textContent=
+"Buscando productos reales...";
+
+products.innerHTML=`
+
+<div class="loading">
+🔎 Buscando...
+</div>
+`;
+
+try{
+
+const response=
+await fetch(
+API+
+"?q="+
+encodeURIComponent(query),
+{
+signal:
+searchController.signal,
+cache:"no-store"
+}
+);
+
+const data=
+await response.json();
+
+if(!response.ok)
+throw new Error();
+
+let list=
+Array.isArray(
+data.shopping_results
+)
+?data.shopping_results
+:[];
+
+
+/* FILTRO CATEGORÍA */
+
+if(category!=="all"){
+
+list=
+list.filter(product=>{
+
+const title=
+(product.title||"")
+.toLowerCase();
+
+if(category==="sneakers"){
+
+return /shoe|sneaker|jordan|nike|adidas|air max|new balance|asics|puma/
+.test(title);
+
+}
+
+if(category==="clothing"){
+
+return /hoodie|shirt|jacket|pants|t-shirt|tee|sweatshirt|cargo|jeans/
+.test(title);
+
+}
+
+return /cap|bag|wallet|belt|backpack|hat|beanie|sunglasses/
+.test(title);
+
+});
+
+}
+
+
+lastResults=
+list;
+
+currentFilteredResults=
+[...list];
+
+resultCount.textContent=
+list.length+
+(list.length===1
+?" producto"
+:" productos");
+
+status.textContent="";
+
+renderResults(list);
+
+}catch(error){
+
+if(
+error.name==="AbortError"
+)
+return;
+
+status.textContent=
+"Error conectando con StreetFind API.";
+
+products.innerHTML=`
+
+<div class="error-box">
+
+No se pudieron cargar los productos.
+
+<br><br>
+
+Comprueba tu conexión e inténtalo de nuevo.
+
+<br>
+
+<button
+class="retry"
+type="button"
+id="retrySearch">
+REINTENTAR
+</button>
+
+</div>
+`;
+
+const retry=
+document.getElementById(
+"retrySearch"
+);
+
+if(retry)
+retry.onclick=search;
+
+}finally{
+
+searchInProgress=false;
+
+go.textContent=
+"BUSCAR";
+
+}
+
+}
+
+
+go.onclick=search;
+
+
+q.addEventListener(
+"keydown",
+event=>{
+
+if(event.key==="Enter"){
+
+event.preventDefault();
+
+search();
+
+}
+
+});
+
+
+clearSearch.onclick=()=>{
+
+q.value="";
+
+clearSearch.classList.remove(
+"show"
+);
+
+lastResults=[];
+
+currentFilteredResults=[];
+
+featuredSection.style.display="";
+
+resultsSection.style.display="none";
+
+setTab("search");
+
+};
+
+
+/* =========================
+   FILTROS CATEGORÍA
+========================= */
+
+document
+.querySelectorAll(".filter")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+document
+.querySelectorAll(".filter")
+.forEach(
+item=>
+item.classList.remove("active")
+);
+
+button.classList.add("active");
+
+category=
+button.dataset.c;
+
+if(q.value.trim())
+search();
+
+};
+
+});
+
+
+/* =========================
+   ORDEN
+========================= */
+
+document
+.querySelectorAll(".sort-btn")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+document
+.querySelectorAll(".sort-btn")
+.forEach(
+item=>
+item.classList.remove("active")
+);
+
+button.classList.add("active");
+
+sortMode=
+button.dataset.sort;
+
+if(lastResults.length){
+
+renderResults(
+currentFilteredResults.length
+?currentFilteredResults
+:lastResults
+);
+
+}
+
+};
+
+});
+
+
+/* =========================
+   PRODUCTOS DESTACADOS
+========================= */
+
+async function loadFeatured(){
+
+try{
+
+const searches=[
+
+"Jordan Nike sneakers",
+"Adidas sneakers",
+"streetwear hoodie"
+
+];
+
+let all=[];
+
+for(
+const term of searches
+){
+
+try{
+
+const response=
+await fetch(
+API+
+"?q="+
+encodeURIComponent(term),
+{
+cache:"no-store"
+}
+);
+
+if(!response.ok)
+continue;
+
+const data=
+await response.json();
+
+if(
+Array.isArray(
+data.shopping_results
+)
+){
+
+all.push(
+...data.shopping_results
+);
+
+}
+
+}catch(e){}
+
+}
+
+const unique=[];
+
+const seen=
+new Set();
+
+all.forEach(product=>{
+
+const key=
+product.product_link||
+product.title;
+
+if(
+!key||
+seen.has(key)
+)
+return;
+
+seen.add(key);
+
+unique.push(product);
+
+});
+
+renderFeatured(unique);
+
+}catch(e){
+
+featuredProducts.innerHTML=`
+
+<div class="empty">
+
+No se pudieron cargar los productos.
+
+<br><br>
+
+Prueba a actualizar la página.
+
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================
+   INICIO
+========================= */
+
+ensureModal();
+
+updateFavoriteCounter();
+
+renderFavorites();
+
+loadFeatured();
+
 </script>
+
+</body>
+</html>
