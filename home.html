@@ -1,41 +1,29 @@
 <!doctype html>
 <html lang="es">
 <head>
-
 <meta charset="utf-8">
-
 <meta
 name="viewport"
 content="width=device-width,initial-scale=1,viewport-fit=cover">
-
 <meta name="theme-color" content="#050505">
-
 <meta
 name="apple-mobile-web-app-capable"
 content="yes">
-
 <meta
 name="apple-mobile-web-app-status-bar-style"
 content="black-translucent">
-
 <meta
 name="apple-mobile-web-app-title"
 content="StreetFind">
-
 <link rel="manifest" href="./manifest.json">
-
 <link
 rel="apple-touch-icon"
 href="./A517A001-A63D-443E-A927-C33D2EB0CC4F.png">
-
 <title>StreetFind</title>
-
 <style>
-
 *{
 box-sizing:border-box
 }
-
 html,body{
 margin:0;
 padding:0;
@@ -43,57 +31,47 @@ background:#050505;
 color:#fff;
 font-family:Arial,sans-serif
 }
-
 body{
 min-height:100vh
 }
-
 header{
 padding:20px 16px;
 border-bottom:1px solid #222;
 padding-top:calc(20px + env(safe-area-inset-top))
 }
-
 .logo{
 font-size:28px;
 font-weight:900;
 letter-spacing:-1px
 }
-
 .logo span{
 color:#777
 }
-
 .tag{
 color:#888;
 font-size:12px;
 margin-top:4px
 }
-
 main{
 max-width:1100px;
 margin:auto;
 padding:25px 15px 50px
 }
-
 .hero h1{
 font-size:clamp(40px,10vw,70px);
 line-height:.9;
 letter-spacing:-3px;
 margin:20px 0
 }
-
 .hero p{
 color:#999;
 line-height:1.5
 }
-
 .search{
 display:flex;
 gap:9px;
 margin:20px 0
 }
-
 .search input{
 flex:1;
 height:50px;
@@ -104,7 +82,6 @@ background:#151515;
 color:#fff;
 font-size:16px
 }
-
 .search button{
 height:50px;
 padding:0 18px;
@@ -114,14 +91,12 @@ background:#fff;
 color:#000;
 font-weight:900
 }
-
 .filters{
 display:flex;
 gap:8px;
 overflow:auto;
 margin-bottom:15px
 }
-
 .filter{
 padding:9px 14px;
 border:1px solid #333;
@@ -130,20 +105,16 @@ background:#151515;
 color:#bbb;
 white-space:nowrap
 }
-
 .filter.active{
 background:#fff;
 color:#000
 }
-
 /* NAVEGACIÓN */
-
 .navigation{
 display:flex;
 gap:10px;
 margin:15px 0 25px
 }
-
 .navigation button{
 flex:1;
 height:45px;
@@ -154,44 +125,35 @@ color:#bbb;
 font-size:14px;
 font-weight:900
 }
-
 .navigation button.active{
 background:#fff;
 color:#000
 }
-
 /* SECCIONES */
-
 .section-title{
 display:flex;
 align-items:center;
 justify-content:space-between;
 margin:25px 0 14px
 }
-
 .section-title h2{
 font-size:20px;
 margin:0
 }
-
 .section-title span{
 font-size:12px;
 color:#777
 }
-
 .status{
 color:#888;
 margin:18px 0
 }
-
 /* PRODUCTOS */
-
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:12px
 }
-
 .card{
 background:#111;
 border:1px solid #222;
@@ -199,7 +161,6 @@ border-radius:15px;
 overflow:hidden;
 position:relative
 }
-
 .best{
 padding:7px;
 background:#fff;
@@ -208,7 +169,6 @@ font-size:10px;
 font-weight:900;
 text-align:center
 }
-
 .image{
 aspect-ratio:1;
 background:#191919;
@@ -218,40 +178,33 @@ justify-content:center;
 color:#666;
 overflow:hidden
 }
-
 .image img{
 width:100%;
 height:100%;
 object-fit:cover
 }
-
 .info{
 padding:12px
 }
-
 .brand{
 font-size:11px;
 color:#888;
 text-transform:uppercase
 }
-
 .name{
 margin-top:5px;
 font-weight:700;
 line-height:1.3
 }
-
 .saving{
 margin-top:8px;
 font-size:11px;
 color:#aaa;
 font-weight:800
 }
-
 .saving strong{
 color:#fff
 }
-
 .bottom{
 display:flex;
 justify-content:space-between;
@@ -259,18 +212,15 @@ align-items:center;
 gap:8px;
 margin-top:12px
 }
-
 .price{
 font-size:17px;
 font-weight:900
 }
-
 .actions{
 display:flex;
 gap:6px;
 align-items:center
 }
-
 .favorite{
 width:36px;
 height:34px;
@@ -284,12 +234,10 @@ align-items:center;
 justify-content:center;
 padding:0
 }
-
 .favorite.active{
 color:#fff;
 background:#292929
 }
-
 .buy{
 background:#fff;
 color:#000;
@@ -299,9 +247,7 @@ border-radius:8px;
 font-size:11px;
 font-weight:900
 }
-
 /* HISTORIAL */
-
 .history{
 margin-top:12px;
 padding:11px;
@@ -309,7 +255,6 @@ border:1px solid #252525;
 border-radius:10px;
 background:#0b0b0b
 }
-
 .history-title{
 font-size:10px;
 font-weight:900;
@@ -317,7 +262,6 @@ color:#888;
 text-transform:uppercase;
 margin-bottom:7px
 }
-
 .history-row{
 display:flex;
 justify-content:space-between;
@@ -325,28 +269,22 @@ align-items:center;
 font-size:11px;
 margin-top:5px
 }
-
 .history-low{
 color:#aaa
 }
-
 .history-change{
 font-weight:900
 }
-
 .history-down{
 color:#fff
 }
-
 .history-up{
 color:#888
 }
-
 .history-loading{
 font-size:10px;
 color:#666
 }
-
 .history-chart{
 height:34px;
 display:flex;
@@ -354,474 +292,324 @@ align-items:flex-end;
 gap:3px;
 margin-top:8px
 }
-
 .history-bar{
 flex:1;
 background:#444;
 min-height:3px;
 border-radius:2px 2px 0 0
 }
-
 .empty{
 grid-column:1/-1;
 text-align:center;
 color:#777;
 padding:50px 15px
 }
-
 .loading{
 grid-column:1/-1;
 text-align:center;
 color:#777;
 padding:40px
 }
-
 .note{
 font-size:10px;
 color:#666;
 margin-top:15px;
 line-height:1.5
 }
-
 @media(min-width:700px){
-
 .products{
 grid-template-columns:repeat(4,1fr)
 }
-
 }
-
 @media(max-width:520px){
-
 .search{
 flex-direction:column
 }
-
 }
-
 </style>
-
 </head>
-
 <body>
-
 <header>
-
 <div class="logo">
 STREETFIND<span> V3</span>
 </div>
-
 <div class="tag">
 Streetwear · Sneakers · Precios
 </div>
-
 </header>
-
 <main>
-
 <section class="hero">
-
 <h1>
 ENCUENTRA<br>
-EL DRIP.
+EL MEJOR PRECIO.
 </h1>
-
 <p>
-Busca sneakers, ropa y accesorios streetwear y encuentra productos reales.
+Compara precios de sneakers, ropa y streetwear y encuentra la mejor oferta.
 </p>
-
 </section>
-
 <div class="search">
-
 <input
 id="q"
 type="search"
 placeholder="Busca Jordan, Nike, hoodie..."
 >
-
 <button id="go">
 BUSCAR
 </button>
-
 </div>
-
 <div class="filters">
-
 <button
 class="filter active"
 data-c="all">
 Todo
 </button>
-
 <button
 class="filter"
 data-c="sneakers">
 Zapatillas
 </button>
-
 <button
 class="filter"
 data-c="clothing">
 Ropa
 </button>
-
 <button
 class="filter"
 data-c="accessories">
 Accesorios
 </button>
-
 </div>
-
 <div class="navigation">
-
 <button
 id="homeButton"
 class="active">
 🏠 Inicio
 </button>
-
 <button
 id="favoritesButton">
 ❤️ Favoritos
 </button>
-
 </div>
-
 <section id="homeSection">
-
 <div
 id="featuredSection">
-
 <div class="section-title">
-
 <h2>
 🔥 Mejores precios
 </h2>
-
 <span>
 Más baratos
 </span>
-
 </div>
-
 <section
 class="products"
 id="featuredProducts">
-
 <div class="loading">
 Buscando los mejores precios...
 </div>
-
 </section>
-
 </div>
-
 <div
 id="resultsSection"
 style="display:none">
-
 <div class="section-title">
-
 <h2>
 Resultados
 </h2>
-
 <span id="resultCount">
 </span>
-
 </div>
-
 <div
 class="status"
 id="status">
 </div>
-
 <section
 class="products"
 id="products">
 </section>
-
 <div class="note">
-
 * El ahorro se calcula comparando los precios encontrados en la búsqueda.
-
 </div>
-
 </div>
-
 </section>
-
 <section
 id="favoritesSection"
 style="display:none">
-
 <div class="section-title">
-
 <h2>
 ❤️ Mis favoritos
 </h2>
-
 <span id="favoriteCount">
 0 productos
 </span>
-
 </div>
-
 <section
 class="products"
 id="favoriteProducts">
 </section>
-
 </section>
-
 </main>
-
 <script>
-
 const API=
 "https://streetfind-rose.vercel.app/api/search";
-
 const HISTORY_API=
 "https://streetfind-rose.vercel.app/api/history";
-
 const q=
 document.getElementById("q");
-
 const go=
 document.getElementById("go");
-
 const homeButton=
 document.getElementById("homeButton");
-
 const favoritesButton=
 document.getElementById("favoritesButton");
-
 const homeSection=
 document.getElementById("homeSection");
-
 const favoritesSection=
 document.getElementById("favoritesSection");
-
 const featuredSection=
 document.getElementById("featuredSection");
-
 const featuredProducts=
 document.getElementById("featuredProducts");
-
 const resultsSection=
 document.getElementById("resultsSection");
-
 const products=
 document.getElementById("products");
-
 const status=
 document.getElementById("status");
-
 const resultCount=
 document.getElementById("resultCount");
-
 const favoriteProducts=
 document.getElementById("favoriteProducts");
-
 const favoriteCount=
 document.getElementById("favoriteCount");
-
 let category="all";
-
 let favorites=[];
-
 try{
-
 favorites=
 JSON.parse(
 localStorage.getItem(
 "streetfind_favorites"
 )||"[]"
 );
-
 if(!Array.isArray(favorites))
 favorites=[];
-
 }catch(e){
-
 favorites=[];
-
 }
-
 function saveFavorites(){
-
 localStorage.setItem(
 "streetfind_favorites",
 JSON.stringify(favorites)
 );
-
 }
-
 function productKey(product){
-
 return String(
 product.product_link||
 product.title||
 ""
 );
-
 }
-
 function isFavorite(product){
-
 return favorites.some(
 item=>
 productKey(item)===
 productKey(product)
 );
-
 }
-
 function toggleFavorite(product){
-
 const key=
 productKey(product);
-
 const index=
 favorites.findIndex(
 item=>
 productKey(item)===key
 );
-
 if(index>=0){
-
 favorites.splice(index,1);
-
 }else{
-
 favorites.push(product);
-
 }
-
 saveFavorites();
-
 renderFavorites();
-
 updateFavoriteButtons();
-
 }
-
 function esc(value){
-
 return String(value??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
-
 }
-
 function getPrice(value){
-
 if(value===null||value===undefined)
 return null;
-
 const match=
 String(value).match(
 /(\d{1,5}(?:[.,]\d{1,2})?)/
 );
-
 if(!match)
 return null;
-
 let number=match[1];
-
 if(
 number.includes(",")&&
 number.includes(".")
 ){
-
 if(
 number.lastIndexOf(",")>
 number.lastIndexOf(".")
 ){
-
 number=
 number
 .replace(/\./g,"")
 .replace(",",".")
 ;
-
 }else{
-
 number=
 number.replace(/,/g,"");
-
 }
-
 }else{
-
 number=
 number.replace(",",".");
 }
-
 const price=
 parseFloat(number);
-
 return Number.isFinite(price)
 ?price
 :null;
-
 }
-
 function money(value){
-
 return Number(value)
 .toFixed(2)
 .replace(".",",")
 +" €";
-
 }
-
 /* HISTORIAL */
-
 async function loadHistory(product){
-
 const key=
 productKey(product);
-
 if(!key)
 return null;
-
 try{
-
 const response=
 await fetch(
 HISTORY_API+
 "?product_key="+
 encodeURIComponent(key)
 );
-
 if(!response.ok)
 return null;
-
 const data=
 await response.json();
-
 return Array.isArray(data.history)
 ?data.history
 :null;
-
 }catch(error){
-
 return null;
-
 }
-
 }
-
 function historyHTML(history){
-
 if(!history){
-
 return `
 <div class="history">
 <div class="history-loading">
@@ -829,11 +617,8 @@ Historial no disponible todavía.
 </div>
 </div>
 `;
-
 }
-
 if(!history.length){
-
 return `
 <div class="history">
 <div class="history-loading">
@@ -841,43 +626,30 @@ Aún no hay historial suficiente.
 </div>
 </div>
 `;
-
 }
-
 const prices=
 history
 .map(item=>Number(item.price))
 .filter(price=>Number.isFinite(price));
-
 if(!prices.length)
 return "";
-
 const current=
 prices[prices.length-1];
-
 const lowest=
 Math.min(...prices);
-
 const highest=
 Math.max(...prices);
-
 const first=
 prices[0];
-
 let changeHTML="";
-
 if(first!==current){
-
 const difference=
 current-first;
-
 const percent=
 Math.abs(
 (difference/first)*100
 );
-
 if(difference<0){
-
 changeHTML=
 `
 <span class="history-change history-down">
@@ -885,9 +657,7 @@ changeHTML=
 (${percent.toFixed(0)}%)
 </span>
 `;
-
 }else{
-
 changeHTML=
 `
 <span class="history-change history-up">
@@ -895,152 +665,103 @@ changeHTML=
 (${percent.toFixed(0)}%)
 </span>
 `;
-
 }
-
 }
-
 const recent=
 prices.slice(-12);
-
 const minRecent=
 Math.min(...recent);
-
 const maxRecent=
 Math.max(...recent);
-
 const range=
 maxRecent-minRecent||1;
-
 const bars=
 recent
 .map(price=>{
-
 const height=
 20+
 (
 ((price-minRecent)/range)
 *80
 );
-
 return `
 <div
 class="history-bar"
 style="height:${height}%">
 </div>
 `;
-
 })
 .join("");
-
 return `
 <div class="history">
-
 <div class="history-title">
 📊 Historial de precio
 </div>
-
 <div class="history-row">
-
 <span>
 Ahora
 </span>
-
 <strong>
 ${money(current)}
 </strong>
-
 </div>
-
 <div class="history-row">
-
 <span class="history-low">
 Mínimo registrado
 </span>
-
 <strong>
 ${money(lowest)}
 </strong>
-
 </div>
-
 <div class="history-row">
-
 <span>
 Desde primera consulta
 </span>
-
 ${changeHTML}
-
 </div>
-
 <div class="history-chart">
 ${bars}
 </div>
-
 </div>
 `;
-
 }
-
 async function addHistoryToCard(
 card,
 product
 ){
-
 const history=
 await loadHistory(product);
-
 const container=
 card.querySelector(".history-container");
-
 if(container){
-
 container.innerHTML=
 historyHTML(history);
-
 }
-
 }
-
 function productHTML(
 product,
 best=false,
 saving=null
 ){
-
 const favorite=
 isFavorite(product);
-
 let savingHTML="";
-
 if(
 saving&&
 saving.amount>0
 ){
-
 savingHTML=`
-
 <div class="saving">
-
 Ahorras
-
 <strong>
 ${money(saving.amount)}
 </strong>
-
 · ${saving.percent.toFixed(0)}%
-
 </div>
-
 `;
-
 }
-
 return `
-
 <article class="card">
-
 ${
 best
 ?
@@ -1052,9 +773,7 @@ best
 :
 ""
 }
-
 <div class="image">
-
 ${
 product.thumbnail
 ?
@@ -1067,21 +786,15 @@ loading="lazy">
 :
 "Sin imagen"
 }
-
 </div>
-
 <div class="info">
-
 <div class="brand">
 ${esc(product.source||"Tienda")}
 </div>
-
 <div class="name">
 ${esc(product.title||"Producto")}
 </div>
-
 ${savingHTML}
-
 <div class="history-container">
 <div class="history">
 <div class="history-loading">
@@ -1089,25 +802,18 @@ Cargando historial...
 </div>
 </div>
 </div>
-
 <div class="bottom">
-
 <div class="price">
 ${esc(product.price||"Precio no disponible")}
 </div>
-
 <div class="actions">
-
 <button
 class="favorite ${favorite?"active":""}"
 data-product="${encodeURIComponent(
 JSON.stringify(product)
 )}">
-
 ${favorite?"❤️":"♡"}
-
 </button>
-
 <a
 class="buy"
 href="${esc(
@@ -1116,87 +822,55 @@ product.product_link||
 )}"
 target="_blank"
 rel="noopener">
-
 VER
-
 </a>
-
 </div>
-
 </div>
-
 </div>
-
 </article>
-
 `;
-
 }
-
 function sortByPrice(list){
-
 return [...list].sort(
 (a,b)=>{
-
 const pa=getPrice(a.price);
-
 const pb=getPrice(b.price);
-
 if(pa===null&&pb===null)
 return 0;
-
 if(pa===null)
 return 1;
-
 if(pb===null)
 return -1;
-
 return pa-pb;
-
 }
 );
-
 }
-
 function updateFavoriteButtons(){
-
 document
 .querySelectorAll(".favorite")
 .forEach(button=>{
-
 button.onclick=()=>{
-
 try{
-
 const product=
 JSON.parse(
 decodeURIComponent(
 button.dataset.product
 )
 );
-
 toggleFavorite(product);
-
 }catch(e){}
-
 };
-
 });
-
 }
-
 async function loadHistories(
 container,
 list
 ){
-
 const cards=
 Array.from(
 container.querySelectorAll(".card")
 );
-
 await Promise.all(
-
 cards.map(
 (card,index)=>
 addHistoryToCard(
@@ -1204,34 +878,23 @@ card,
 list[index]
 )
 )
-
 );
-
 }
-
 function renderFeatured(list){
-
 featuredProducts.innerHTML="";
-
 if(!list.length){
-
 featuredProducts.innerHTML=
 `
 <div class="empty">
 No hay productos disponibles.
 </div>
 `;
-
 return;
-
 }
-
 const sorted=
 sortByPrice(list).slice(0,8);
-
 sorted.forEach(
 (product,index)=>{
-
 featuredProducts
 .insertAdjacentHTML(
 "beforeend",
@@ -1241,89 +904,63 @@ index===0&&
 getPrice(product.price)!==null
 )
 );
-
 });
-
 updateFavoriteButtons();
-
 loadHistories(
 featuredProducts,
 sorted
 );
-
 }
-
 function renderResults(list){
-
 products.innerHTML="";
-
 if(!list.length){
-
 products.innerHTML=
 `
 <div class="empty">
 No encontramos productos.
 </div>
 `;
-
 return;
-
 }
-
 const sorted=
 sortByPrice(list);
-
 const prices=
 sorted
 .map(p=>getPrice(p.price))
 .filter(p=>p!==null);
-
 const lowest=
 prices.length
 ?Math.min(...prices)
 :null;
-
 const highest=
 prices.length
 ?Math.max(...prices)
 :null;
-
 sorted.forEach(product=>{
-
 const price=
 getPrice(product.price);
-
 let saving=null;
-
 if(
 price!==null&&
 lowest!==null&&
 highest!==null&&
 highest>lowest
 ){
-
 const amount=
 price-lowest;
-
 const percent=
 (amount/highest)*100;
-
 if(amount>0){
-
 saving={
 amount,
 percent
 };
-
 }
-
 }
-
 const best=
 price!==null&&
 lowest!==null&&
 price===lowest;
-
 products
 .insertAdjacentHTML(
 "beforeend",
@@ -1333,22 +970,15 @@ best,
 saving
 )
 );
-
 });
-
 updateFavoriteButtons();
-
 loadHistories(
 products,
 sorted
 );
-
 }
-
 function renderFavorites(){
-
 favoriteProducts.innerHTML="";
-
 favoriteCount.textContent=
 favorites.length+
 (
@@ -1358,305 +988,192 @@ favorites.length===1
 :
 " productos"
 );
-
 if(!favorites.length){
-
 favoriteProducts.innerHTML=
 `
 <div class="empty">
-
 ❤️
-
 <br><br>
-
 Todavía no tienes favoritos.
-
 <br><br>
-
 Pulsa ♡ en cualquier producto
 para guardarlo aquí.
-
 </div>
 `;
-
 return;
-
 }
-
 favorites.forEach(product=>{
-
 favoriteProducts
 .insertAdjacentHTML(
 "beforeend",
 productHTML(product)
 );
-
 });
-
 updateFavoriteButtons();
-
 loadHistories(
 favoriteProducts,
 favorites
 );
-
 }
-
 homeButton.onclick=()=>{
-
 homeSection.style.display="";
-
 favoritesSection.style.display="none";
-
 homeButton.classList.add("active");
-
 favoritesButton.classList.remove("active");
-
 };
-
 favoritesButton.onclick=()=>{
-
 homeSection.style.display="none";
-
 favoritesSection.style.display="";
-
 homeButton.classList.remove("active");
-
 favoritesButton.classList.add("active");
-
 renderFavorites();
-
 };
-
 async function search(){
-
 const query=
 q.value.trim();
-
 if(!query){
-
 featuredSection.style.display="";
-
 resultsSection.style.display="none";
-
 return;
-
 }
-
 featuredSection.style.display="none";
-
 resultsSection.style.display="";
-
 status.textContent=
 "Buscando productos reales...";
-
 products.innerHTML=
 `
 <div class="loading">
 🔎 Buscando...
 </div>
 `;
-
 try{
-
 const response=
 await fetch(
 API+
 "?q="+
 encodeURIComponent(query)
 );
-
 const data=
 await response.json();
-
 if(!response.ok)
 throw new Error();
-
 let list=
 data.shopping_results||
 [];
-
 if(category!=="all"){
-
 list=
 list.filter(product=>{
-
 const title=
 (product.title||"")
 .toLowerCase();
-
 if(category==="sneakers"){
-
 return /shoe|sneaker|jordan|nike|adidas|air max/.test(title);
-
 }
-
 if(category==="clothing"){
-
 return /hoodie|shirt|jacket|pants|t-shirt/.test(title);
-
 }
-
 return /cap|bag|wallet|belt/.test(title);
-
 });
-
 }
-
 resultCount.textContent=
 list.length+
 " productos";
-
 status.textContent="";
-
 renderResults(list);
-
 }catch(error){
-
 status.textContent=
 "Error conectando con StreetFind API.";
-
 products.innerHTML=
 `
 <div class="empty">
-
 No se pudieron cargar los productos.
-
 <br><br>
-
 Inténtalo de nuevo.
-
 </div>
 `;
-
 }
-
 }
-
 go.onclick=search;
-
 q.addEventListener(
 "keydown",
 event=>{
-
 if(event.key==="Enter")
 search();
-
 });
-
 document
 .querySelectorAll(".filter")
 .forEach(button=>{
-
 button.onclick=()=>{
-
 document
 .querySelectorAll(".filter")
 .forEach(x=>
 x.classList.remove("active")
 );
-
 button.classList.add("active");
-
 category=
 button.dataset.c;
-
 if(q.value.trim())
 search();
-
 };
-
 });
-
 async function loadFeatured(){
-
 try{
-
 const searches=[
 "Jordan Nike sneakers",
 "Adidas sneakers",
 "streetwear hoodie"
 ];
-
 let all=[];
-
 for(
 const term of searches
 ){
-
 try{
-
 const response=
 await fetch(
 API+
 "?q="+
 encodeURIComponent(term)
 );
-
 if(!response.ok)
 continue;
-
 const data=
 await response.json();
-
 if(
 Array.isArray(
 data.shopping_results
 )
 ){
-
 all.push(
 ...data.shopping_results
 );
-
 }
-
 }catch(e){}
-
 }
-
 const unique=[];
-
 const seen=new Set();
-
 all.forEach(product=>{
-
 const key=
 product.product_link||
 product.title;
-
 if(!key)
 return;
-
 if(seen.has(key))
 return;
-
 seen.add(key);
-
 unique.push(product);
-
 });
-
 renderFeatured(unique);
-
 }catch(e){
-
 featuredProducts.innerHTML=
 `
 <div class="empty">
 No se pudieron cargar los productos.
 </div>
 `;
-
 }
-
 }
-
 renderFavorites();
-
 loadFeatured();
-
 </script>
-
 </body>
 </html>
